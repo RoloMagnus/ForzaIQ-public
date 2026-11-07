@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jamar Ricketts | Individual Development Plan Dashboard v4 | FORZA IQ</title>
+<style>
+:root{
+--bg:#f5f5f7;--card:#ffffff;--card2:#fbfbfd;--line:rgba(0,0,0,.10);--hair:rgba(0,0,0,.07);
+--txt:#1d1d1f;--mut:#6e6e73;--dim:#86868b;
+--cyan:#0071e3;--org:#c4560a;--ok:#248a3d;--warn:#a36b00;--bad:#d70015;--pink:#d62a5c;
+--blue-t:#eef5ff;--org-t:#fff3e6;--ok-t:#eaf7ee;--warn-t:#fff8db;--pink-t:#fdecf1;--gray-t:#f2f2f7;
+--sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","Segoe UI",Roboto,Arial,sans-serif;
+--mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Segoe UI",Roboto,Arial,sans-serif;
+--shadow:0 1px 2px rgba(0,0,0,.04),0 8px 28px rgba(0,0,0,.05);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.47;font-size:15px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.88em;background:var(--gray-t);padding:1px 6px;border-radius:6px}
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:4px;height:52px;padding:0 24px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);border-bottom:1px solid var(--hair);overflow-x:auto;white-space:nowrap}
+nav .brand{flex:1;font-weight:600;font-size:14px;letter-spacing:-.01em;color:var(--txt)}
+nav .brand i{display:inline-block;width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,#0a84ff,#5ac8fa);margin-right:9px}
+nav::after{content:"";flex:1}
+nav a{font-size:12.5px;font-weight:500;letter-spacing:.01em;color:rgba(29,29,31,.8);padding:6px 12px;border-radius:999px;transition:background .15s,color .15s}
+nav a:hover{background:rgba(0,0,0,.05);color:#000;text-decoration:none}
+nav a.on{background:rgba(0,113,227,.11);color:var(--cyan);font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:0 28px 96px}
+section{padding-top:72px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--cyan);text-transform:uppercase}
+h1{font-size:56px;line-height:1.04;font-weight:700;letter-spacing:-.03em;margin:8px 0 6px}
+h2{font-size:36px;line-height:1.1;font-weight:700;letter-spacing:-.025em;margin:6px 0 18px}
+h3{font-size:24px;line-height:1.2;font-weight:600;letter-spacing:-.015em;margin:44px 0 14px}
+h3 .tiertag{vertical-align:2px}
+p.lead{color:var(--mut);font-size:17px;line-height:1.5;max-width:880px;margin:6px 0 18px}
+.sub{color:var(--mut);font-size:19px;font-weight:500}
+.secband{position:relative;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;padding:6px 0 22px;margin:0 0 30px;border-bottom:1px solid var(--line)}
+.secband:after{content:"";position:absolute;left:0;bottom:-1px;width:72px;height:4px;border-radius:4px;background:var(--cyan)}
+.secband.o:after{background:#ff9500}
+.secband .sn{font-size:46px;line-height:1.05;font-weight:700;letter-spacing:-.025em;color:var(--txt)}
+.secband .sd{font-size:14px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.secband.o .sd{color:var(--org)}
+.hero{padding-top:44px;display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:start}
+.hero h1{font-size:54px;margin:4px 0 6px}
+.herotop{display:grid;grid-template-columns:192px 1fr;gap:30px;align-items:start}
+.photo{position:relative;width:192px;height:192px;border-radius:40px;overflow:hidden;background:var(--gray-t);box-shadow:0 2px 6px rgba(0,0,0,.08),0 14px 36px rgba(0,0,0,.10)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);gap:4px}
+.photo .ph span{font-size:56px;font-weight:700;letter-spacing:-.03em;color:#c7c7cc;line-height:1}
+.photo .ph small{font-size:11px;font-weight:600;letter-spacing:.06em}
+.photo .chg{display:none;opacity:0;transition:opacity .15s;position:absolute;top:10px;right:10px;background:rgba(255,255,255,.85);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--txt);border:0;border-radius:999px;font:600 11px var(--sans);padding:5px 10px;cursor:pointer}
+.photo:hover .chg{opacity:1}
+.photocap{margin-top:14px;font-size:18px;font-weight:600;letter-spacing:-.01em}
+.photocap small{display:block;font-size:12px;font-weight:500;color:var(--mut);letter-spacing:.04em;margin-top:2px}
+@media(max-width:980px){.hero,.herotop{grid-template-columns:1fr}.hero h1{font-size:42px}}
+.card{background:var(--card);border:1px solid var(--hair);border-radius:20px;padding:22px 24px;box-shadow:var(--shadow)}
+.card h4{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--mut);text-transform:uppercase}
+.card.org{background:#fffaf4;border-color:rgba(255,149,0,.22)}
+.card.org h4{color:var(--org)}
+.card.stage{position:relative;overflow:hidden}
+.card.stage:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--cyan)}
+.card.stage.o:before{background:#ff9500}
+.card.stage b{font-size:17px;letter-spacing:-.01em}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g6{grid-template-columns:repeat(6,1fr)}
+@media(max-width:980px){.g2,.g3,.g4,.g6{grid-template-columns:1fr}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:980px){.two{grid-template-columns:1fr}}
+.kpi{background:var(--card);border:1px solid var(--hair);border-radius:20px;padding:16px 18px;box-shadow:var(--shadow)}
+.kpi b{display:block;font-size:34px;line-height:1.1;font-weight:700;letter-spacing:-.025em;color:var(--cyan)}
+.kpi.o b{color:#ff9500}
+.kpi span{display:block;margin-top:4px;font-size:13px;font-weight:600;color:var(--txt)}
+.kpi small{display:block;color:var(--dim);font-size:11.5px;margin-top:2px;line-height:1.35}
+.profile h4{margin-bottom:6px}
+.profile dl{margin:0;display:grid;grid-template-columns:132px 1fr;gap:0}
+.profile dt{font-size:12px;font-weight:600;color:var(--mut);padding:11px 0;border-top:1px solid var(--hair)}
+.profile dd{margin:0;padding:10px 0;border-top:1px solid var(--hair)}
+.profile dt:first-of-type,.profile dd:first-of-type{border-top:0}
+.chip{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.03em;padding:2px 9px;border-radius:999px;vertical-align:middle;white-space:nowrap;border:0}
+.chip.ok{background:var(--ok-t);color:var(--ok)}.chip.cf{background:var(--org-t);color:var(--org)}.chip.un{background:var(--warn-t);color:var(--warn)}.chip.na{background:var(--gray-t);color:var(--mut)}.chip.pv{background:#f4eafc;color:#8944ab}
+.chip.hi{background:var(--ok-t);color:var(--ok)}.chip.md{background:var(--warn-t);color:var(--warn)}.chip.lo{background:#fdecee;color:var(--bad)}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--hair);border-radius:18px;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);text-align:left;padding:12px 14px;background:#fafafc;border-bottom:1px solid var(--line)}
+td{padding:11px 14px;border-top:1px solid var(--hair);vertical-align:top}
+tbody tr:first-child td{border-top:0}
+tbody tr:hover td{background:#fafafc}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tr.hl td{color:var(--cyan);font-weight:600}
+table.sort th{cursor:pointer}table.sort th:hover{color:var(--txt)}
+.card table th{background:transparent;padding-left:0}.card table td{padding-left:0}
+.card .tw table th{padding-left:14px}.card .tw table td{padding-left:14px}
+.card .tw{box-shadow:none}
+.note{font-size:13px;color:#3a3a3c;background:var(--blue-t);border-radius:12px;padding:10px 14px;margin:14px 0}
+.note.o{background:var(--org-t)}.note.w{background:var(--warn-t)}
+.note b{color:var(--txt)}
+.banner{background:var(--org-t);color:#7a3a05;border-radius:16px;padding:12px 18px;margin:14px 0;font-size:13.5px}
+.radarwrap{display:grid;grid-template-columns:minmax(300px,560px) 1fr;gap:22px;align-items:start}
+@media(max-width:980px){.radarwrap{grid-template-columns:1fr}}
+.radarbox{background:#fff;border-radius:20px;border:1px solid var(--hair);box-shadow:var(--shadow);padding:6px;overflow:hidden}
+.radarbox svg{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px}
+.legend button{display:flex;align-items:center;gap:8px;font:600 12px var(--sans);background:#fff;color:var(--txt);border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer;transition:opacity .15s,background .15s}
+.legend button:hover{background:#fafafc}
+.legend button i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.legend button.off{opacity:.38}
+#tip{position:fixed;z-index:99;pointer-events:none;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line);color:var(--txt);padding:9px 12px;border-radius:12px;font-size:12.5px;max-width:270px;display:none;box-shadow:0 10px 34px rgba(0,0,0,.16)}
+.bar{display:grid;grid-template-columns:170px 1fr 120px;gap:12px;align-items:center;margin:7px 0;font-size:13px}
+.bar .t{height:10px;background:#ececf0;border-radius:999px;position:relative}
+.bar .f{height:100%;border-radius:999px}
+.bar .w{position:absolute;top:-2px;height:14px;border-left:2px solid #1d1d1f;border-right:2px solid #1d1d1f;opacity:.55}
+.bar .v{font-size:12px;color:var(--mut)}
+.mono{font-family:var(--sans)}
+label.mono{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.tiertag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--cyan);border-radius:999px;padding:2px 11px;margin-right:10px}
+.tiertag.o{background:#ff9500}
+button.btn{background:var(--cyan);color:#fff;border:0;border-radius:999px;padding:9px 18px;font:600 13px var(--sans);cursor:pointer;transition:background .15s}
+button.btn:hover{background:#0077ed}
+button.btn.alt{background:rgba(0,113,227,.10);color:var(--cyan)}
+button.btn.alt:hover{background:rgba(0,113,227,.18)}
+input[type=number],input[type=text],input[type=date],select.s{width:100%;background:#fff;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:inherit;font-size:14px}
+input:focus,select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 4px rgba(0,113,227,.15)}
+.subh{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--org);margin:22px 0 10px}
+/* methodology */
+.meth{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:980px){.meth{grid-template-columns:1fr}}
+.mcard{background:var(--card);border:1px solid var(--hair);border-radius:20px;padding:16px;box-shadow:var(--shadow)}
+.mcard svg{width:100%;height:auto;display:block;border-radius:12px;margin-bottom:12px}
+.mcard h5{margin:0 0 4px;font-size:16px;font-weight:700;letter-spacing:-.01em}
+.mcard p{margin:0;font-size:13.5px;color:var(--mut)}
+.mcard p b{color:var(--txt)}
+.phasehead{display:flex;align-items:center;gap:14px;margin:38px 0 4px}
+.phasehead h3{margin:0;font-size:26px;font-weight:700;letter-spacing:-.02em}
+.phasehead i{flex:1;height:1px;background:var(--line)}
+.sub-phase{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin:22px 0 10px}
+.ncards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:980px){.ncards{grid-template-columns:1fr}}
+.nc{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:16px 20px;box-shadow:var(--shadow)}
+.nc .hd{display:flex;gap:10px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.nc .tag{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--org);background:var(--org-t);border-radius:999px;padding:3px 10px}
+.nc.pos .tag{color:var(--ok);background:var(--ok-t)}.nc.mix .tag{color:var(--warn);background:var(--warn-t)}
+button.ts,span.ts{font:600 12px var(--sans);font-variant-numeric:tabular-nums;border-radius:999px;padding:4px 12px;border:0}
+button.ts{background:rgba(0,113,227,.10);color:var(--cyan);cursor:pointer;transition:background .15s,color .15s}
+button.ts:hover{background:var(--cyan);color:#fff}
+span.ts{background:var(--gray-t);color:var(--mut)}
+.nc p{margin:7px 0;font-size:14.5px}
+.nc p.rec b{color:var(--cyan)}
+.nc p.cp{color:var(--mut)}.nc p.cp b{color:var(--mut)}
+.nc p.dl{font-size:12.5px;color:var(--mut);border-top:1px solid var(--hair);padding-top:9px;margin-top:10px}
+.nc p.dl b{color:var(--org)}
+.tally{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+/* video */
+.vidslot{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:22px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.10),0 22px 60px rgba(0,0,0,.16)}
+.vidslot iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;display:block}
+a.btn{display:inline-block;border-radius:999px;padding:9px 18px;font:600 13px var(--sans);cursor:pointer}
+a.btn.alt{background:rgba(0,113,227,.10);color:var(--cyan)}
+a.btn.alt:hover{background:rgba(0,113,227,.18);text-decoration:none}
+.vidph{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;color:#d2d2d7;font-size:15px;background:#1d1d1f;padding:24px}
+.vidbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px;font-size:12px;font-weight:600;color:var(--mut)}
+.vidbar input[type=text]{width:170px;padding:7px 10px}
+.grph{margin:16px 0 4px;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--txt);text-transform:uppercase}
+.grph span{color:var(--dim);font-weight:500;margin-left:8px;text-transform:none;letter-spacing:0}
+/* SWOT */
+.swot{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:980px){.swot{grid-template-columns:1fr}}
+.sw{border-radius:22px;padding:20px 24px;border:1px solid var(--hair)}
+.sw h4{margin:0 0 10px;font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.sw.S{background:var(--ok-t)}.sw.S h4{color:var(--ok)}
+.sw.W{background:var(--org-t)}.sw.W h4{color:var(--org)}
+.sw.O{background:var(--blue-t)}.sw.O h4{color:var(--cyan)}
+.sw.T{background:var(--pink-t)}.sw.T h4{color:var(--pink)}
+.sw ul{margin:0;padding-left:18px}.sw li{margin:8px 0;font-size:14px}
+.pl{margin:10px 0;font-size:14px;display:grid;grid-template-columns:62px 1fr;column-gap:8px;align-items:start}
+.pl span{display:block;padding-top:2px;font-size:10.5px;font-weight:700;letter-spacing:.07em;color:var(--cyan)}
+.pl ul{margin:4px 0 0;padding-left:18px}
+.card.stage.o .pl span{color:var(--org)}
+details{background:var(--card);border:1px solid var(--hair);border-radius:14px;margin:8px 0;padding:6px 16px}
+summary{cursor:pointer;font-weight:600;color:var(--cyan);padding:6px 0}
+footer{margin-top:60px;padding:28px;text-align:center;color:var(--dim);font-size:11.5px;letter-spacing:.04em;border-top:1px solid var(--line)}
+@media print{body{background:#fff}nav,.btn,.legend,.vidbar{display:none}.card,.kpi,.tw,.note,.nc,.mcard,.sw{box-shadow:none!important}section{break-inside:avoid-page}}
+</style>
+</head>
+<body>
+<div id="tip"></div>
+<nav>
+<span class="brand"><i></i>FORZA IQ / IDP</span>
+<a href="#top">PROFILE</a><a href="#brief">ASSIGNMENT</a><a href="#match">MATCH</a><a href="#p1">PILLAR 1</a><a href="#p2">PILLAR 2</a><a href="#p3">PILLAR 3</a><a href="#plan">ACTION PLAN</a><a href="#src">DEFINITIONS</a>
+</nav>
+<main>
+
+<!-- ============ COVER / PROFILE ============ -->
+<header id="top" class="hero">
+<div class="secband" style="grid-column:1/-1;margin-bottom:6px"><span class="sn">PROFILE</span><span class="sd">Player profile and season snapshot</span></div>
+<div>
+<div class="herotop">
+<div class="photowrap"><div class="photo" id="photoBox">
+<img id="photoImg" alt="Jamar Ricketts" src="data:image/png;base64,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" style="display:block">
+<div class="ph" id="photoPh" style="display:none"><span>JR</span><small>CLICK TO ADD PHOTO</small></div>
+<button class="chg" id="photoChg" type="button" style="display:block">CHANGE</button>
+<input type="file" accept="image/*" id="photoIn" style="display:none">
+</div>
+<div class="photocap">Jamar Ricketts<small>SAN JOSE EARTHQUAKES &middot; #2</small></div></div>
+<div>
+<div class="eyebrow">Individual Development Plan / MLS / Player analysis</div>
+<h1>Jamar Ricketts</h1>
+<div class="sub">San Jose Earthquakes &middot; #2 &middot; left-back / left-midfield utility</div>
+<p class="lead" style="margin-top:10px">A three-pillar IDP dashboard: video verification, workload and physical metrics, and a four-tier benchmark ladder, built around the video notations and reconciled with the data. Where evidence is missing it says <b>NOT AVAILABLE</b>, never zero.</p>
+</div>
+</div>
+<div class="grid g3" style="margin-top:18px">
+<div class="kpi"><b>1,923</b><span>MLS 2026 minutes</span><small>Statz, 30 apps, snapshot 31 Oct 2026</small></div>
+<div class="kpi"><b>0.94</b><span>Key passes / 90</span><small>20 &times; 90 / 1,923 &middot; 30th of 83 FB</small></div>
+<div class="kpi o"><b>0.51</b><span>Big chances created / 90</span><small>11 &middot; 1st of 83 FB (Statz)</small></div>
+<div class="kpi"><b>18.3</b><span>Sprints / 90 (count)</span><small>peer mean 11.23 &middot; +63%</small></div>
+<div class="kpi o"><b>16.1%</b><span>Open-play cross success</span><small>1.5 crosses/90 &middot; SJ mean 21.1%</small></div>
+<div class="kpi"><b>11</b><span>Video notations</span><small>10 in TFC&ndash;SJ (2 May) + 1 RSL clip</small></div>
+</div>
+<div class="note o" style="margin-top:16px"><b>Video match:</b> Toronto FC 1&ndash;1 San Jose Earthquakes, BMO Field, Saturday 2 May 2026. Season totals (31 Oct / 2 Nov 2026 snapshots) are <b>retrospective context only</b> and are never blended into the as-of-2-May baseline.</div>
+</div>
+<div class="card profile">
+<h4>Player profile</h4>
+<dl>
+<dt>Full name</dt><dd>Jamar Ricketts</dd>
+<dt>Date of birth</dt><dd>24 Oct 2001</dd>
+<dt>Age</dt><dd>25 &middot; <b>24 on match day</b></dd>
+<dt>Nationality</dt><dd>United States</dd>
+<dt>Born</dt><dd>Montclair, New Jersey, USA</dd>
+<dt>Current club</dt><dd>San Jose Earthquakes (MLS), roster: Senior</dd>
+<dt>Position</dt><dd>LB / left midfield<br><small style="color:var(--mut)">Club &amp; MLS list "Midfielder" &middot; Statz: LB &middot; Wikipedia: Defender</small></dd>
+<dt>Shirt / height</dt><dd>#2 &middot; 5'9" (1.75 m)</dd>
+<dt>Market value</dt><dd>&euro;0.8M (Transfermarkt, 2 Jun 2026)</dd>
+<dt>Preferred foot</dt><dd>Not published</dd>
+<dt>Entry route</dt><dd>2024 MLS SuperDraft, 1st round #13, from CSU Northridge</dd>
+<dt>Contract</dt><dd>Signed Feb 2024, club options through 2027</dd>
+<dt>Main traits</dt><dd>Explosive on the left flank; reaches big-chance situations; wins duels and recoveries; inconsistent reception and final ball; long recoveries after high-block losses</dd>
+</dl>
+</div>
+</header>
+
+<!-- ============ ASSIGNMENT BRIEF ============ -->
+<section id="brief">
+<div class="secband"><span class="sn">ASSIGNMENT</span><span class="sd">Brief: objective and deliverable rules</span></div>
+<h2>Individual Development Plan (IDP) brief</h2>
+<div class="grid g2">
+<div class="card"><h4>Objective</h4><p style="margin:0">Build a holistic, data-driven IDP for one player from the provided club dataset: diagnose the current performance profile and design a targeted growth framework by integrating match video, physical workload metrics and positional benchmarks.</p></div>
+<div class="card"><h4>Deliverable rules</h4>
+<ul style="margin:0;padding-left:18px"><li>Length <b>2&ndash;4 pages</b>: clear headers, data tables, visual callouts, embedded annotated screenshots.</li><li>Export as <b>PDF</b>. Word documents and editable slides are <b>not accepted</b>.</li><li>File name: <code>Jamar_Ricketts_IDP_Plan.pdf</code> (Firstname_Lastname_IDP_Plan.pdf).</li><li>Submit via Google Classroom (done by the student, not by this tooling).</li></ul></div>
+</div>
+</section>
+
+<!-- ============ MATCH CONTEXT ============ -->
+<section id="match">
+<div class="secband"><span class="sn">MATCH</span><span class="sd">Video match context</span></div>
+<h2>Toronto FC 1&ndash;1 San Jose Earthquakes &middot; 2 May 2026</h2>
+<p class="lead">Facts read from both clubs' official recaps (retrieved 5 Nov 2026). Where the two recaps disagree, the conflict is shown rather than resolved quietly.</p>
+<div class="grid g2">
+<div class="card"><h4>Match facts</h4>
+<table><tbody>
+<tr><td>Venue</td><td>BMO Field, Toronto</td></tr>
+<tr><td>Goals</td><td>Sall&oacute;i (TFC) 2' &middot; Judd (SJ) 13' or 14' <span class="chip cf">CONFLICT</span> (assist Tsakiris)</td></tr>
+<tr><td>Disallowed</td><td>Judd (SJ), offside after review, 64' (TFC) / 65' (SJ)</td></tr>
+<tr><td>SJ starting XI</td><td>Daniel; Ricketts, Roberts, Munie, Kikanovi&#263;; Leroux, Vieira (c), Tsakiris; Bouda, Skahan, Judd (SJ recap order)</td></tr>
+<tr><td>SJ substitutions</td><td>54' Fernandez for Tsakiris (injury) &middot; 66' Harkes for Skahan &middot; 66' Marie for Judd</td></tr>
+<tr><td>Ricketts</td><td>Starter. No substitution listed, so ~90 min is <b>inferred</b>, not stated.</td></tr>
+</tbody></table></div>
+<div class="card org"><h4>Discrepancies that matter for the IDP</h4>
+<ul style="margin:0;padding-left:18px">
+<li><b>Side / role not stated.</b> SJ lists defenders "Ricketts, Roberts, Munie, Kikanovi&#263;"; Toronto lists the same four in reverse order. Neither names a side or a formation, so <b>LB vs LM must be confirmed on video</b>.</li>
+<li><b>Goal minute:</b> 13' (TFC) vs 14' (SJ). The supplied broadcast scoreboard shows 1&ndash;0 at 12:18 and 1&ndash;1 at 13:19, which fits the 13' reading.</li>
+<li><b>Formation:</b> SJ page implies a 4-3-3 from its grouping; Toronto's listing groups five midfielders. Neither states it.</li>
+</ul></div>
+</div>
+</section>
+
+<!-- ============ PILLAR 1 ============ -->
+<section id="p1">
+<div class="secband"><span class="sn">PILLAR 1</span><span class="sd">In-game performance and video verification</span></div>
+<h2>What the footage shows, and what the data say</h2>
+<p class="lead">Video notations from Toronto FC 1&ndash;1 San Jose (2 May 2026), plus one additional clip from San Jose vs Real Salt Lake, organised by phase of play. Timecodes are the original match-video times noted by the analyst: click one to see where its clip starts in the edited video below. Each phase is then reconciled with the statistical cues that follow.</p>
+
+<h3>Overall evaluation methodology</h3>
+<div class="subh" style="color:var(--cyan)">In possession &middot; Build Up, Create and Finishing</div>
+<div class="meth">
+<div class="mcard"><div data-pitch="in-build"></div><h5 style="color:#248a3d">Build Up</h5><p><b>Beat the first line of pressure.</b> Use the goalkeeper and support angles. Find the free player to progress.</p></div>
+<div class="mcard"><div data-pitch="in-create"></div><h5 style="color:#a36b00">Create</h5><p><b>Open a route to goal.</b> Receive between lines or switch play. Combine to break the last line.</p></div>
+<div class="mcard"><div data-pitch="in-finish"></div><h5 style="color:#d62a5c">Finishing</h5><p><b>Turn an opening into a goal.</b> Time runs and occupy the box. Choose the final pass or shot.</p></div>
+</div>
+<div class="subh" style="color:var(--cyan)">Out of possession &middot; High Block, Middle Block and Low Block</div>
+<div class="meth">
+<div class="mcard"><div data-pitch="out-high"></div><h5 style="color:#248a3d">High Block</h5><p><b>Disrupt the opponent's build up.</b> Press together near their goal. Protect the space behind.</p></div>
+<div class="mcard"><div data-pitch="out-mid"></div><h5 style="color:#a36b00">Middle Block</h5><p><b>Deny central progression.</b> Stay compact around midfield. Press when a trap or trigger appears.</p></div>
+<div class="mcard"><div data-pitch="out-low"></div><h5 style="color:#d62a5c">Low Block</h5><p><b>Protect the goal and penalty area.</b> Close gaps and defend the box. Keep an outlet for the regain.</p></div>
+</div>
+
+<h3>Video notations</h3>
+<div class="tally"><span class="chip ok">2 POSITIVE REMARKS</span><span class="chip cf">8 DEVELOPMENT POINTS</span><span class="chip un">1 MIXED SEQUENCE</span><span class="chip na">10 TFC&ndash;SJ + 1 RSL CLIP</span></div>
+<div class="note">Observations and recommendations follow the analyst's notations. Lines marked <b>Coaching point</b> are suggested additions where the notation did not include a recommendation. The notations place Jamar on the left flank in possession and against Toronto's right winger Henry out of possession, consistent with a left-sided back / wide role.</div>
+
+<div class="phasehead"><h3 style="color:var(--cyan)">IN POSSESSION</h3><i></i></div>
+
+<div class="sub-phase" style="color:#248a3d">Build Up</div>
+<div class="ncards">
+<div class="nc"><div class="hd"><button class="ts" data-t="69:25" data-s="16.0">69:25</button><span class="tag">Development point</span></div>
+<p>Fails to control a ball reception with no significant pressure; possession ends up lost.</p>
+<p class="rec"><b>Recommendation:</b> practise technical reception control.</p>
+<p class="dl"><b>Data link:</b> accurate passes 24.76/90 (78th of 83 full backs); open-play pass volume and success % are blank in the CSV.</p></div>
+</div>
+
+<div class="sub-phase" style="color:#a36b00">Create</div>
+<div class="ncards">
+<div class="nc pos"><div class="hd"><button class="ts" data-t="7:52" data-s="42.0">7:52</button><span class="tag">Positive remark</span></div>
+<p>Long cross from the left flank starts a progression that ends inside the box.</p>
+<p class="dl"><b>Data link:</b> big chances created 0.51/90 (1st of 83); accurate crosses 0.51/90 (29th).</p></div>
+<div class="nc"><div class="hd"><button class="ts" data-t="24:04" data-s="63.5">24:04</button><span class="tag">Development point</span></div>
+<p>Combines well with a teammate but does not use the clear space in front of him: a through ball on the left flank or a support pass to the striker in the centre was available. Instead he rotates to protect the ball and loses possession.</p>
+<p class="rec"><b>Recommendation:</b> scan quickly and use the free frontal space to keep breaking lines in the last third.</p>
+<p class="dl"><b>Data link:</b> chances created (key passes) 0.94/90 (30th of 83); goal involvements 0.14/90.</p></div>
+<div class="nc"><div class="hd"><button class="ts" data-t="43:16" data-s="99.0">43:16</button><span class="tag">Development point</span></div>
+<p>Fully open on the left flank, he attempts a long cross into the box. The defence deflects it, play continues and he gets a second opportunity on the same side, but this time the long ball goes straight to the opponent's goalkeeper.</p>
+<p class="rec"><b>Recommendation:</b> scan quickly and choose a clear short pass; keep practising long-ball technique aimed at the centre of the box.</p>
+<p class="dl"><b>Data link:</b> cross success 16.1% on 1.5 crosses/90, against 21.1% (SJ mean) and 19.7% (peers).</p></div>
+<div class="nc"><div class="hd"><button class="ts" data-t="47:10" data-s="140.75">47:10</button><span class="tag">Development point</span></div>
+<p>Misses a through pass while the team is set in a high block. The opponent tries to counter-attack in a fast transition, but luckily sends the ball out.</p>
+<p class="rec"><b>Recommendation:</b> secure the pass and avoid compromising the ball in that area, because the team's high offensive block can suffer a dangerous counter-attack.</p>
+<p class="dl"><b>Data link:</b> every high-block loss can trigger a long recovery run: sprints 18.3/90 against a peer mean of 11.2.</p></div>
+</div>
+
+<div class="sub-phase" style="color:#d62a5c">Finishing</div>
+<div class="ncards">
+<div class="nc pos"><div class="hd"><button class="ts" data-t="16:28" data-s="173.25">RSL clip &middot; 16:28</button><span class="tag">Positive remark &middot; contribution: assist</span></div>
+<p>Additional video, San Jose Earthquakes vs Real Salt Lake. Jamar wins the left flank with a powerful sprint and, after combining in the box, delivers an assist for a goal. This is evidence of what he is capable of; he needs consistency to improve his attacking numbers.</p>
+<p class="dl"><b>Data link:</b> 3 assists in MLS 2026 (0.14/90, 24th of 83); 0 goals; xG 0.06/90 (28th). The match date of the clip is not stated in the notation.</p></div>
+</div>
+
+<div class="phasehead"><h3 style="color:var(--cyan)">OUT OF POSSESSION</h3><i></i></div>
+
+<div class="sub-phase" style="color:#d62a5c">Low Block</div>
+<div class="ncards">
+<div class="nc"><div class="hd"><button class="ts" data-t="1:36" data-s="226.0">1:36</button><span class="tag">Development point</span></div>
+<p>The opponent sends a long cross, the centre-back follows the attacker, and <b>Jamar could not cut the opponent's build-up on time</b>: the play allowed a dangerous progression that ended in a goal for Toronto.</p>
+<p class="cp"><b>Coaching point:</b> read the long ball earlier and start from a position that cuts the build-up before the cross.</p>
+<p class="dl"><b>Data link:</b> Toronto's opening goal (Sall&oacute;i, 2') in both club recaps. Interceptions 1.12/90 (43rd of 83).</p></div>
+<div class="nc"><div class="hd"><button class="ts" data-t="9:34" data-s="262.0">9:34</button><span class="tag">Development point</span></div>
+<p>Loses the pressure at a throw-in: the striker wins behind him because he is not aware of his back, and the winger ends up receiving the ball. On the next consecutive throw-in he is claiming a refereeing decision and winger Henry wins behind him again.</p>
+<p class="cp"><b>Coaching point:</b> scan before every restart, protect the blind side, and stay in the play after a decision.</p>
+<p class="dl"><b>Data link:</b> 2 yellow cards in 1,923 min (Statz); the direction of the supplied discipline rank is unconfirmed, so this is a watch point only.</p></div>
+<div class="nc"><div class="hd"><button class="ts" data-t="19:32" data-s="296.0">19:32</button><span class="tag">Development point</span></div>
+<p>Allows space and does not close the pressure gap to Toronto's right winger Henry, who is quick and explosive.</p>
+<p class="cp"><b>Coaching point:</b> close the distance earlier and set a body position that limits the winger's running space.</p>
+<p class="dl"><b>Data link:</b> duels won 5.76/90 (9th of 83): he is strong once engaged, so the gap is the distance before the duel.</p></div>
+</div>
+
+<div class="sub-phase" style="color:#a36b00">Mid-Block</div>
+<div class="ncards">
+<div class="nc"><div class="hd"><button class="ts" data-t="21:50" data-s="330.5">21:50</button><span class="tag">Development point</span></div>
+<p>The team is trying to build up through the middle and he is static, waiting for the ball while a midfielder shouts "go, go, go, go". He does not run into the space to pull the winger away and create room for a teammate who is being followed by two opponents.</p>
+<p class="cp"><b>Coaching point:</b> move without the ball: run into the space to drag the winger and open room for the player on the ball.</p>
+<p class="dl"><b>Data link:</b> off-ball movement is not captured by the CSV. A sprint count of 18.3/90 shows the engine for the run is there.</p></div>
+</div>
+
+<div class="sub-phase" style="color:#248a3d">High Block</div>
+<div class="ncards">
+<div class="nc mix" style="grid-column:1/-1"><div class="hd"><button class="ts" data-t="60:57" data-s="359.5">60:57</button><span class="tag">Mixed sequence &middot; one strength, two development points</span></div>
+<p>The team is attacking from a high block. Three things happen:</p>
+<ol style="margin:4px 0 6px;padding-left:20px;font-size:14px"><li>He recovers the ball, which is great, and starts the attacking transition.</li><li>In the attack, Jamar never overlaps his teammate or cuts into the box; he is just waiting too sidelined.</li><li>The team loses the ball and he has to make a very long recovery run with two opponents in front of him. He is jogging at mid-pace and by the time he wants to cover, there is a very dangerous situation for the team.</li></ol>
+<p class="rec"><b>Recommendation:</b> regain position from the high block back into the own third as soon as possible, block any free player, and avoid compromising the team's shape against a counter-attack.</p>
+<p class="dl"><b>Data link:</b> ball recoveries 5.05/90 (10th of 83). Sprints 18.3/90 (+63% vs peer mean) but total distance 10.62 equals the peer mean: many bursts, not extra distance. A jogging return alongside a high sprint count points to the recovery trigger and team structure, not to a lack of engine.</p></div>
+</div>
+
+<h3>Match video</h3>
+<div class="vidslot" id="vidslot">
+<iframe id="driveFrame" src="https://drive.google.com/file/d/1Y_sNe_p6-UPHd091K7CnXAMjU1C4Zapx/preview" title="Jamar Ricketts IDP video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+</div>
+<div class="vidbar"><span id="vidMsg">Click a timecode above to see where its clip starts in the video.</span><a class="btn alt" id="vidDrive" href="https://drive.google.com/file/d/1Y_sNe_p6-UPHd091K7CnXAMjU1C4Zapx/view?usp=drive_link" target="_blank" rel="noopener" style="text-decoration:none;margin-left:auto">OPEN IN GOOGLE DRIVE</a></div>
+
+<h3>Video findings reconciled with the data</h3>
+<div class="tw"><table><thead><tr><th>Priority</th><th>Video evidence</th><th>Data cue</th><th>Reading</th></tr></thead><tbody>
+<tr><td><b>1. Final-third decisions and crossing technique</b></td><td>24:04 rotates instead of the through ball / support pass; 43:16 deflected cross, then the second long ball goes to the goalkeeper; 47:10 missed through pass. Upside: 7:52 and 16:28.</td><td>Cross success 16.1% vs 21.1% (SJ) and 19.7% (peers); accurate crosses 29th; chances created 30th; big chances created 1st of 83</td><td>He reaches the right areas often; the final action (choice and technique) is the inconsistent part.</td></tr>
+<tr><td><b>2. Ball control and reception</b></td><td>69:25 fails a reception with no significant pressure and loses possession</td><td>Accurate passes 24.76/90 (78th of 83); open-play pass cells blank in the CSV</td><td>Low-volume, low-accuracy involvement in build-up is consistent with the control error on film.</td></tr>
+<tr><td><b>3. Sprint and distance efficiency</b></td><td>60:57 long return run at mid-pace after a lost attack; 47:10 and 60:57 show how high-block losses expose the team</td><td>Sprints 18.3/90 vs peer mean 11.2 (+63%); HSR 37.4 vs 33.2 (+13%); total distance 10.62 vs 10.62 (0%)</td><td>Many bursts with no extra total distance. The issue is which sprints he makes and when he triggers the return, not capacity.</td></tr>
+<tr><td><b>4. Off-ball tactical positioning</b></td><td>1:36 late to cut the build-up; 9:34 blind side lost twice; 19:32 pressure gap not closed; 21:50 static in the mid-block</td><td>Duels won 5.76/90 (9th), recoveries 5.05/90 (10th), interceptions 1.12/90 (43rd), clearances 2.57/90 (38th)</td><td>Strong in reactive duels and recoveries, weaker in anticipation and positioning before the duel.</td></tr>
+<tr><td><b>5. Consistency of output</b></td><td>16:28 (RSL clip) powerful sprint, combination in the box, assist</td><td>3 assists (0.14/90, 24th of 83), 0 goals, xG 0.06/90 (28th)</td><td>The capability is proven; repeating it is the development target.</td></tr>
+</tbody></table></div>
+<div class="note">Notations come from one full match plus one additional clip: they identify development priorities and their direction, and should be re-checked as more matches are reviewed.</div>
+
+<h3>Statistical cues behind the notations</h3>
+<div class="two">
+<div class="card"><h4>Statz per-90 rank position vs MLS full backs (pool 83)</h4><div id="rankBars"></div>
+<div class="note">Rank position = (83 &minus; rank) / 82 &times; 100, where 100 is 1st. It is derived from page ranks, not a published percentile. Pool selection rule is not stated by the source. Snapshot 31 Oct 2026 (retrospective to 2 May).</div></div>
+<div class="card"><h4>CSV technical cells (per 90, screenshot-derived)</h4><div id="techCells"></div>
+<div class="note o">Blank cells (open-play passes, pass %, aerials) are <b>not zero</b>. Units and event definitions are not documented by the source.</div></div>
+</div>
+<div class="card" style="margin-top:16px"><h4>Poisson uncertainty on key passes per 90 (approx. 95% interval from event counts)</h4><div id="kpCI"></div>
+<div class="note">Small counts give wide intervals: Costa (5 events) and Jones (3 events) overlap Ricketts, so the apparent ranking among SJ left-backs is <b>not statistically separable</b>.</div></div>
+
+<h3>Metrics to define before use</h3>
+<div class="tw"><table><thead><tr><th>Area</th><th>Metric</th><th>Available now?</th><th>Needs</th></tr></thead><tbody>
+<tr><td>Passing</td><td>Open-play volume, completion %, pressured-pass %, progressive passes, final-third entries, line-breaking passes, receptions facing forward, passes into box</td><td><span class="chip na">BLANK for Ricketts</span> (CSV), Statz accurate passes 24.76/90</td><td>Event data with pressure and coordinates (authorized export)</td></tr>
+<tr><td>Attacking</td><td>Crosses and locations, cutbacks, xA, key passes, big chances created, overlaps/underlaps per eligible opportunity, final-third touches</td><td>Crosses/90, cross %, key passes, BCC, assists, xG (Statz/CSV)</td><td>Video coding for locations, cutbacks, eligible-opportunity denominators</td></tr>
+<tr><td>Defence</td><td>Defensive-third duels by coordinate, aerials by third, 1v1 defending, turnovers leading to progression, recovery positioning</td><td>1v1 66.7% (0.6/90), duels won 5.76/90, recoveries 5.05/90</td><td>Event coordinates + video</td></tr>
+<tr><td>Rules</td><td>Separate LB vs LM/LW minutes; exclude set pieces from open-play creation; clarify "one-on-one", "duels", "crosses", "chances created"</td><td>Statz "chances created" = "key passes" (page label)</td><td>Provider glossary; role-by-match log</td></tr>
+</tbody></table></div>
+</section>
+
+<!-- ============ PILLAR 2 ============ -->
+<section id="p2">
+<div class="secband"><span class="sn">PILLAR 2</span><span class="sd">Workload and physical metrics</span></div>
+<h2>Observed movement involvement, not fatigue or injury risk</h2>
+<p class="lead">The CSV holds per-90 locomotor <b>event counts</b>. They describe how often a player did something above a proprietary threshold, not how far, how fast, or how ready the athlete was. Counts are never presented as distance, and no injury-risk or acute:chronic cut-off is asserted.</p>
+<div class="two">
+<div class="card"><h4>Tier-2 locomotor profile (per 90)</h4><div id="physBars"></div><div class="note">Each bar is the value as a share of the highest of the four players in that metric. Counts per 90, screenshot-derived; distance units and speed thresholds are undocumented.</div></div>
+<div class="card"><h4>Ricketts vs peer median (3 peers, excl. Ricketts)</h4><div class="tw"><table id="gapPhys"></table></div>
+<div class="note">Gap = player &minus; peer median; % = gap / median. Four players cannot establish an MLS percentile. Distance and sprint-distance units are <b>unverified</b>; HSR / sprint / intensive thresholds are <b>undocumented</b>.</div></div>
+</div>
+<h3>SWOT analysis: data findings reconciled with the video</h3>
+<div class="swot">
+<div class="sw S"><h4>Strengths</h4><ul>
+<li><b>Gets into big-chance situations.</b> Big chances created 0.51/90, 1st of 83 full backs; video 7:52 (progression into the box) and 16:28 (assist).</li>
+<li><b>Explosive on the flank.</b> Wins the left flank with a powerful sprint (16:28); sprint count 18.3/90 vs 11.2 peer mean (+63%).</li>
+<li><b>Wins duels and recoveries.</b> Duels won 5.76/90 (9th of 83), ball recoveries 5.05/90 (10th); he recovers the ball and starts the transition at 60:57.</li>
+<li><b>Carries and combines.</b> Successful dribbles 0.84/90 (11th); combines well with teammates in tight spaces (24:04).</li>
+</ul></div>
+<div class="sw W"><h4>Weaknesses</h4><ul>
+<li><b>Final-third decisions and crossing technique.</b> 24:04, 43:16, 47:10; cross success 16.1% vs 21.1% (SJ) and 19.7% (peers); accurate crosses 29th.</li>
+<li><b>Ball control.</b> Reception lost with no significant pressure (69:25); accurate passes 24.76/90, 78th of 83.</li>
+<li><b>Defensive anticipation and positioning.</b> Late to cut the build-up (1:36), blind side lost twice (9:34), pressure gap not closed (19:32); interceptions 43rd.</li>
+<li><b>Off-ball movement and recovery.</b> Static in the mid-block (21:50); sidelined in attack and slow return at 60:57.</li>
+</ul></div>
+<div class="sw O"><h4>Opportunities</h4><ul>
+<li><b>Convert access into output.</b> 0 goals and 3 assists in 1,923 min against top-ranked big-chance creation: better final-ball choice is the lever (illustrative key passes 0.94 &rarr; 1.15&ndash;1.30 per 90).</li>
+<li><b>Make the sprints count.</b> Same engine, fewer long recoveries: a clear rest-defence structure, an immediate recovery trigger and selective overlaps could cut recovery distance and raise end-product.</li>
+<li><b>Clear elite models.</b> Grimaldo (cutback and creation), Cucurella (inverted cover, rest-defence), Mendes (timed underlaps and recovery) map directly onto his three priorities.</li>
+<li><b>Runway.</b> Age 24 with club options through 2027; a consistent minutes base (30 apps) to apply the work.</li>
+</ul></div>
+<div class="sw T"><h4>Risks</h4><ul>
+<li><b>Load and injury exposure.</b> Repeated high-speed bursts forward plus long recovery runs back can stack up high-speed and acceleration/deceleration load (sprints 18.3/90 vs 11.2 peers; late-April match density in the provisional log). This is a monitoring flag, not a prediction: no GPS, injury or medical data are available.</li>
+<li><b>Transition exposure.</b> Ball loss while advanced plus a slow return (47:10, 60:57) hands opponents dangerous counters; the opening goal came from a missed cut at 1:36.</li>
+<li><b>Role ambiguity.</b> Statz shows left midfield 384 min vs left back 144 min in the last 10 games; unclear defensive expectations make positioning inconsistent.</li>
+<li><b>Composure.</b> Claiming a refereeing decision while the play continues (9:34); 2 yellow cards in 1,923 min. A watch point.</li>
+<li><b>Over-correction.</b> More crosses or sprints without better decisions adds exposure without end-product.</li>
+</ul></div>
+</div>
+
+<h3>Match-minute exposure before the video match</h3>
+<div class="two">
+<div class="card"><h4>Match log</h4><div class="tw"><table id="minTbl"></table></div></div>
+<div class="card"><h4>7 / 14 / 28-day minutes</h4>
+<label class="mono" style="font-size:11px;color:var(--mut)">REFERENCE MATCH</label><select class="s" id="refMatch"></select>
+<div id="winOut" style="margin-top:12px"></div>
+<div class="note">Window = matches in [reference date &minus; N days, reference date). League and Cup minutes both counted. "Starts in last 6" = 4/6 (screening report). Never blend later matches into the 2 May baseline.</div></div>
+</div>
+<div id="minChart" class="card" style="margin-top:16px"></div>
+
+</section>
+
+<!-- ============ PILLAR 3 ============ -->
+<section id="p3">
+<div class="secband"><span class="sn">PILLAR 3</span><span class="sd">Context and benchmarks</span></div>
+<h2>Four separate tiers, never blended</h2>
+<p class="lead">Each tier has its own cohort, source, season and caveats. Gaps are expressed as (player &minus; peer median) and % difference, not percentile arithmetic. Radars below use <b>index = value / reference maximum &times; 100</b> (or rank position where stated), explicitly <b>not</b> percentiles.</p>
+<div class="tw"><table><thead><tr><th>Tier</th><th>Cohort</th><th>N</th><th>Source / season</th><th>Confidence</th><th>Main limitation</th></tr></thead><tbody>
+<tr><td><span class="tiertag">T1</span>Internal</td><td>San Jose LBs (Ricketts, Costa, Jones) + SJ all-position context</td><td>3 LBs (+13 SJ rows)</td><td>Statz squad page 31 Oct 2026; CSV</td><td><span class="chip md">MEDIUM-LOW</span></td><td>Role purity unknown; 5 and 3 events for peers; different minutes</td></tr>
+<tr><td><span class="tiertag">T2</span>Same dataset</td><td>Ricketts, Santos (STL), Norris (DAL), Johnson (VAN)</td><td>4</td><td>CSV screenshot transcription</td><td><span class="chip lo">LOW</span></td><td>True positions/minutes unverified; thresholds and units undocumented</td></tr>
+<tr><td><span class="tiertag">T3</span>MLS LB / WB cohort</td><td>Statz full-back pool (rank view) + Markanich Jr., Miller</td><td>83 (per-90 pool); 2 named</td><td>Statz 31 Oct / 2 Nov 2026</td><td><span class="chip lo">LOW-MEDIUM</span></td><td>Named comparators logged mostly LM / wing minutes; role-filtered cohort NOT AVAILABLE</td></tr>
+<tr><td><span class="tiertag o">T4</span>Elite ceiling</td><td>Grimaldo, Cucurella, Nuno Mendes (3 archetypes)</td><td>3</td><td>FootyMetrics 2025/26 domestic league</td><td><span class="chip lo">LOW</span> numbers &middot; <span class="chip md">MEDIUM</span> behaviours</td><td>League strength, possession, role and tracking definitions differ; second-source audit pending</td></tr>
+</tbody></table></div>
+
+<!-- Tier 1 -->
+<h3><span class="tiertag">T1</span> Internal: San Jose Earthquakes</h3>
+<div class="two">
+<div class="card"><h4>San Jose LBs, MLS 2026 (Statz, updated 31 Oct 2026)</h4><div class="tw"><table class="sort" id="t1Tbl"></table></div>
+<div class="note">"Chances created" is the Statz label for key passes. Gap uses the median of the two other LBs. Ricketts' 1,923 min are <b>not LB-pure</b>: his last-10-game split is mostly left midfield.</div></div>
+<div class="card"><h4>Key passes per 90 with 95% Poisson interval</h4><div id="t1Bars"></div></div>
+</div>
+<div class="banner"><b>Context only, not a role benchmark.</b> The radar compares Ricketts with the mean of all San Jose players in the CSV (all positions, goalkeepers excluded by source filter). Index = value / maximum observed in the 52-player CSV sample.</div>
+<div class="radarwrap"><div class="radarbox" id="radT1"></div><div id="radT1side"></div></div>
+
+<!-- Tier 2 -->
+<h3><span class="tiertag">T2</span> Same dataset: closest MLS LB comparators</h3>
+<div class="radarwrap"><div class="radarbox" id="radT2"></div><div id="radT2side"></div></div>
+<div class="radarwrap" style="margin-top:16px"><div class="radarbox" id="radT2b"></div><div id="radT2bside"></div></div>
+
+<!-- Tier 3 -->
+<h3><span class="tiertag">T3</span> Validated MLS LB / WB positional cohort</h3>
+<div class="banner">A role-filtered MLS 2026 cohort (&ge;900 verified LB/WB minutes; sensitivity at 450, 900, 1,350) is <b>NOT AVAILABLE</b>: no provider export with minutes by position was accessible. The tier is shown as (a) Ricketts' rank position inside Statz's "full backs" pool and (b) two named comparators with wing contamination.</div>
+<div class="radarwrap"><div class="radarbox" id="radT3a"></div><div id="radT3aside"></div></div>
+<div class="radarwrap" style="margin-top:16px"><div class="radarbox" id="radT3b"></div><div id="radT3bside"></div></div>
+<div class="two" style="margin-top:16px">
+<div class="card"><h4>Position contamination (Statz last-10 games)</h4><div class="tw"><table id="posTbl"></table></div></div>
+<div class="card org"><h4>Reconciling the supplied attacking ranking with big chances created</h4>
+<ul style="margin:0;padding-left:18px">
+<li><b>The ranking is not on the source page.</b> The supplied ranks (overall 56/64, attacking 56/64, defending 12/64, possession 14/64, discipline 5/64) do not appear on the Statz player page, which instead ranks each stat among "MLS full backs" (142 for totals, 83 for per 90), 1st = best.</li>
+<li><b>Data: access is elite, execution is not.</b> Big chances created: 11, rank 28&ndash;33 overall, 2nd of 142 full backs by total and <b>1st of 83 per 90</b>. Yet goals 0 (=83rd), accurate passes 24.76/90 (78th), accurate crosses 29th, chances created 30th, xG 28th.</li>
+<li><b>Video explains the gap.</b> He gets into the situations that produce big chances (7:52 progression, 16:28 sprint and assist, 43:16 fully open on the flank), but the final action is inconsistent: the through ball not taken (24:04), the second long ball to the goalkeeper (43:16), the missed through pass (47:10) and the lost reception (69:25).</li>
+<li><b>Conclusion.</b> A composite that rewards goals and pass volume can sit low despite elite big-chance counts, so the ranking is no reason to doubt his chance access. It points to consistency of reception and final ball as the lever. The earlier 9 (26 Oct) big-chance value cannot be checked.</li>
+<li><b>Discipline rank 5 is not assumed good</b> until its ordering is confirmed. Statz shows 2 yellow cards in 1,923 min; the 9:34 protest is a watch point only.</li></ul></div>
+</div>
+
+<!-- Tier 4 -->
+<h3><span class="tiertag o">T4</span> Elite tactical ceiling: three archetypes</h3>
+<h4 class="subh">Elite archetype goals as video process metrics (not G+A targets)</h4>
+<div class="grid g3">
+<div class="card"><h4>Grimaldo</h4>Creation, cutback and dead-ball competency; final-third occupation. Process metric: % of final-third deliveries that choose the highest-value option.<div class="note" style="margin-bottom:0"><b>For Jamar:</b> Priority 1, final-third decisions (24:04, 43:16).</div></div>
+<div class="card"><h4>Cucurella</h4>Inversion and defensive cover; rest-defence. Process metric: rest-defence shape held when he moves inside.<div class="note" style="margin-bottom:0"><b>For Jamar:</b> Priorities 3 and 4, recovery and positioning (1:36, 60:57).</div></div>
+<div class="card"><h4>Nuno Mendes</h4>Timed carries and underlaps plus recovery. Process metric: productive underlap % and recovery speed to cover.<div class="note" style="margin-bottom:0"><b>For Jamar:</b> Priority 3, making sprints count (16:28 run, 60:57 return).</div></div>
+</div>
+<div class="banner">Cross-league numbers are <b>not</b> used to score Ricketts' quality. League strength, possession dominance, set pieces, coaching roles, opponent quality, tracking definitions and sample sizes differ. Use Tier 4 for <b>video-derived behaviours</b> and aspirational skill profiles.</div>
+<div class="grid g3" id="archCards"></div>
+<div class="radarwrap" style="margin-top:16px"><div class="radarbox" id="radT4"></div><div id="radT4side"></div></div>
+
+<!-- All players -->
+<h3>All comparison players on one radar</h3>
+<div class="banner">Only five metrics exist for players across Statz and FootyMetrics (goals, assists, G+A, key passes, tackles per 90), and only for six of the eleven players. Index = value / maximum among the six displayed. Tiers differ in competition and role: read shape, not rank.</div>
+<div class="radarwrap"><div class="radarbox" id="radAll"></div><div id="radAllside"></div></div>
+<h3>Data coverage matrix (what exists for whom)</h3>
+<div class="tw"><table id="covTbl"></table></div>
+
+<!-- Explorer -->
+<h3>Explorer: compare Ricketts with any of the 52 CSV players</h3>
+<div class="card"><div class="grid g4">
+<div><label class="mono" style="font-size:11px;color:var(--mut)">PLAYER 2</label><select class="s" id="exP2"></select></div>
+<div><label class="mono" style="font-size:11px;color:var(--mut)">PLAYER 3 (optional)</label><select class="s" id="exP3"></select></div>
+<div><label class="mono" style="font-size:11px;color:var(--mut)">AXIS SET</label><select class="s" id="exSet"><option value="phys">Physical (5)</option><option value="tech">Technical (8)</option><option value="mix">Mixed (10)</option></select></div>
+<div><label class="mono" style="font-size:11px;color:var(--mut)">REFERENCE</label><select class="s" id="exRef"><option value="all">Max of 52 players</option></select></div>
+</div>
+<div class="note o">The 52-player CSV is all positions across four clubs, minimum one-third playing time. It is context, not a role benchmark. Blank source cells are shown as n/a, never zero.</div>
+<div class="radarwrap"><div class="radarbox" id="radEx"></div><div id="radExside"></div></div></div>
+
+<h3>Gap summary (player &minus; peer median)</h3>
+<div class="tw"><table id="gapAll"></table></div>
+<div class="note">Direction of the Tier-1 gap is <b>positive</b>: on key passes per 90 Ricketts is above San Jose's other two LBs, so "below SJ LB peers in attacking creation" is <b>not supported</b> by the available data. He sits below the wing-heavy Tier-3 comparators and far below the elite archetypes, which is not a like-for-like finding.</div>
+
+<h3>Opportunity-adjusted metrics (to be coded from video)</h3>
+<div class="tw"><table><thead><tr><th>Metric</th><th>Numerator</th><th>Denominator (eligible opportunity)</th><th>Status</th></tr></thead><tbody>
+<tr><td>Productive wide runs %</td><td>Runs that create a pass option / entry</td><td>Eligible wide-run opportunities</td><td><span class="chip na">NEEDS VIDEO</span></td></tr>
+<tr><td>Successful entries per allowed attack</td><td>Completed final-third / box entries</td><td>Attacks in which his side was the active channel</td><td><span class="chip na">NEEDS VIDEO</span></td></tr>
+<tr><td>Key passes per final-third touch</td><td>Key passes</td><td>Final-third touches</td><td><span class="chip na">NEEDS EVENT DATA</span></td></tr>
+<tr><td>Cross vs cutback vs recycle choice</td><td>Option chosen</td><td>Moments when &ge;2 options were available</td><td><span class="chip na">NEEDS VIDEO</span></td></tr>
+</tbody></table></div>
+
+<h3>Benchmark ledger (export)</h3>
+<p class="lead" style="margin-bottom:8px">Schema from the brief: player, tier, season, competition, N minutes, position split, statistic, value, unit, denominator, source URL, retrieved_at, definition_confidence, validation_status.</p>
+<button class="btn" id="dlBench">DOWNLOAD benchmark_four_tiers.csv</button>
+<div class="tw" style="margin-top:10px;max-height:380px;overflow:auto"><table class="sort" id="benchTbl"></table></div>
+</section>
+
+<!-- ============ ACTION PLAN ============ -->
+<section id="plan">
+<div class="secband o"><span class="sn">ACTION PLAN</span><span class="sd">Synthesis and recommendations</span></div>
+<h2>Action plan built on the video findings</h2>
+<p class="lead">Four priorities come out of the notations and the data, ordered by expected effect on his attacking output and on the team's security in transition. The work is decision-first: outcome numbers (key passes, cross success) are tracked but illustrative. Any change to his load needs club S&amp;C and medical review.</p>
+
+<div class="grid g2">
+<div class="card stage"><h4>Priority 1 &middot; In possession / Create</h4><b>Final-third decisions and crossing technique</b>
+<p class="pl"><span>VIDEO</span> 24:04, 43:16, 47:10 show the weak final choice; 7:52 and 16:28 show the upside.</p>
+<p class="pl"><span>DATA</span> Cross success 16.1% vs 21.1% (SJ) / 19.7% (peers); chances created 30th of 83; big chances created 1st of 83.</p>
+<div class="pl"><span>DO</span><ul><li>Scan-and-choose game: 3v2 wide progression into the final third; options are through ball, support pass to the striker, cutback, cross or recycle, with the coach's cue arriving late.</li><li>After a deflected cross, the rule is the short pass (43:16).</li><li>Crossing technique blocks aimed at the centre of the box from different starting positions.</li></ul></div>
+<p class="pl"><span>TRACK</span> Best option chosen when two or more were available; cross success; key passes per 90.</p></div>
+
+<div class="card stage o"><h4>Priority 2 &middot; In possession / Build Up</h4><b>Ball control and reception</b>
+<p class="pl"><span>VIDEO</span> 69:25 fails a reception with no significant pressure.</p>
+<p class="pl"><span>DATA</span> Accurate passes 24.76/90, 78th of 83; open-play pass cells blank in the CSV.</p>
+<div class="pl"><span>DO</span><ul><li>Technical reception control: directional first touch, open body shape, receiving on the back foot and in tight spaces.</li><li>Rondos with a "receive and play forward" constraint; wall-pass patterns on the left channel.</li></ul></div>
+<p class="pl"><span>TRACK</span> Receptions lost under no or low pressure per match (1 noted at 69:25); accurate passes per 90.</p></div>
+
+<div class="card stage"><h4>Priority 3 &middot; Transitions / High Block</h4><b>Make the sprints and distance count</b>
+<p class="pl"><span>VIDEO</span> 60:57 long return run at mid-pace after a lost attack; 47:10 high-block loss.</p>
+<p class="pl"><span>DATA</span> Sprints 18.3/90 (+63% vs peers), HSR +13%, total distance equal to the peer mean: many bursts, not extra distance.</p>
+<div class="pl"><span>DO</span><ul><li>Agree a rest-defence structure: who holds when he advances (nearest midfielder, far-side full-back, centre-backs).</li><li>Overlap rule: make the run that adds a threat (overlap or cut into the box) when cover is set, instead of waiting sidelined (60:57).</li><li>Recovery protocol: immediate trigger on loss, central route first, block the free player, then close.</li><li>4v3 and 3v2 transition recovery from wide-high start positions.</li></ul></div>
+<p class="pl"><span>TRACK</span> Recovery runs triggered immediately after a loss; dangerous counters conceded after his advances; sprint purpose (attack vs recovery) once GPS is available.</p></div>
+
+<div class="card stage o"><h4>Priority 4 &middot; Out of possession / Low and Mid Block</h4><b>Off-ball tactical positioning</b>
+<p class="pl"><span>VIDEO</span> 1:36 late to cut the build-up; 9:34 blind side lost twice; 19:32 pressure gap; 21:50 static.</p>
+<p class="pl"><span>DATA</span> Duels won 9th and recoveries 10th of 83, but interceptions 43rd: strong once engaged, weaker in anticipation.</p>
+<div class="pl"><span>DO</span><ul><li>Restart routine: scan before every throw-in, protect the blind side, stay in the play after a decision.</li><li>Wide-defending work (1v1 and 2v1) against a quick winger: close the gap early, limit running space.</li><li>Mid-block movement without the ball: run to drag the winger and open room for the teammate on the ball (21:50).</li></ul></div>
+<p class="pl"><span>TRACK</span> Pressure-gap incidents and blind-side losses per match; interceptions per 90.</p></div>
+</div>
+
+<h3>Making the sprints count: efficiency plan</h3>
+<div class="tw"><table><thead><tr><th>Situation</th><th>Pattern on video</th><th>More efficient pattern</th><th>Team support needed</th></tr></thead><tbody>
+<tr><td>Attacking in a high block (60:57)</td><td>Waits sidelined; no overlap or cut into the box</td><td>Makes the run that adds a threat when cover is set; otherwise holds the width without over-committing</td><td>Midfielder and far-side full-back hold the rest-defence</td></tr>
+<tr><td>Ball lost with opponents ahead</td><td>Mid-pace jog; arrives late</td><td>Immediate recovery sprint on the shortest central route; block the free player</td><td>Nearest midfielder screens; centre-backs hold the line</td></tr>
+<tr><td>Opponent long ball and build-up (1:36)</td><td>Late to cut the build-up</td><td>Reads the long ball earlier from a position that shortens his reaction distance</td><td>Clear centre-back / full-back communication on who steps</td></tr>
+<tr><td>Throw-ins and restarts (9:34)</td><td>Blind side lost; winger wins behind</td><td>Scans, stays connected, keeps the free runner in view</td><td>Set restart roles</td></tr>
+<tr><td>Middle-block build-up (21:50)</td><td>Static, waiting for the ball</td><td>Short, purposeful runs that drag the winger away</td><td>Midfielder uses the space created</td></tr>
+<tr><td>Build-up shape</td><td>Fully advanced when the ball is lost</td><td>Option to test: an inside, hybrid position at times to shorten the return distance (Cucurella model)</td><td>Coach decision on the team's structure</td></tr>
+</tbody></table></div>
+
+<h3>Load and injury-risk monitoring</h3>
+<div class="card org"><p style="margin:0">Repeated high-speed bursts forward and long returns can stack up load, so the aim is to remove <b>low-value</b> sprints, not to cut the useful ones. Request GPS high-speed running <b>metres</b> (with the velocity cut-off), maximum speed, accelerations and decelerations, session-RPE and wellness; split sprints by purpose (attacking run, press, recovery) using the video; review congested periods. Club S&amp;C and medical staff sign off every change. No injury prediction is made from sprint counts, and no acute:chronic cut-off is applied.</p></div>
+
+<h3>Tracking metrics</h3>
+<div class="tw"><table><thead><tr><th>Metric</th><th>Source</th><th>Baseline</th><th>Direction</th></tr></thead><tbody>
+<tr><td>Decision quality in Create (best option chosen)</td><td>Video</td><td>1 positive vs 3 development points (4 notations)</td><td>Increase; code 10&ndash;20 opportunities per match</td></tr>
+<tr><td>Cross success</td><td>CSV</td><td>16.1% (1.5 crosses/90)</td><td>&gt;21% illustrative; needs a large sample (see simulator)</td></tr>
+<tr><td>Key passes per 90</td><td>Statz</td><td>0.94</td><td>1.15&ndash;1.30 illustrative</td></tr>
+<tr><td>Receptions lost under low pressure</td><td>Video</td><td>1 noted (69:25)</td><td>Reduce</td></tr>
+<tr><td>Immediate recovery trigger after a loss</td><td>Video</td><td>1 jogging return noted (60:57)</td><td>Full-effort trigger in every case</td></tr>
+<tr><td>Sprint purpose split (attack / press / recovery)</td><td>Video + GPS</td><td>Not coded</td><td>Monitor; reduce low-value long recoveries</td></tr>
+<tr><td>Interceptions per 90</td><td>Statz</td><td>1.12 (43rd of 83)</td><td>Increase positional anticipation</td></tr>
+</tbody></table></div>
+
+<h3>Target simulator</h3>
+<div class="card"><div class="grid g3">
+<div><label class="mono" style="font-size:11px;color:var(--mut)">TARGET KEY PASSES / 90</label><input type="number" step="0.01" id="simKP" value="1.15"></div>
+<div><label class="mono" style="font-size:11px;color:var(--mut)">MINUTES TO PROJECT</label><input type="number" step="30" id="simMin" value="900"></div>
+<div><label class="mono" style="font-size:11px;color:var(--mut)">CROSSES / 90 (assumed)</label><input type="number" step="0.1" id="simCr" value="1.5"></div>
+</div><div id="simOut" class="note" style="margin-top:12px"></div></div>
+</section>
+
+<!-- ============ DEFINITIONS ============ -->
+<section id="src">
+<div class="secband"><span class="sn">DEFINITIONS</span><span class="sd">Method and formulas</span></div>
+<h2>Definitions and formulas</h2>
+
+<div class="grid g2">
+<div class="card"><ul style="margin:0;padding-left:18px"><li><b>Per 90</b> = stat &times; 90 / minutes (recomputed from minute-summed totals; never averaged across matches).</li><li><b>Gap</b> = player &minus; peer median; <b>% difference</b> = gap / median &times; 100.</li><li><b>Radar index</b> = value / reference maximum &times; 100. <b>Rank position</b> = (N &minus; rank) / (N &minus; 1) &times; 100.</li><li><b>Poisson interval</b>: exact-style (Garwood) interval via the Wilson&ndash;Hilferty approximation.</li></ul></div>
+<div class="card"><ul style="margin:0;padding-left:18px"><li><b>Sprints, HSR, intensive runs</b>: event counts per 90 above undocumented thresholds, not distances.</li><li><b>Chances created</b> (Statz) = key passes; <b>big chances created</b> is a separate, stricter provider event.</li><li><b>Tackles</b> vs <b>tackles won</b> differ (Ricketts 42 vs 27).</li><li>Blank = not visible in source, not zero.</li></ul></div>
+</div>
+</section>
+</main>
+<footer>FORZA IQ / PLAYER DEVELOPMENT &nbsp;&bull;&nbsp; JAMAR RICKETTS IDP &nbsp;&bull;&nbsp; PREPARED 6 NOV 2026</footer>
+<script>
+const CSVDATA = {"csv": [{"player": "Bernard Kamungo", "team": "DAL", "goals": 0.0, "xg": 0.09, "ast": 0.2, "gi": 0.4, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": null, "aerialPct": null, "oneV1": 0.9, "oneV1Pct": 81.3, "clear": 0.4, "dist": 10.2, "sprints": 13.6, "sprintDist": 0.29, "intensive": 47.7, "hsr": 34.1}, {"player": "Christian Cappis", "team": "DAL", "goals": 0.0, "xg": 0.04, "ast": null, "gi": null, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": 1.8, "aerialPct": 48.7, "oneV1": 0.1, "oneV1Pct": 100.0, "clear": 0.5, "dist": 11.86, "sprints": 5.7, "sprintDist": 0.12, "intensive": 36.2, "hsr": 30.4}, {"player": "Herman Johansson", "team": "DAL", "goals": 0.0, "xg": 0.04, "ast": 0.1, "gi": 0.2, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": 3.6, "aerialPct": 55.3, "oneV1": null, "oneV1Pct": null, "clear": 0.8, "dist": 11.05, "sprints": 12.0, "sprintDist": 0.27, "intensive": 43.4, "hsr": 31.5}, {"player": "Joaquín Valiente", "team": "DAL", "goals": 0.1, "xg": 0.11, "ast": 0.4, "gi": 0.7, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": null, "aerialPct": null, "oneV1": 0.2, "oneV1Pct": 75.0, "clear": null, "dist": 11.97, "sprints": 15.3, "sprintDist": 0.3, "intensive": 68.6, "hsr": 53.4}, {"player": "Kaick", "team": "DAL", "goals": 0.2, "xg": 0.13, "ast": null, "gi": 0.3, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": null, "aerialPct": null, "oneV1": 0.2, "oneV1Pct": 100.0, "clear": null, "dist": 11.49, "sprints": 11.6, "sprintDist": 0.24, "intensive": 46.7, "hsr": 35.0}, {"player": "Logan Farrington", "team": "DAL", "goals": 0.6, "xg": 0.48, "ast": 0.2, "gi": 1.0, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": 4.0, "aerialPct": 41.3, "oneV1": 0.6, "oneV1Pct": 44.4, "clear": 0.6, "dist": 10.28, "sprints": 11.7, "sprintDist": 0.25, "intensive": 41.9, "hsr": 30.2}, {"player": "Nolan Norris", "team": "DAL", "goals": 0.0, "xg": 0.03, "ast": 0.0, "gi": null, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": 2.8, "aerialPct": 56.1, "oneV1": 0.1, "oneV1Pct": 66.7, "clear": 1.5, "dist": 10.8, "sprints": 8.5, "sprintDist": 0.17, "intensive": 35.7, "hsr": 27.2}, {"player": "Osaze Urhoghide", "team": "DAL", "goals": 0.1, "xg": 0.09, "ast": 0.1, "gi": 0.2, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": 4.7, "aerialPct": 63.6, "oneV1": 0.1, "oneV1Pct": 100.0, "clear": 1.3, "dist": 10.21, "sprints": 10.2, "sprintDist": 0.22, "intensive": 38.9, "hsr": 28.7}, {"player": "Petar Musa", "team": "DAL", "goals": 0.9, "xg": 0.79, "ast": 0.2, "gi": 1.2, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": 4.2, "aerialPct": 56.1, "oneV1": 0.3, "oneV1Pct": 57.1, "clear": null, "dist": 9.75, "sprints": 8.3, "sprintDist": 0.19, "intensive": 35.0, "hsr": 26.7}, {"player": "Ramiro", "team": "DAL", "goals": 0.0, "xg": null, "ast": 0.2, "gi": 0.3, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": 1.5, "aerialPct": 51.5, "oneV1": null, "oneV1Pct": null, "clear": 0.5, "dist": 11.41, "sprints": 6.9, "sprintDist": 0.14, "intensive": 40.8, "hsr": 33.8}, {"player": "Ran Binyamin", "team": "DAL", "goals": 0.1, "xg": 0.13, "ast": 0.2, "gi": 0.4, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": 3.1, "aerialPct": 45.7, "oneV1": 0.3, "oneV1Pct": 100.0, "clear": 0.4, "dist": 12.97, "sprints": 17.8, "sprintDist": 0.42, "intensive": 68.7, "hsr": 50.9}, {"player": "Santiago Moreno", "team": "DAL", "goals": 0.3, "xg": 0.25, "ast": 0.1, "gi": 0.7, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": null, "aerialPct": null, "oneV1": 0.5, "oneV1Pct": 85.7, "clear": null, "dist": 11.1, "sprints": 11.7, "sprintDist": 0.24, "intensive": 52.7, "hsr": 41.0}, {"player": "Sebastien Ibeagha", "team": "DAL", "goals": 0.0, "xg": 0.04, "ast": null, "gi": null, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": 2.8, "aerialPct": 66.7, "oneV1": null, "oneV1Pct": null, "clear": 1.4, "dist": 9.83, "sprints": 6.6, "sprintDist": 0.15, "intensive": 26.9, "hsr": 20.2}, {"player": "Shaq Moore", "team": "DAL", "goals": 0.0, "xg": 0.04, "ast": 0.1, "gi": null, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": 1.6, "aerialPct": 54.2, "oneV1": null, "oneV1Pct": null, "clear": 0.9, "dist": 10.29, "sprints": 10.2, "sprintDist": 0.21, "intensive": 37.5, "hsr": 27.3}, {"player": "Beau Leroux", "team": "SJ", "goals": 0.1, "xg": 0.18, "ast": 0.3, "gi": 0.5, "phases": 55.9, "passes": 40.3, "passPct": 80.4, "crosses": 1.1, "crossPct": 20.0, "aerial": 1.8, "aerialPct": 51.0, "oneV1": 0.4, "oneV1Pct": 100.0, "clear": 0.3, "dist": 11.42, "sprints": 3.1, "sprintDist": 0.06, "intensive": 33.0, "hsr": 29.9}, {"player": "Benji Kikanovic", "team": "SJ", "goals": 0.0, "xg": 0.08, "ast": null, "gi": null, "phases": 59.3, "passes": 35.1, "passPct": 76.7, "crosses": 1.6, "crossPct": 25.8, "aerial": 4.3, "aerialPct": 65.9, "oneV1": 0.1, "oneV1Pct": 0.0, "clear": 1.3, "dist": 11.3, "sprints": 14.9, "sprintDist": 0.31, "intensive": 49.4, "hsr": 34.5}, {"player": "Daniel Munie", "team": "SJ", "goals": 0.2, "xg": 0.12, "ast": 0.1, "gi": 0.4, "phases": 63.9, "passes": 53.0, "passPct": 88.4, "crosses": null, "crossPct": null, "aerial": 2.9, "aerialPct": 50.0, "oneV1": null, "oneV1Pct": null, "clear": 1.2, "dist": 10.36, "sprints": 12.6, "sprintDist": 0.27, "intensive": 39.5, "hsr": 26.9}, {"player": "Dave Romney", "team": "SJ", "goals": 0.1, "xg": 0.07, "ast": null, "gi": 0.1, "phases": 63.7, "passes": 47.5, "passPct": 87.2, "crosses": 0.3, "crossPct": 25.0, "aerial": 3.3, "aerialPct": 66.7, "oneV1": null, "oneV1Pct": null, "clear": 1.7, "dist": 10.45, "sprints": 9.6, "sprintDist": 0.21, "intensive": 34.9, "hsr": 25.2}, {"player": "Ian Harkes", "team": "SJ", "goals": 0.0, "xg": 0.11, "ast": null, "gi": null, "phases": 59.3, "passes": 46.3, "passPct": 91.3, "crosses": 0.2, "crossPct": 0.0, "aerial": 2.1, "aerialPct": 36.0, "oneV1": 0.1, "oneV1Pct": 100.0, "clear": 0.9, "dist": 12.51, "sprints": 6.4, "sprintDist": 0.11, "intensive": 42.0, "hsr": 35.6}, {"player": "Jack Jasinski", "team": "SJ", "goals": 0.3, "xg": 0.12, "ast": 0.0, "gi": 0.3, "phases": 53.1, "passes": 32.6, "passPct": 84.4, "crosses": 1.2, "crossPct": 21.4, "aerial": 2.7, "aerialPct": 46.9, "oneV1": 0.1, "oneV1Pct": 0.0, "clear": 1.2, "dist": 12.13, "sprints": 15.5, "sprintDist": 0.32, "intensive": 58.8, "hsr": 43.3}, {"player": "Jamar Ricketts", "team": "SJ", "goals": 0.0, "xg": 0.05, "ast": 0.1, "gi": 0.2, "phases": 53.3, "passes": null, "passPct": null, "crosses": 1.5, "crossPct": 16.1, "aerial": null, "aerialPct": null, "oneV1": 0.6, "oneV1Pct": 66.7, "clear": 0.6, "dist": 10.62, "sprints": 18.3, "sprintDist": 0.43, "intensive": 55.6, "hsr": 37.4}, {"player": "Niko Tsakiris", "team": "SJ", "goals": 0.2, "xg": 0.32, "ast": 0.5, "gi": 1.0, "phases": 70.0, "passes": 50.0, "passPct": 84.6, "crosses": 1.4, "crossPct": 41.7, "aerial": null, "aerialPct": null, "oneV1": 0.5, "oneV1Pct": 25.0, "clear": null, "dist": 11.92, "sprints": 6.6, "sprintDist": 0.14, "intensive": 44.4, "hsr": 37.8}, {"player": "Ousseni Bouda", "team": "SJ", "goals": 0.2, "xg": 0.26, "ast": 0.0, "gi": 0.5, "phases": null, "passes": null, "passPct": null, "crosses": 2.3, "crossPct": 27.1, "aerial": 3.5, "aerialPct": 31.5, "oneV1": 0.3, "oneV1Pct": 42.9, "clear": 0.2, "dist": 10.48, "sprints": 14.9, "sprintDist": 0.33, "intensive": 51.8, "hsr": 36.8}, {"player": "Preston Judd", "team": "SJ", "goals": 0.7, "xg": 0.65, "ast": 0.1, "gi": 0.9, "phases": null, "passes": null, "passPct": null, "crosses": 0.3, "crossPct": 12.5, "aerial": 2.3, "aerialPct": 50.9, "oneV1": 0.1, "oneV1Pct": 66.7, "clear": null, "dist": 9.41, "sprints": 12.6, "sprintDist": 0.28, "intensive": 31.9, "hsr": 19.3}, {"player": "Reid Roberts", "team": "SJ", "goals": 0.1, "xg": 0.1, "ast": 0.0, "gi": 0.2, "phases": 66.2, "passes": 55.0, "passPct": 90.2, "crosses": null, "crossPct": null, "aerial": 3.2, "aerialPct": 58.0, "oneV1": null, "oneV1Pct": null, "clear": 1.2, "dist": 10.93, "sprints": 9.9, "sprintDist": 0.19, "intensive": 39.2, "hsr": 29.3}, {"player": "Ronaldo Vieira", "team": "SJ", "goals": 0.0, "xg": 0.07, "ast": 0.0, "gi": null, "phases": null, "passes": 39.6, "passPct": 86.0, "crosses": null, "crossPct": null, "aerial": 1.7, "aerialPct": 55.3, "oneV1": 0.1, "oneV1Pct": 100.0, "clear": 0.7, "dist": 10.47, "sprints": 3.5, "sprintDist": 0.07, "intensive": 25.6, "hsr": 22.1}, {"player": "Timo Werner", "team": "SJ", "goals": 0.4, "xg": 0.43, "ast": 0.4, "gi": 1.2, "phases": 56.5, "passes": 34.8, "passPct": 71.4, "crosses": 2.9, "crossPct": 21.4, "aerial": null, "aerialPct": null, "oneV1": 0.6, "oneV1Pct": 62.5, "clear": null, "dist": 10.06, "sprints": 16.7, "sprintDist": 0.37, "intensive": 48.0, "hsr": 31.3}, {"player": "Chris Durkin", "team": "STL", "goals": 0.1, "xg": 0.06, "ast": 0.1, "gi": 0.3, "phases": 61.7, "passes": 51.0, "passPct": 87.5, "crosses": 0.4, "crossPct": 36.4, "aerial": 2.0, "aerialPct": 76.9, "oneV1": 0.1, "oneV1Pct": 50.0, "clear": 0.5, "dist": 12.45, "sprints": 8.5, "sprintDist": 0.17, "intensive": 49.1, "hsr": 40.6}, {"player": "Conrad Wallem", "team": "STL", "goals": 0.0, "xg": 0.08, "ast": 0.2, "gi": 0.4, "phases": 59.5, "passes": 39.6, "passPct": 84.8, "crosses": 1.5, "crossPct": 27.0, "aerial": 2.1, "aerialPct": 59.6, "oneV1": 0.2, "oneV1Pct": 100.0, "clear": 0.5, "dist": 10.95, "sprints": 14.1, "sprintDist": 0.31, "intensive": 52.1, "hsr": 38.0}, {"player": "Daniel Edelman", "team": "STL", "goals": 0.2, "xg": 0.08, "ast": 0.1, "gi": 0.3, "phases": 58.9, "passes": 47.7, "passPct": 86.5, "crosses": 0.3, "crossPct": 57.1, "aerial": 1.9, "aerialPct": 52.9, "oneV1": null, "oneV1Pct": null, "clear": 0.7, "dist": 12.64, "sprints": 9.3, "sprintDist": 0.19, "intensive": 55.4, "hsr": 46.0}, {"player": "Dante Polvara", "team": "STL", "goals": 0.0, "xg": 0.06, "ast": 0.0, "gi": 0.0, "phases": 69.6, "passes": 57.7, "passPct": 89.7, "crosses": 0.0, "crossPct": 0.0, "aerial": 2.9, "aerialPct": 59.0, "oneV1": 0.0, "oneV1Pct": 100.0, "clear": 1.0, "dist": 10.43, "sprints": 6.0, "sprintDist": 0.14, "intensive": 32.6, "hsr": 26.6}, {"player": "Jaziel Orozco", "team": "STL", "goals": 0.0, "xg": 0.01, "ast": null, "gi": null, "phases": 75.5, "passes": 64.4, "passPct": 91.1, "crosses": null, "crossPct": null, "aerial": 2.6, "aerialPct": 47.6, "oneV1": 0.1, "oneV1Pct": 0.0, "clear": 0.8, "dist": 10.42, "sprints": 7.3, "sprintDist": 0.15, "intensive": 36.4, "hsr": 29.1}, {"player": "Jeong Sang-bin", "team": "STL", "goals": 0.2, "xg": 0.32, "ast": 0.2, "gi": 0.8, "phases": null, "passes": 32.3, "passPct": 82.5, "crosses": 0.9, "crossPct": 27.3, "aerial": 1.6, "aerialPct": 36.8, "oneV1": 0.4, "oneV1Pct": 60.0, "clear": null, "dist": 10.77, "sprints": 17.8, "sprintDist": 0.36, "intensive": 54.9, "hsr": 37.0}, {"player": "Lukas MacNaughton", "team": "STL", "goals": 0.1, "xg": 0.05, "ast": 0.1, "gi": 0.2, "phases": 76.6, "passes": 62.2, "passPct": 88.4, "crosses": 0.2, "crossPct": 0.0, "aerial": 4.5, "aerialPct": 59.4, "oneV1": null, "oneV1Pct": null, "clear": 1.8, "dist": 11.71, "sprints": 7.1, "sprintDist": 0.15, "intensive": 37.2, "hsr": 30.1}, {"player": "Marcel Hartel", "team": "STL", "goals": 0.4, "xg": 0.36, "ast": 0.2, "gi": 0.7, "phases": 59.3, "passes": 41.7, "passPct": 80.6, "crosses": 1.1, "crossPct": 18.8, "aerial": null, "aerialPct": null, "oneV1": 0.3, "oneV1Pct": 80.0, "clear": null, "dist": 11.69, "sprints": 10.9, "sprintDist": 0.23, "intensive": 47.2, "hsr": 36.3}, {"player": "Rafael Santos", "team": "STL", "goals": 0.1, "xg": 0.08, "ast": 0.1, "gi": 0.1, "phases": 52.3, "passes": 31.0, "passPct": 78.6, "crosses": 3.7, "crossPct": 21.2, "aerial": null, "aerialPct": null, "oneV1": 0.4, "oneV1Pct": 40.0, "clear": 0.8, "dist": 10.06, "sprints": 14.5, "sprintDist": 0.31, "intensive": 52.2, "hsr": 37.7}, {"player": "Simon Becher", "team": "STL", "goals": 0.4, "xg": 0.5, "ast": 0.2, "gi": 0.7, "phases": null, "passes": null, "passPct": null, "crosses": 0.2, "crossPct": 0.0, "aerial": 5.4, "aerialPct": 37.7, "oneV1": 0.2, "oneV1Pct": 75.0, "clear": 0.3, "dist": 10.75, "sprints": 15.2, "sprintDist": 0.31, "intensive": 56.6, "hsr": 41.4}, {"player": "Timo Baumgartl", "team": "STL", "goals": 0.0, "xg": 0.02, "ast": 0.0, "gi": null, "phases": 79.0, "passes": 61.0, "passPct": 91.7, "crosses": null, "crossPct": null, "aerial": 2.0, "aerialPct": 58.5, "oneV1": 0.0, "oneV1Pct": 0.0, "clear": 1.2, "dist": 9.95, "sprints": 3.9, "sprintDist": 0.08, "intensive": 19.5, "hsr": 15.6}, {"player": "Tomas Totland", "team": "STL", "goals": 0.1, "xg": 0.12, "ast": 0.2, "gi": 0.6, "phases": 48.2, "passes": null, "passPct": null, "crosses": 1.1, "crossPct": 20.8, "aerial": 1.4, "aerialPct": 54.8, "oneV1": 0.1, "oneV1Pct": 100.0, "clear": 1.0, "dist": 11.04, "sprints": 13.2, "sprintDist": 0.28, "intensive": 49.1, "hsr": 36.0}, {"player": "Andrés Cubas", "team": "VAN", "goals": 0.0, "xg": 0.03, "ast": 0.1, "gi": 0.2, "phases": 64.8, "passes": 52.8, "passPct": 90.7, "crosses": 0.1, "crossPct": 0.0, "aerial": null, "aerialPct": null, "oneV1": null, "oneV1Pct": null, "clear": 0.2, "dist": 11.53, "sprints": null, "sprintDist": null, "intensive": null, "hsr": null}, {"player": "Brian White", "team": "VAN", "goals": 0.6, "xg": 0.67, "ast": 0.1, "gi": 0.7, "phases": null, "passes": null, "passPct": null, "crosses": null, "crossPct": null, "aerial": 4.3, "aerialPct": 41.2, "oneV1": null, "oneV1Pct": null, "clear": 0.3, "dist": null, "sprints": 11.2, "sprintDist": 0.23, "intensive": 43.4, "hsr": 32.2}, {"player": "Édier Ocampo", "team": "VAN", "goals": 0.1, "xg": 0.06, "ast": 0.0, "gi": 0.5, "phases": 65.8, "passes": 43.7, "passPct": 82.5, "crosses": 2.5, "crossPct": 35.9, "aerial": null, "aerialPct": null, "oneV1": 0.3, "oneV1Pct": 50.0, "clear": 0.6, "dist": 10.99, "sprints": 18.4, "sprintDist": 0.4, "intensive": 59.9, "hsr": 41.5}, {"player": "Emmanuel Sabbi", "team": "VAN", "goals": 0.3, "xg": 0.34, "ast": 0.3, "gi": 0.7, "phases": null, "passes": null, "passPct": null, "crosses": 1.0, "crossPct": 26.7, "aerial": null, "aerialPct": null, "oneV1": 0.4, "oneV1Pct": 71.4, "clear": null, "dist": 10.88, "sprints": 13.7, "sprintDist": 0.28, "intensive": 51.0, "hsr": 37.4}, {"player": "Jeevan Badwal", "team": "VAN", "goals": 0.1, "xg": 0.19, "ast": 0.1, "gi": 0.3, "phases": null, "passes": null, "passPct": null, "crosses": 0.5, "crossPct": 50.0, "aerial": 1.8, "aerialPct": 42.9, "oneV1": 0.1, "oneV1Pct": 100.0, "clear": null, "dist": 11.87, "sprints": 9.5, "sprintDist": 0.2, "intensive": 60.7, "hsr": 51.2}, {"player": "Mathias Laborda", "team": "VAN", "goals": 0.1, "xg": 0.16, "ast": 0.1, "gi": 0.3, "phases": 77.5, "passes": 63.1, "passPct": 89.1, "crosses": 0.2, "crossPct": 50.0, "aerial": 3.1, "aerialPct": 64.0, "oneV1": 0.0, "oneV1Pct": 100.0, "clear": 0.8, "dist": null, "sprints": 8.8, "sprintDist": 0.19, "intensive": 36.9, "hsr": 28.0}, {"player": "Oliver Larraz", "team": "VAN", "goals": 0.1, "xg": 0.08, "ast": 0.3, "gi": 0.5, "phases": 68.9, "passes": 50.5, "passPct": 88.9, "crosses": 0.9, "crossPct": 6.3, "aerial": 1.4, "aerialPct": 50.0, "oneV1": 0.1, "oneV1Pct": 100.0, "clear": 0.4, "dist": 12.5, "sprints": 8.4, "sprintDist": 0.17, "intensive": 50.2, "hsr": 41.9}, {"player": "Ralph Priso", "team": "VAN", "goals": 0.1, "xg": 0.09, "ast": 0.1, "gi": null, "phases": 82.7, "passes": 69.5, "passPct": 93.5, "crosses": null, "crossPct": null, "aerial": 1.3, "aerialPct": 35.7, "oneV1": 0.1, "oneV1Pct": 0.0, "clear": 1.8, "dist": 10.78, "sprints": null, "sprintDist": null, "intensive": null, "hsr": null}, {"player": "Ryan Gauld", "team": "VAN", "goals": 0.4, "xg": 0.32, "ast": 0.1, "gi": 0.7, "phases": 70.4, "passes": 50.3, "passPct": 87.5, "crosses": 1.0, "crossPct": 38.5, "aerial": 1.2, "aerialPct": 37.5, "oneV1": 0.1, "oneV1Pct": 50.0, "clear": 0.1, "dist": 12.2, "sprints": 12.2, "sprintDist": 0.25, "intensive": 52.6, "hsr": 40.4}, {"player": "Sebastian Berhalter", "team": "VAN", "goals": 0.5, "xg": 0.27, "ast": 0.3, "gi": 1.3, "phases": 87.2, "passes": 62.1, "passPct": 84.5, "crosses": 1.5, "crossPct": 21.1, "aerial": 1.2, "aerialPct": 60.0, "oneV1": null, "oneV1Pct": null, "clear": null, "dist": 12.23, "sprints": 8.9, "sprintDist": 0.19, "intensive": 49.0, "hsr": 40.2}, {"player": "Tate Johnson", "team": "VAN", "goals": 0.0, "xg": 0.0, "ast": null, "gi": null, "phases": 76.0, "passes": 57.5, "passPct": 88.2, "crosses": 0.8, "crossPct": 18.2, "aerial": 1.2, "aerialPct": 55.9, "oneV1": 0.0, "oneV1Pct": 100.0, "clear": 0.8, "dist": 10.99, "sprints": 10.7, "sprintDist": 0.24, "intensive": 45.4, "hsr": 34.7}, {"player": "Thomas Müller", "team": "VAN", "goals": 0.5, "xg": 0.36, "ast": 0.3, "gi": 0.9, "phases": 58.4, "passes": 44.6, "passPct": 77.6, "crosses": 0.8, "crossPct": 20.0, "aerial": 1.6, "aerialPct": 48.4, "oneV1": 0.2, "oneV1Pct": 75.0, "clear": 0.2, "dist": 11.42, "sprints": 4.7, "sprintDist": null, "intensive": 40.8, "hsr": 36.1}, {"player": "Tristan Blackmon", "team": "VAN", "goals": 0.0, "xg": 0.1, "ast": 0.0, "gi": null, "phases": 87.6, "passes": 72.9, "passPct": 90.3, "crosses": null, "crossPct": null, "aerial": 3.0, "aerialPct": 65.9, "oneV1": 0.1, "oneV1Pct": 100.0, "clear": 1.4, "dist": null, "sprints": 8.8, "sprintDist": 0.19, "intensive": 36.7, "hsr": null}], "hashes": [{"file": "Claude_Copilot_Ricketts_IDP_Four_Tier_Validation_Prompt.md", "sha256": "3143abe5a0b200c4da8e2d1817466c543e279c2c411faa58691ccef81f6ec8d7", "bytes": 16679}, {"file": "IDP_Template.pptx", "sha256": "55a3b7773691707d143d46e99e6659f38d085a5b0934b0bb60d787e47c7eb195", "bytes": 2445925}, {"file": "Individual Development Plan (IDP).docx", "sha256": "4121b7bf9b5165c7f1c3eb258bff99a22d73b673d444e245331da51c0cbda7dd", "bytes": 316413}, {"file": "MLS_IDP_Consolidated_Candidate_Report.pdf", "sha256": "482958c1967c32df1e9973ce35af9ead802881bef38f365608b272feaa1da980", "bytes": 116421}, {"file": "MLS_IDP_Four_Matches_All_52.csv", "sha256": "49ce36e0f1f804f2807828b54b77b39091d33ff5e933d3fcab8d59d26b8436e0", "bytes": 16328}, {"file": "MLS_IDP_Match_Appearance_Crosswalk_2026.xlsx", "sha256": "5fa54f1276e59a3beb6ae7cda72f4e3c91a0bd4d0c9964a4fb67241a2804632c", "bytes": 11243}, {"file": "MLS_Player_Metrics_By_Team - MLS_Player_Metrics_By_Team.csv", "sha256": "d8b58016f5892085716c12c538b10853b109eb304f89060131d7643acfffeaa1", "bytes": 21471}]};
+(function(){
+'use strict';
+var COL={cyan:'#007AFF',org:'#FF9500',green:'#34C759',yellow:'#F5B800',violet:'#AF52DE',pink:'#FF2D55',gray:'#8E8E93'};
+var $=function(s,r){return (r||document).querySelector(s)};
+var fx=function(v,d){return v==null?'n/a':(Math.round(v*Math.pow(10,d))/Math.pow(10,d)).toFixed(d)};
+var f2=function(v){return fx(v,2)};
+var p90=function(x,m){return x*90/m};
+var clean=function(a){return a.filter(function(v){return v!=null})};
+var med=function(a){a=clean(a).sort(function(x,y){return x-y});var n=a.length;if(!n)return null;return n%2?a[(n-1)/2]:(a[n/2-1]+a[n/2])/2};
+var mean=function(a){a=clean(a);return a.length?a.reduce(function(s,v){return s+v},0)/a.length:null};
+var sign=function(v,d){return (v>=0?'+':'')+fx(v,d)};
+var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')};
+var RETR='2026-11-05';
+
+/* ---------------- data ---------------- */
+var CSV=CSVDATA.csv;
+var byName=function(n){return CSV.filter(function(r){return r.player===n})[0]};
+var R=byName('Jamar Ricketts'),SANTOS=byName('Rafael Santos'),NORRIS=byName('Nolan Norris'),JOHNSON=byName('Tate Johnson');
+var PEERS=[SANTOS,NORRIS,JOHNSON];
+var SJ=CSV.filter(function(r){return r.team==='SJ'});
+var STZ='https://statz.ai/player/', SQUAD='https://statz.ai/team/sj-earthquakes/squad', FM='https://www.footymetrics.com/players/';
+var P=[
+ {id:'ricketts',name:'Jamar Ricketts',short:'Ricketts',club:'San Jose Earthquakes',tier:1,comp:'MLS 2026',season:'2026',apps:30,min:1923,G:0,A:3,KP:20,T:42,TW:27,BCC:11,src:STZ+'jamar-ricketts/37740713',asof:'Statz updated 31 Oct 2026',color:COL.cyan},
+ {id:'costa',name:'Vítor Costa',short:'Costa',club:'San Jose Earthquakes',tier:1,comp:'MLS 2026',season:'2026',apps:15,min:643,KP:5,src:SQUAD,asof:'Statz updated 31 Oct 2026',color:COL.green},
+ {id:'jones',name:'DeJuan Jones',short:'Jones',club:'San Jose Earthquakes',tier:1,comp:'MLS 2026',season:'2026',apps:5,min:362,KP:3,src:SQUAD,asof:'Statz updated 31 Oct 2026',color:COL.yellow},
+ {id:'markanich',name:'Anthony Markanich Jr.',short:'Markanich',club:'Minnesota United',tier:3,comp:'MLS 2026',season:'2026',apps:32,min:2681,G:9,A:3,KP:38,T:60,TW:39,src:STZ+'anthony-markanich-jr/37614781',asof:'Statz updated 2 Nov 2026',color:COL.org},
+ {id:'miller',name:'Peyton Miller',short:'Miller',club:'New England Revolution',tier:3,comp:'MLS 2026',season:'2026',apps:30,min:2167,G:7,A:8,KP:28,T:21,TW:14,src:STZ+'peyton-miller/37689784',asof:'Statz updated 2 Nov 2026',color:COL.violet},
+ {id:'grimaldo',name:'Alejandro Grimaldo',short:'Grimaldo',club:'club not stated on source page',tier:4,comp:'Bundesliga 2025/26',season:'2025/26',apps:29,min:2525,G:8,A:8,KP:70,T:49,src:FM+'2233/alejandro-grimaldo',asof:'FootyMetrics, no update date',color:COL.pink},
+ {id:'cucurella',name:'Marc Cucurella',short:'Cucurella',club:'club not stated on source page',tier:4,comp:'Premier League 2025/26',season:'2025/26',apps:34,min:2709,G:1,A:4,KP:39,T:56,src:FM+'3753/marc-cucurella',asof:'FootyMetrics, no update date',color:COL.yellow},
+ {id:'mendes',name:'Nuno Mendes',short:'Mendes',club:'Paris Saint-Germain (per page)',tier:4,comp:'Ligue 1 2025/26',season:'2025/26',apps:20,min:1251,G:4,A:5,KP:30,T:25,src:FM+'2006/nuno-mendes',asof:'FootyMetrics, no update date',color:COL.green}
+];
+var PID={};P.forEach(function(p){PID[p.id]=p});
+var m90=function(p,k){return p[k]==null?null:p90(p[k],p.min)};
+var gi90=function(p){return p.G==null?null:p90(p.G+p.A,p.min)};
+var RANKS=[['Goals',0.00,83,'0 goals (=142nd of 142 by total)'],['xG',0.06,28,''],['Assists',0.14,24,''],['Chances created',0.94,30,'= key passes'],['Big chances created',0.51,1,'11 total (2nd of 142)'],['Successful dribbles',0.84,11,''],['Accurate crosses',0.51,29,''],['Accurate passes',24.76,78,''],['Duels won',5.76,9,''],['Ball recoveries',5.05,10,''],['Tackles won',1.26,29,''],['Interceptions',1.12,43,''],['Clearances',2.57,38,'']];
+var rp=function(r){return (83-r)/82*100};
+var MATCHES=[{d:'2026-03-21',opp:'VAN',comp:'MLS',min:53},{d:'2026-04-04',opp:'SD',comp:'MLS',min:68},{d:'2026-04-11',opp:'SKC',comp:'MLS',min:0},{d:'2026-04-19',opp:'LAFC',comp:'MLS',min:68},{d:'2026-04-22',opp:'ATX',comp:'MLS',min:89},{d:'2026-04-25',opp:'STL',comp:'MLS',min:21},{d:'2026-04-28',opp:'Cup',comp:'Cup',min:81},{d:'2026-05-02',opp:'TOR',comp:'MLS',min:90,video:true}];
+
+/* ---------------- helpers ---------------- */
+function T(el,heads,rows,cls){
+  var h='<thead><tr>'+heads.map(function(x){var n=x.charAt(0)==='#';return '<th class="'+(n?'n':'')+'">'+esc(n?x.slice(1):x)+'</th>'}).join('')+'</tr></thead><tbody>';
+  h+=rows.map(function(r,i){return '<tr'+(cls&&cls[i]?' class="'+cls[i]+'"':'')+'>'+r.map(function(c,j){var n=heads[j].charAt(0)==='#';return '<td class="'+(n?'n':'')+'">'+c+'</td>'}).join('')+'</tr>'}).join('')+'</tbody>';
+  el.innerHTML=h;
+  if(el.classList.contains('sort'))sortable(el);
+}
+function sortable(t){
+  var ths=t.querySelectorAll('th');
+  ths.forEach(function(th,ci){th.addEventListener('click',function(){
+    var dir=th.dataset.d==='1'?-1:1;th.dataset.d=dir===1?'1':'0';
+    var rows=Array.prototype.slice.call(t.tBodies[0].rows);
+    var val=function(r){var s=r.cells[ci].textContent.replace(/[,%+]/g,'').trim();var n=parseFloat(s);return isNaN(n)?s.toLowerCase():n};
+    rows.sort(function(a,b){var x=val(a),y=val(b);return (x>y?1:x<y?-1:0)*dir});
+    rows.forEach(function(r){t.tBodies[0].appendChild(r)});
+  })});
+}
+var chip=function(k,t){return '<span class="chip '+k+'">'+t+'</span>'};
+var ST={ok:chip('ok','VERIFIED'),cf:chip('cf','CONFLICTED'),un:chip('un','UNVERIFIED'),na:chip('na','NOT AVAILABLE'),pv:chip('pv','PROVISIONAL'),inf:chip('un','INFERRED')};
+
+/* Poisson interval (Wilson-Hilferty approximation of the Garwood interval) */
+function chi2q(z,v){var a=2/(9*v);return v*Math.pow(1-a+z*Math.sqrt(a),3)}
+function poisCI(k){var lo=k===0?0:0.5*chi2q(-1.959964,2*k);var hi=0.5*chi2q(1.959964,2*k+2);return [lo,hi]}
+
+/* horizontal bars */
+function hbars(el,rows,o){
+  o=o||{};var mx=o.max||Math.max.apply(null,rows.map(function(r){return Math.max(r.value==null?0:r.value,r.hi||0)}));
+  el.innerHTML=rows.map(function(r){
+    var w=r.value==null?0:Math.min(r.value/mx*100,100);
+    var wh=(r.lo!=null)?'<span class="w" style="left:'+(r.lo/mx*100)+'%;width:'+((r.hi-r.lo)/mx*100)+'%"></span>':'';
+    return '<div class="bar"><div>'+r.label+'</div><div class="t"><div class="f" style="width:'+w+'%;background:'+(r.color||COL.cyan)+'"></div>'+wh+'</div><div class="v">'+(r.text||'')+'</div></div>';
+  }).join('');
+}
+
+/* ---------------- radar engine ---------------- */
+var TIPS=[];
+var tip=$('#tip');
+document.addEventListener('mousemove',function(e){
+  var t=e.target;
+  if(t&&t.getAttribute&&t.getAttribute('data-i')!=null){
+    tip.innerHTML=TIPS[+t.getAttribute('data-i')];tip.style.display='block';
+    tip.style.left=Math.min(e.clientX+14,window.innerWidth-280)+'px';tip.style.top=(e.clientY+14)+'px';
+  }else tip.style.display='none';
+});
+function radar(boxId,cfg){
+  var box=$('#'+boxId),side=$('#'+boxId+'side');
+  var W=600,H=610,cx=300,cy=315,Rr=195,n=cfg.axes.length;
+  var on={};cfg.series.forEach(function(s){on[s.id]=s.on!==false});
+  cfg.axes.forEach(function(a){
+    if(cfg.mode==='pct')a.max=100;
+    else if(cfg.ref&&cfg.ref[a.k]!=null)a.max=cfg.ref[a.k];
+    else a.max=Math.max.apply(null,clean(cfg.series.map(function(s){return s.vals[a.k]})).concat([1e-9]));
+  });
+  var ang=function(i){return -Math.PI/2+i*2*Math.PI/n};
+  var pt=function(i,r){return [cx+r*Math.cos(ang(i)),cy+r*Math.sin(ang(i))]};
+  function fmtv(a,v){return v==null?'n/a (blank in source)':fx(v,a.d==null?2:a.d)+(a.u||'')}
+  function draw(){
+    TIPS=TIPS.slice(0,0);
+    var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(cfg.title)+'"><rect width="'+W+'" height="'+H+'" fill="#ffffff"/>';
+    s+='<text x="22" y="32" fill="#1d1d1f" font-size="20" font-weight="700" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+esc(cfg.title)+'</text>';
+    s+='<text x="22" y="52" fill="#6e6e73" font-size="12" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+esc(cfg.subtitle||'')+'</text>';
+    for(var k=1;k<=5;k++){s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(Rr*k/5)+'" fill="none" stroke="'+(k===5?'#c7c7cc':'#e5e5ea')+'" stroke-width="'+(k===5?2:1)+'"/>';
+      s+='<text x="'+(cx+Rr*k/5+3)+'" y="'+(cy-3)+'" fill="#8e8e93" font-size="9" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+(k*20)+'</text>'}
+    if(cfg.refRing!=null)s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(Rr*cfg.refRing/100)+'" fill="none" stroke="#FF9500" stroke-dasharray="6 5" stroke-width="1.6"/>';
+    cfg.axes.forEach(function(a,i){var p=pt(i,Rr);s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="#e5e5ea"/>'});
+    cfg.series.forEach(function(se){
+      if(!on[se.id])return;
+      var pts=cfg.axes.map(function(a,i){var v=se.vals[a.k];var f=v==null?0:Math.max(0,Math.min(v/a.max,1));return pt(i,Rr*f)});
+      s+='<polygon points="'+pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ')+'" fill="'+se.color+'" fill-opacity="0.18" stroke="'+se.color+'" stroke-width="2.4" stroke-linejoin="round"/>';
+      cfg.axes.forEach(function(a,i){
+        var v=se.vals[a.k],p=pts[i];
+        var idx=TIPS.length;
+        var idxv=v==null?'n/a':(cfg.mode==='pct'?fx(v,0)+' (rank position)':fx(v/a.max*100,0)+' index');
+        var raw=cfg.raw&&cfg.raw[se.id]&&cfg.raw[se.id][a.k]?cfg.raw[se.id][a.k]:fmtv(a,v);
+        var extra=cfg.tipx?cfg.tipx(se,a,v):'';
+        TIPS.push('<b style="color:'+se.color+'">'+esc(se.name)+'</b><br>'+esc(a.label.replace(/\n/g,' '))+': <b>'+esc(raw)+'</b><br>'+idxv+extra);
+        if(v==null)s+='<circle data-i="'+idx+'" cx="'+p[0]+'" cy="'+p[1]+'" r="5" fill="#ffffff" stroke="'+se.color+'" stroke-dasharray="2 2"/>';
+        else s+='<circle data-i="'+idx+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="4.5" fill="'+se.color+'" stroke="#ffffff" stroke-width="1.5"/>';
+      });
+    });
+    cfg.axes.forEach(function(a,i){
+      var p=pt(i,Rr+16),c=Math.cos(ang(i)),an=c>0.3?'start':c<-0.3?'end':'middle';
+      var lines=a.label.split('\n');
+      var y0=p[1]+(Math.sin(ang(i))>0.5?10:Math.sin(ang(i))<-0.5?-4*lines.length+2:4);
+      s+='<text x="'+p[0].toFixed(1)+'" y="'+y0.toFixed(1)+'" text-anchor="'+an+'" fill="#1d1d1f" font-size="12.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+lines.map(function(l,j){return '<tspan x="'+p[0].toFixed(1)+'" dy="'+(j?14:0)+'">'+esc(l)+'</tspan>'}).join('')+'</text>';
+    });
+    s+='<text x="22" y="'+(H-12)+'" fill="#8e8e93" font-size="10" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+esc(cfg.foot||'')+'</text></svg>';
+    box.innerHTML=s;
+  }
+  function drawSide(){
+    var h='<div class="legend">'+cfg.series.map(function(se){return '<button data-id="'+se.id+'" class="'+(on[se.id]?'':'off')+'"><i style="background:'+se.color+'"></i>'+esc(se.name)+'</button>'}).join('')+'</div>';
+    if(cfg.note)h+='<div class="note">'+cfg.note+'</div>';
+    h+='<div class="tw"><table><thead><tr><th>Axis</th>'+cfg.series.map(function(se){return '<th class="n" style="color:'+se.color+'">'+esc(se.short||se.name)+'</th>'}).join('')+'</tr></thead><tbody>'+
+      cfg.axes.map(function(a){return '<tr><td>'+esc(a.label.replace(/\n/g,' '))+'</td>'+cfg.series.map(function(se){var v=se.vals[a.k];var raw=cfg.raw&&cfg.raw[se.id]&&cfg.raw[se.id][a.k]?cfg.raw[se.id][a.k]:fmtv(a,v);return '<td class="n">'+(v==null?'<span style="color:var(--dim)">n/a</span>':esc(raw))+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>';
+    if(cfg.after)h+=cfg.after;
+    side.innerHTML=h;
+    side.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){on[b.dataset.id]=!on[b.dataset.id];b.classList.toggle('off');draw()})});
+  }
+  draw();drawSide();
+}
+
+/* ---------------- Pillar 1 ---------------- */
+hbars($('#rankBars'),RANKS.map(function(r){var v=rp(r[2]);return {label:r[0],value:v,color:v>=75?COL.green:v>=40?COL.cyan:COL.org,text:'#'+r[2]+'/83 &middot; '+r[1]+(r[3]?'<br><span style="color:var(--dim)">'+r[3]+'</span>':'')}}),{max:100});
+
+(function(){
+  var rows=[['Crosses / 90','crosses',2],['Cross success %','crossPct',1],['1v1 / 90','oneV1',2],['1v1 success %','oneV1Pct',1],['Clearances / 90','clear',2],['Goal involvements / 90','gi',2],['Possession phases / 90','phases',1],['Open-play passes / 90','passes',1],['Pass success %','passPct',1],['Aerial success %','aerialPct',1]];
+  var h='<div class="tw"><table><thead><tr><th>Metric</th><th class="n">Ricketts</th><th class="n">SJ mean (n)</th><th class="n">Peers mean (n)</th></tr></thead><tbody>';
+  rows.forEach(function(r){
+    var sjv=clean(SJ.map(function(x){return x[r[1]]})),pv=clean(PEERS.map(function(x){return x[r[1]]}));
+    h+='<tr><td>'+r[0]+'</td><td class="n">'+(R[r[1]]==null?chip('na','BLANK'):fx(R[r[1]],r[2]))+'</td><td class="n">'+fx(mean(sjv),r[2])+' ('+sjv.length+')</td><td class="n">'+(pv.length?fx(mean(pv),r[2])+' ('+pv.length+')':'n/a')+'</td></tr>';
+  });
+  $('#techCells').innerHTML=h+'</tbody></table></div>';
+})();
+
+(function(){
+  var rows=P.filter(function(p){return p.KP!=null}).map(function(p){var ci=poisCI(p.KP);return {label:esc(p.short)+' <span style="color:var(--dim)">T'+p.tier+'</span>',value:p90(p.KP,p.min),lo:p90(ci[0],p.min),hi:p90(ci[1],p.min),color:p.color,text:f2(p90(p.KP,p.min))+' ['+f2(p90(ci[0],p.min))+'&ndash;'+f2(p90(ci[1],p.min))+']<br><span style="color:var(--dim)">'+p.KP+' events / '+p.min+' min</span>'}});
+  hbars($('#kpCI'),rows,{max:3.4});
+})();
+
+function download(name,text,type){var b=new Blob([text],{type:type||'text/csv'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove()}
+
+/* player photo: embedded in this file; CHANGE lets you swap it (kept in this browser only) */
+(function(){
+  var img=$('#photoImg'),ph=$('#photoPh'),inp=$('#photoIn'),chg=$('#photoChg');
+  function show(src){img.src=src;img.style.display='block';ph.style.display='none';chg.style.display='block'}
+  var saved=null;try{saved=localStorage.getItem('idp_ricketts_photo')}catch(e){}
+  if(saved)show(saved);
+  chg.addEventListener('click',function(){inp.click()});ph.addEventListener('click',function(){inp.click()});
+  inp.addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;var r=new FileReader();
+    r.onload=function(){var im=new Image();im.onload=function(){
+      var m=700,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);
+      c.getContext('2d').drawImage(im,0,0,c.width,c.height);var d=c.toDataURL('image/jpeg',0.86);show(d);try{localStorage.setItem('idp_ricketts_photo',d)}catch(x){}};im.src=r.result};
+    r.readAsDataURL(f);
+  });
+})();
+
+/* match video: Google Drive preview. Drive's player has no seek API, so a timecode scrolls to the video and shows where its clip starts */
+(function(){
+  var msg=$('#vidMsg');
+  function mmss(s){s=Math.round(s);return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2)}
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('button.ts[data-t]');if(!b)return;
+    var s=parseFloat(b.dataset.s);
+    msg.innerHTML='<b style="color:var(--cyan)">'+b.dataset.t+'</b> clip starts at <b>'+mmss(s)+'</b> in the video &mdash; drag the progress bar to '+mmss(s)+'.';
+    $('#vidslot').scrollIntoView({behavior:'smooth',block:'center'});
+  });
+})();
+
+/* methodology pitches */
+(function(){
+  var C={g:'#34C759',y:'#FFCC00',p:'#FF2D55'};
+  function base(){return '<rect width="300" height="170" rx="6" fill="#f5f5f7"/><g fill="none" stroke="#c7c7cc" stroke-width="1.2"><rect x="8" y="8" width="284" height="154"/><line x1="150" y1="8" x2="150" y2="162"/><circle cx="150" cy="85" r="20"/><rect x="8" y="45" width="40" height="80"/><rect x="252" y="45" width="40" height="80"/></g>'}
+  function dots(a,c){return a.map(function(d){return '<circle cx="'+d[0]+'" cy="'+d[1]+'" r="5.5" fill="'+c+'" stroke="#ffffff" stroke-width="1.5"/>'}).join('')}
+  function zone(x,w,c){return '<rect x="'+x+'" y="8" width="'+w+'" height="154" fill="'+c+'" fill-opacity="0.24"/>'}
+  function ball(x,y){return '<circle cx="'+x+'" cy="'+y+'" r="3.4" fill="#fff"/>'}
+  function arrow(){return '<g stroke="#8e8e93" stroke-width="1.2" fill="#8e8e93"><line x1="110" y1="158" x2="190" y2="158"/><polygon points="190,155 196,158 190,161" stroke="none"/></g>'}
+  var P={
+   'in-build':base()+zone(8,95,C.g)+dots([[24,85],[58,48],[58,122],[104,85],[132,40]],C.g)+arrow(),
+   'in-create':base()+zone(103,94,C.y)+dots([[120,45],[150,85],[188,128],[172,38]],C.y)+arrow(),
+   'in-finish':base()+zone(197,95,C.p)+dots([[216,56],[240,104],[262,80]],C.p)+arrow(),
+   'out-high':base()+zone(150,110,C.g)+dots([[176,36],[176,66],[176,104],[176,134],[208,50],[208,86],[208,122],[240,70]],C.g)+ball(20,85),
+   'out-mid':base()+zone(96,108,C.y)+dots([[118,40],[118,70],[118,100],[118,130],[150,55],[150,85],[150,115],[184,85]],C.y)+ball(20,85),
+   'out-low':base()+zone(24,100,C.p)+dots([[50,40],[50,70],[50,100],[50,130],[82,52],[82,85],[82,118],[112,85]],C.p)+ball(20,85)
+  };
+  document.querySelectorAll('[data-pitch]').forEach(function(el){el.innerHTML='<svg viewBox="0 0 300 170" role="img" aria-label="'+el.dataset.pitch+'">'+P[el.dataset.pitch]+'</svg>'});
+})();
+
+/* active section in the top navigation */
+(function(){
+  var links={};document.querySelectorAll('nav a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)Object.keys(links).forEach(function(k){links[k].classList.toggle('on',k===e.target.id)})})},{rootMargin:'-15% 0px -75% 0px'});
+  Object.keys(links).forEach(function(i){var el=document.getElementById(i);if(el)io.observe(el)});
+})();
+
+/* ---------------- Pillar 2 ---------------- */
+(function(){
+  var K=[['Distance','dist',2],['Sprints','sprints',1],['Sprint dist.','sprintDist',2],['HSR','hsr',1],['Intensive','intensive',1]];
+  var PL=[R,SANTOS,NORRIS,JOHNSON],PC=[COL.cyan,COL.org,COL.green,COL.yellow];
+  $('#physBars').innerHTML=K.map(function(k,i){var pv=PEERS.map(function(p){return p[k[1]]});return '<div class="grph">'+k[0]+'<span>peer mean '+fx(mean(pv),k[2])+' &middot; median '+fx(med(pv),k[2])+'</span></div><div id="pb'+i+'"></div>'}).join('');
+  K.forEach(function(k,i){var mx=Math.max.apply(null,PL.map(function(r){return r[k[1]]}));hbars($('#pb'+i),PL.map(function(r,j){return {label:esc(r.player)+' <span style="color:var(--dim)">'+r.team+'</span>',value:r[k[1]],color:PC[j],text:fx(r[k[1]],k[2])}}),{max:mx})});
+  var g=K.map(function(k){var m=med(PEERS.map(function(p){return p[k[1]]}));var gp=R[k[1]]-m;return [k[0],fx(R[k[1]],k[2]),fx(m,k[2]),sign(gp,k[2]),sign(gp/m*100,0)+'%']});
+  T($('#gapPhys'),['Metric','#Ricketts','#Peer median','#Gap','#% diff'],g);
+})();
+T($('#minTbl'),['Date','Opponent','Comp','#Min','#Days since prev'],MATCHES.map(function(m,i){var dd=i?Math.round((Date.parse(m.d)-Date.parse(MATCHES[i-1].d))/864e5):null;return [m.d,m.opp+(m.video?' <b style="color:var(--cyan)">(video)</b>':''),m.comp,m.min===0?'DNP':String(m.min),dd==null?'':String(dd)]}),MATCHES.map(function(m){return m.video?'hl':''}));
+$('#refMatch').innerHTML=MATCHES.filter(function(m,i){return i>0}).map(function(m){return '<option value="'+m.d+'"'+(m.video?' selected':'')+'>'+m.d+' vs '+m.opp+'</option>'}).join('');
+function windows(){
+  var ref=Date.parse($('#refMatch').value);
+  var h='<table><thead><tr><th>Window</th><th class="n">Minutes</th><th class="n">Matches</th></tr></thead><tbody>';
+  [7,14,28].forEach(function(n){var ms=MATCHES.filter(function(m){var d=Date.parse(m.d);return d<ref&&d>=ref-n*864e5});h+='<tr><td>Last '+n+' days</td><td class="n"><b>'+ms.reduce(function(s,m){return s+m.min},0)+'</b></td><td class="n">'+ms.length+'</td></tr>'});
+  $('#winOut').innerHTML=h+'</tbody></table>';
+}
+$('#refMatch').addEventListener('change',windows);windows();
+(function(){
+  var W=640,H=250,bw=48,gap=26,x0=40,mx=100;
+  var s='<h4 class="mono" style="font-size:12px;letter-spacing:.12em;color:var(--cyan);margin:0 0 6px">MINUTES BY MATCH (PROVISIONAL) AND SPACING</h4><svg viewBox="0 0 '+W+' '+H+'" style="width:100%;max-width:760px">';
+  MATCHES.forEach(function(m,i){var x=x0+i*(bw+gap),h=m.min/mx*160,y=190-h;var c=m.video?'#1d1d1f':m.comp==='Cup'?COL.org:COL.cyan;
+    s+='<rect x="'+x+'" y="'+y+'" width="'+bw+'" height="'+Math.max(h,1)+'" fill="'+c+'" rx="3"/><text x="'+(x+bw/2)+'" y="'+(y-6)+'" fill="#1d1d1f" font-size="12" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif" font-weight="700">'+(m.min===0?'DNP':m.min)+'</text>';
+    s+='<text x="'+(x+bw/2)+'" y="208" fill="#6e6e73" font-size="11" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+m.d.slice(5)+'</text><text x="'+(x+bw/2)+'" y="222" fill="#8e8e93" font-size="10.5" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+m.opp+'</text>';
+    if(i){var dd=Math.round((Date.parse(m.d)-Date.parse(MATCHES[i-1].d))/864e5);s+='<text x="'+(x-gap/2)+'" y="240" fill="'+(dd<=4?COL.org:'#8e8e93')+'" font-size="10" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+dd+'d</text>'}});
+  $('#minChart').innerHTML=s+'<text x="12" y="20" fill="#8e8e93" font-size="10.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">Orange gaps = 4 days or fewer between matches (4 matches in 11 days, 19 Apr to 2 May).</text><text x="12" y="34" fill="#8e8e93" font-size="10.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">Blue = MLS, orange bar = Cup, dark = video match.</text></svg>';
+})();
+
+/* ---------------- Pillar 3 ---------------- */
+/* Tier 1 table */
+(function(){
+  var t1=['ricketts','costa','jones'].map(function(id){return PID[id]});
+  var oth=med([m90(PID.costa,'KP'),m90(PID.jones,'KP')]);
+  var rows=t1.map(function(p){var ci=poisCI(p.KP);return [esc(p.name),'LB (Statz)',String(p.apps),p.min.toLocaleString(),String(p.KP),f2(m90(p,'KP')),f2(p90(ci[0],p.min))+'&ndash;'+f2(p90(ci[1],p.min))]});
+  T($('#t1Tbl'),['Player','Role label','#Apps','#Min','#Chances created','#KP/90','#95% interval'],rows,['hl','','']);
+  var g=m90(PID.ricketts,'KP')-oth;
+  $('#t1Tbl').insertAdjacentHTML('afterend','<div class="note">Peer median KP/90 (Costa, Jones) = <b>'+f2(oth)+'</b>. Ricketts gap = <b>'+sign(g,2)+'</b> ('+sign(g/oth*100,0)+'%). Intervals overlap, so this is a direction, not a significant difference.</div>');
+  hbars($('#t1Bars'),t1.map(function(p){var ci=poisCI(p.KP);return {label:esc(p.short),value:m90(p,'KP'),lo:p90(ci[0],p.min),hi:p90(ci[1],p.min),color:p.color,text:f2(m90(p,'KP'))}}),{max:2});
+})();
+/* CSV max reference */
+var REF={};['phases','crosses','crossPct','oneV1Pct','clear','dist','sprints','sprintDist','hsr','intensive','passes','passPct','aerialPct','gi','oneV1','aerial','xg','goals','ast'].forEach(function(k){REF[k]=Math.max.apply(null,clean(CSV.map(function(r){return r[k]})))});
+var meanOf=function(rows,k){return mean(rows.map(function(r){return r[k]}))};
+radar('radT1',{title:'Tier 1 context: Ricketts vs SJ team mean',subtitle:'CSV, per 90, all-position SJ players (n=13 rows) | index = value / max of 52-player CSV',mode:'max',ref:REF,
+  axes:[{k:'phases',label:'Possession\nphases',d:1},{k:'crosses',label:'Crosses',d:2},{k:'crossPct',label:'Cross\nsuccess %',d:1,u:'%'},{k:'oneV1Pct',label:'1v1\nsuccess %',d:1,u:'%'},{k:'clear',label:'Clearances',d:2},{k:'dist',label:'Distance',d:2},{k:'sprints',label:'Sprints',d:1},{k:'sprintDist',label:'Sprint\ndistance',d:2},{k:'hsr',label:'High-speed\nruns',d:1},{k:'intensive',label:'Intensive\nruns',d:1}],
+  series:[{id:'r',name:'Jamar Ricketts',short:'Ricketts',color:COL.cyan,vals:R},{id:'sj',name:'SJ all-position mean',short:'SJ mean',color:COL.org,vals:(function(){var o={};['phases','crosses','crossPct','oneV1Pct','clear','dist','sprints','sprintDist','hsr','intensive'].forEach(function(k){o[k]=meanOf(SJ,k)});return o})()}],
+  note:'<b>Context only.</b> All-position means are not role benchmarks. Counts are event counts; distance units unverified.',foot:'Source: MLS_Player_Metrics_By_Team.csv (screenshot-transcribed). Blank = n/a, not zero.'});
+/* Tier 2 */
+var T2S=[{id:'r',name:'Jamar Ricketts (SJ)',short:'Ricketts',color:COL.cyan,vals:R},{id:'s',name:'Rafael Santos (STL)',short:'Santos',color:COL.org,vals:SANTOS},{id:'n',name:'Nolan Norris (DAL)',short:'Norris',color:COL.green,vals:NORRIS},{id:'j',name:'Tate Johnson (VAN)',short:'Johnson',color:COL.yellow,vals:JOHNSON}];
+radar('radT2',{title:'Tier 2 physical: Ricketts vs closest MLS comparators',subtitle:'CSV per-90 counts | index = value / max of the 4 players | not percentiles',mode:'max',
+  axes:[{k:'dist',label:'Distance\ncovered',d:2},{k:'sprints',label:'Sprints',d:1},{k:'sprintDist',label:'Sprint\ndistance',d:2},{k:'hsr',label:'High-speed\nruns',d:1},{k:'intensive',label:'Intensive\nruns',d:1}],series:T2S.map(function(s){return Object.assign({},s)}),
+  note:'True positions and minutes for Santos, Norris and Johnson are <b>unverified</b>; speed thresholds and distance units are undocumented. A 4-player sample cannot define an MLS percentile.',foot:'Source: MLS_Player_Metrics_By_Team.csv'});
+radar('radT2b',{title:'Tier 2 technical: where the data exist',subtitle:'CSV per-90 / % | gaps are blank source cells, not zeros',mode:'max',
+  axes:[{k:'crosses',label:'Crosses',d:2},{k:'crossPct',label:'Cross\nsuccess %',d:1,u:'%'},{k:'oneV1Pct',label:'1v1\nsuccess %',d:1,u:'%'},{k:'passPct',label:'Open-play\npass %',d:1,u:'%'},{k:'passes',label:'Open-play\npasses',d:1},{k:'aerialPct',label:'Aerial\nsuccess %',d:1,u:'%'},{k:'gi',label:'Goal\ninvolvements',d:2},{k:'clear',label:'Clearances',d:2}],series:T2S.map(function(s){return Object.assign({},s)}),
+  note:'Ricketts has blank open-play pass and aerial cells; Norris has blank crossing cells. Dashed hollow markers show <b>n/a</b>. Percentages with tiny denominators (e.g. 100% from few 1v1s) mislead.',foot:'Source: MLS_Player_Metrics_By_Team.csv'});
+/* Tier 3 */
+radar('radT3a',{title:'Tier 3: Ricketts rank position vs MLS full backs',subtitle:'Statz per-90 ranks, pool 83 | 100 = 1st, 0 = last | NOT percentiles',mode:'pct',refRing:50,
+  axes:RANKS.map(function(r){return {k:r[0],label:r[0].replace(' ','\n').replace('Successful\ndribbles','Dribbles'),d:0}}),
+  series:[{id:'r',name:'Jamar Ricketts',short:'Rank pos.',color:COL.cyan,vals:(function(){var o={};RANKS.forEach(function(r){o[r[0]]=rp(r[2])});return o})()}],
+  raw:{r:(function(){var o={};RANKS.forEach(function(r){o[r[0]]='#'+r[2]+' of 83 ('+r[1]+' per 90)'});return o})()},
+  note:'Orange dashed ring = pool mid-point. Snapshot 31 Oct 2026, so <b>retrospective</b> to the 2 May video. The pool is "MLS full backs" with an unstated per-90 selection rule: not a role-filtered LB cohort.',foot:'Source: statz.ai/player/jamar-ricketts/37740713, retrieved 5 Nov 2026'});
+(function(){
+  var S=['ricketts','markanich','miller'].map(function(id){var p=PID[id];return {id:id,name:p.name+(p.tier===3?' *':''),short:p.short,color:p.color,vals:{G:m90(p,'G'),A:m90(p,'A'),GI:gi90(p),KP:m90(p,'KP'),T:m90(p,'T'),TW:m90(p,'TW')}}});
+  radar('radT3b',{title:'Tier 3 named comparators: per-90 output',subtitle:'Statz MLS 2026 | index = value / max of the 3 | * = wing-heavy minutes',mode:'max',
+    axes:[{k:'G',label:'Goals',d:2},{k:'A',label:'Assists',d:2},{k:'GI',label:'Goal\ninvolvements',d:2},{k:'KP',label:'Key passes',d:2},{k:'T',label:'Tackles',d:2},{k:'TW',label:'Tackles won',d:2}],series:S,
+    note:'* Markanich Jr. and Miller are listed as full-backs but their recent minutes are mostly left-mid / wing, so <b>unfiltered per-90 values are not pure LB benchmarks</b>. "Tackles" and "tackles won" are different Statz fields.',foot:'Sources: statz.ai player pages (Ricketts 31 Oct; Markanich, Miller 2 Nov 2026)'});
+})();
+T($('#posTbl'),['Player','Window','#LB min','#LM / RM','#LW / RW','#Other','#LB share'],[
+ ['Ricketts','last 10 games (584 min)','144','384','0','56','25%'],['Markanich Jr.','last 10 games (897 min)','267','630','0','0','30%'],['Miller','last 9 MLS games (730 min)','90','90','522','28','12%']],['hl','','']);
+$('#posTbl').insertAdjacentHTML('afterend','<div class="note">Statz publishes positions only for the most recent games, not the full season. Minutes summed by this report from those tables. Season-long LB / wing splits: <b>NOT AVAILABLE</b>.</div>');
+/* Tier 4 */
+var ARCH=[['grimaldo','Offensive wing-back','Set-piece and cross creativity, final-third occupation'],['cucurella','Two-way full-back','Inverted / interior support, positional rotations, rest-defence'],['mendes','Explosive wide progression','Carrying and underlapping, plus recovery']];
+$('#archCards').innerHTML=ARCH.map(function(a){var p=PID[a[0]];return '<div class="card"><h4>'+esc(p.name)+'</h4><div style="color:var(--org);font-weight:700">'+a[1]+'</div><div style="color:var(--mut);margin:4px 0 8px">'+a[2]+'</div><table><tbody><tr><td>Competition</td><td>'+p.comp+'</td></tr><tr><td>Minutes (apps)</td><td>'+p.min.toLocaleString()+' ('+p.apps+')</td></tr><tr><td>G / A / KP / Tackles</td><td>'+p.G+' / '+p.A+' / '+p.KP+' / '+p.T+'</td></tr><tr><td>KP/90 &middot; (G+A)/90 &middot; T/90</td><td><b>'+f2(m90(p,'KP'))+' &middot; '+f2(gi90(p))+' &middot; '+f2(m90(p,'T'))+'</b></td></tr><tr><td>Club / team strength</td><td>'+esc(p.club)+' &middot; strength '+ST.na+'</td></tr></tbody></table><div style="margin-top:8px">'+ST.un+' second-source audit pending'+(a[0]==='mendes'?' &middot; page shows an injury flag and inconsistent dates':'')+'</div></div>'}).join('');
+function s4(id,on){var p=PID[id];return {id:id,name:p.name,short:p.short,color:p.color,on:on,vals:{G:m90(p,'G'),A:m90(p,'A'),GI:gi90(p),KP:m90(p,'KP'),T:m90(p,'T')}}}
+var AX5=[{k:'G',label:'Goals',d:2},{k:'A',label:'Assists',d:2},{k:'GI',label:'Goals +\nassists',d:2},{k:'KP',label:'Key passes',d:2},{k:'T',label:'Tackles',d:2}];
+radar('radT4',{title:'Tier 4 archetypes: per-90 output (aspirational profile)',subtitle:'FootyMetrics 2025/26 domestic league | index = value / max of shown players',mode:'max',axes:AX5.map(function(a){return Object.assign({},a)}),
+  series:[s4('grimaldo',true),s4('cucurella',true),s4('mendes',true),Object.assign(s4('ricketts',false),{name:'Jamar Ricketts (reference, MLS 2026)'})],
+  note:'Toggle Ricketts on for a visual reference only. Leagues, roles, possession and set-piece duties differ: <b>do not score quality from these gaps</b>. Use them to choose video behaviours (cutbacks, cover, underlaps).',foot:'Sources: footymetrics.com player pages, retrieved 5 Nov 2026; statz.ai for Ricketts'});
+/* All players */
+radar('radAll',{title:'All players with common per-90 data',subtitle:'Tiers 1, 3, 4 | index = value / max of the six | toggle players',mode:'max',axes:AX5.map(function(a){return Object.assign({},a)}),
+  series:[s4('ricketts',true),s4('markanich',true),s4('miller',true),s4('grimaldo',true),s4('cucurella',true),s4('mendes',true)],
+  note:'Costa and Jones have only key passes; Santos, Norris and Johnson have no minutes or event totals in the CSV (physical and technical rates only). See the coverage matrix.',foot:'Sources: Statz (MLS 2026), FootyMetrics (2025/26). Different competitions: compare shape, not rank.'});
+/* coverage */
+(function(){
+  var Y='✓',N='<span style="color:var(--dim)">—</span>';
+  var rows=[['Jamar Ricketts','1 / 2 / 3',Y,Y,Y,Y,Y,Y,Y,Y,'partial'],['Vítor Costa','1',Y,N,N,Y,N,N,N,N,N],['DeJuan Jones','1',Y,N,N,Y,N,N,N,N,N],['Rafael Santos','2',N,N,N,N,N,N,Y,Y,N],['Nolan Norris','2',N,N,N,N,N,N,Y,'partial',N],['Tate Johnson','2',N,N,N,N,N,N,Y,Y,N],['Anthony Markanich Jr.','3',Y,Y,Y,Y,Y,N,N,N,'partial'],['Peyton Miller','3',Y,Y,Y,Y,Y,N,N,N,'partial'],['Alejandro Grimaldo','4',Y,Y,Y,Y,Y,N,N,N,N],['Marc Cucurella','4',Y,Y,Y,Y,Y,N,N,N,N],['Nuno Mendes','4',Y,Y,Y,Y,Y,N,N,N,N]];
+  T($('#covTbl'),['Player','Tier','Minutes','Goals','Assists','Key passes','Tackles','Big chances','CSV physical','CSV technical','Role split'],rows.map(function(r){return r.map(function(c){return c==='partial'?'<span style="color:var(--warn)">partial</span>':c})}),['hl'].concat(new Array(10).fill('')));
+})();
+/* explorer */
+(function(){
+  var names=CSV.filter(function(r){return r.player!=='Jamar Ricketts'}).map(function(r){return r.player});
+  var opt=function(sel,blank){$(sel).innerHTML=(blank?'<option value="">(none)</option>':'')+names.map(function(n){var r=byName(n);return '<option value="'+esc(n)+'"'+(n==='Rafael Santos'&&!blank?' selected':'')+'>'+esc(n)+' ('+r.team+')</option>'}).join('')};
+  opt('#exP2',false);opt('#exP3',true);
+  var SETS={phys:[['dist','Distance',2],['sprints','Sprints',1],['sprintDist','Sprint\ndistance',2],['hsr','High-speed\nruns',1],['intensive','Intensive\nruns',1]],tech:[['crosses','Crosses',2],['crossPct','Cross\nsuccess %',1],['oneV1','1v1',2],['oneV1Pct','1v1\nsuccess %',1],['passes','Open-play\npasses',1],['passPct','Pass\nsuccess %',1],['aerialPct','Aerial\nsuccess %',1],['gi','Goal\ninvolvements',2]],mix:[['crosses','Crosses',2],['crossPct','Cross\nsuccess %',1],['oneV1Pct','1v1\nsuccess %',1],['clear','Clearances',2],['gi','Goal\ninvolvements',2],['dist','Distance',2],['sprints','Sprints',1],['sprintDist','Sprint\ndistance',2],['hsr','High-speed\nruns',1],['intensive','Intensive\nruns',1]]};
+  function pctIn(k,v){var a=clean(CSV.map(function(r){return r[k]}));return Math.round(a.filter(function(x){return x<=v}).length/a.length*100)}
+  function go(){
+    var ax=SETS[$('#exSet').value],cols=[COL.cyan,COL.org,COL.green],sel=[R,byName($('#exP2').value)];
+    if($('#exP3').value)sel.push(byName($('#exP3').value));
+    radar('radEx',{title:'Explorer: '+sel.map(function(r){return r.player.split(' ').slice(-1)[0]}).join(' vs '),subtitle:'CSV per 90 | index = value / max of all 52 players | all positions',mode:'max',ref:REF,
+      axes:ax.map(function(a){return {k:a[0],label:a[1],d:a[2]}}),series:sel.map(function(r,i){return {id:'e'+i,name:r.player+' ('+r.team+')',short:r.player.split(' ').slice(-1)[0],color:cols[i],vals:r}}),
+      tipx:function(s,a,v){return v==null?'':'<br>percentile in 52-player CSV sample: '+pctIn(a.k,v)+' (all positions)'},foot:'Context only: all positions, four clubs, min. 1/3 playing time.'});
+  }
+  ['exP2','exP3','exSet'].forEach(function(id){$('#'+id).addEventListener('change',go)});go();
+})();
+/* gap summary */
+(function(){
+  var rows=[];
+  var add=function(tier,metric,rv,peerVals,d,conf,note){var m=med(peerVals);var n=clean(peerVals).length;var g=rv-m;rows.push([tier,metric,fx(rv,d),fx(m,d)+' (n='+n+')',sign(g,d),sign(g/m*100,0)+'%',conf,note])};
+  add('T1','Key passes / 90',m90(PID.ricketts,'KP'),[m90(PID.costa,'KP'),m90(PID.jones,'KP')],2,chip('md','MED-LOW'),'Intervals overlap');
+  [['dist','Distance / 90',2],['sprints','Sprints / 90',1],['sprintDist','Sprint distance / 90',2],['hsr','HSR count / 90',1],['intensive','Intensive runs / 90',1]].forEach(function(k){add('T2',k[1],R[k[0]],PEERS.map(function(p){return p[k[0]]}),k[2],chip('lo','LOW'),'Counts; thresholds undocumented')});
+  add('T2','Cross success %',R.crossPct,PEERS.map(function(p){return p.crossPct}),1,chip('lo','LOW'),'n=2 peers; attempts unknown');
+  add('T2','Crosses / 90',R.crosses,PEERS.map(function(p){return p.crosses}),2,chip('lo','LOW'),'n=2 peers');
+  add('T3','Key passes / 90',m90(PID.ricketts,'KP'),[m90(PID.markanich,'KP'),m90(PID.miller,'KP')],2,chip('lo','LOW-MED'),'Wing-heavy comparators');
+  add('T3','Goal involvements / 90',gi90(PID.ricketts),[gi90(PID.markanich),gi90(PID.miller)],2,chip('lo','LOW-MED'),'Wing-heavy comparators');
+  add('T3','Tackles / 90',m90(PID.ricketts,'T'),[m90(PID.markanich,'T'),m90(PID.miller,'T')],2,chip('lo','LOW-MED'),'Definition: tackles, not tackles won');
+  add('T4','Key passes / 90',m90(PID.ricketts,'KP'),['grimaldo','cucurella','mendes'].map(function(i){return m90(PID[i],'KP')}),2,chip('lo','LOW'),'Aspirational; do not score quality');
+  add('T4','Goal involvements / 90',gi90(PID.ricketts),['grimaldo','cucurella','mendes'].map(function(i){return gi90(PID[i])}),2,chip('lo','LOW'),'Aspirational; do not score quality');
+  T($('#gapAll'),['Tier','Metric','#Ricketts','#Peer median','#Gap','#% diff','Confidence','Caveat'],rows);
+})();
+/* benchmark ledger */
+var BENCH=[];
+(function(){
+  var rt=function(p){return p.src},conf='Medium';
+  var add=function(o){BENCH.push(o)};
+  var posOf={ricketts:'Statz LB; last10 LM 384 / LB 144 / other 56',markanich:'Statz; last10 LM 540 / LB 267 / RM 90',miller:'Statz; last9 RW 267 / LW 255 / LB 90 / RM 90 / other 28'};
+  P.forEach(function(p){
+    var stats=[['Key passes per 90','KP',m90(p,'KP'),'events/90','key passes x 90 / minutes'],['Goal involvements per 90','GI',gi90(p),'events/90','(goals+assists) x 90 / minutes'],['Tackles per 90','T',m90(p,'T'),'events/90','tackles x 90 / minutes']];
+    stats.forEach(function(s){if(s[2]==null)return;add({player:p.name,tier:'T'+p.tier,season:p.season,competition:p.comp,n_minutes:p.min,position_split:posOf[p.id]||(p.tier===4?'not split (domestic league total)':'NOT AVAILABLE'),statistic:s[0],value:Math.round(s[2]*1000)/1000,unit:s[3],denominator:s[4],source_url:p.src,retrieved_at:RETR,definition_confidence:p.tier===1||p.tier===3?'Medium':'Low',validation_status:p.tier===4?'VERIFIED vs source page; second-source audit pending':'VERIFIED (source read + recomputed)'})});
+  });
+  add({player:'Jamar Ricketts',tier:'T3',season:'2026',competition:'MLS 2026',n_minutes:1923,position_split:posOf.ricketts,statistic:'Big chances created per 90',value:0.51,unit:'events/90 (rank 1 of 83 full backs)',denominator:'per-90 pool of 83',source_url:STZ+'jamar-ricketts/37740713',retrieved_at:RETR,definition_confidence:'Medium',validation_status:'VERIFIED vs source page'});
+  [R,SANTOS,NORRIS,JOHNSON].forEach(function(r){[['Distance covered per 90','dist','unit unverified'],['Sprints per 90','sprints','count'],['Sprint distance per 90','sprintDist','unit unverified'],['High-speed runs per 90','hsr','count'],['Intensive runs per 90','intensive','count'],['Open-play crosses per 90','crosses','count'],['Open-play cross success','crossPct','%']].forEach(function(s){if(r[s[1]]==null)return;add({player:r.player,tier:'T2',season:'unknown window',competition:'MLS (screenshot transcription)',n_minutes:'NOT AVAILABLE',position_split:'NOT AVAILABLE (positions unverified)',statistic:s[0],value:r[s[1]],unit:s[2],denominator:'per 90 (min. 1/3 playing time)',source_url:'local: MLS_Player_Metrics_By_Team.csv',retrieved_at:RETR,definition_confidence:'Low',validation_status:'PROVISIONAL (thresholds undocumented)'})})});
+  var crs=clean(SJ.map(function(r){return r.crosses})),cps=clean(SJ.map(function(r){return r.crossPct}));
+  add({player:'SJ all-position mean (context only)',tier:'T1',season:'unknown window',competition:'MLS (CSV)',n_minutes:'NOT AVAILABLE',position_split:'all positions',statistic:'Open-play crosses per 90',value:Math.round(mean(crs)*100)/100,unit:'count (n='+crs.length+')',denominator:'per 90',source_url:'local: MLS_Player_Metrics_By_Team.csv',retrieved_at:RETR,definition_confidence:'Low',validation_status:'VERIFIED (recomputed)'});
+  add({player:'SJ all-position mean (context only)',tier:'T1',season:'unknown window',competition:'MLS (CSV)',n_minutes:'NOT AVAILABLE',position_split:'all positions',statistic:'Open-play cross success',value:Math.round(mean(cps)*100)/100,unit:'% (n='+cps.length+')',denominator:'attempt-weighted by source',source_url:'local: MLS_Player_Metrics_By_Team.csv',retrieved_at:RETR,definition_confidence:'Low',validation_status:'VERIFIED (recomputed)'});
+  var H=['Player','Tier','Season','Competition','#N min','Position split','Statistic','#Value','Unit','Status'];
+  T($('#benchTbl'),H,BENCH.map(function(b){return [esc(b.player),b.tier,b.season,esc(b.competition),String(b.n_minutes),esc(b.position_split),esc(b.statistic),String(b.value),esc(b.unit),esc(b.validation_status)]}));
+})();
+$('#dlBench').addEventListener('click',function(){
+  var keys=['player','tier','season','competition','n_minutes','position_split','statistic','value','unit','denominator','source_url','retrieved_at','definition_confidence','validation_status'];
+  var q=function(v){v=String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+  download('benchmark_four_tiers.csv',keys.join(',')+'\n'+BENCH.map(function(b){return keys.map(function(k){return q(b[k])}).join(',')}).join('\n')+'\n');
+});
+
+/* ---------------- simulator ---------------- */
+function sim(){
+  var T0=+$('#simKP').value||0,M=+$('#simMin').value||0,C=+$('#simCr').value||0;
+  var base=p90(20,1923),be=base*M/90,te=T0*M/90,sd=Math.sqrt(be);
+  var p0=0.21,p1=0.161,nreq=Math.pow((1.959964*Math.sqrt(p0*(1-p0))+0.841621*Math.sqrt(p1*(1-p1)))/(p0-p1),2),matches=C>0?nreq/C:Infinity;
+  $('#simOut').innerHTML='<b>Key passes:</b> baseline '+f2(base)+'/90 gives ~'+fx(be,1)+' events in '+M+' min; a target of '+f2(T0)+'/90 means ~'+fx(te,1)+' ('+sign(te-be,1)+' events). Random variation alone is about &plusmn;'+fx(sd,1)+' events, so an outcome count over '+Math.round(M/90)+' matches cannot confirm the change: judge with coded process metrics.<br><b>Cross success:</b> to separate 16.1% from 21% (one-sample, 80% power, 5% alpha) needs roughly <b>'+Math.round(nreq)+' crosses</b>, about <b>'+(isFinite(matches)?Math.round(matches):'n/a')+' matches</b> at '+f2(C)+' crosses/90. Use decision quality and productive-run % for the 10-week window.';
+}
+['simKP','simMin','simCr'].forEach(function(id){$('#'+id).addEventListener('input',sim)});sim();
+})();
+</script>
+</body>
+</html>
