@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en" data-module="scouting">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forza IQ | Scouting Report: Recruitment Recommendation | FORZA IQ</title>
+<style>
+:root{
+--bg:#f5f5f7;--card:#ffffff;--card2:#fbfbfd;--line:rgba(0,0,0,.10);--hair:rgba(0,0,0,.07);
+--txt:#1d1d1f;--mut:#6e6e73;--dim:#86868b;
+--cyan:#0071e3;--org:#c4560a;--ok:#248a3d;--warn:#a36b00;--bad:#d70015;--pink:#d62a5c;
+--blue-t:#eef5ff;--org-t:#fff3e6;--ok-t:#eaf7ee;--warn-t:#fff8db;--pink-t:#fdecf1;--gray-t:#f2f2f7;
+--sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","Segoe UI",Roboto,Arial,sans-serif;
+--mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Segoe UI",Roboto,Arial,sans-serif;
+--shadow:0 1px 2px rgba(0,0,0,.04),0 8px 28px rgba(0,0,0,.05);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.47;font-size:15px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.88em;background:var(--gray-t);padding:1px 6px;border-radius:6px}
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:4px;height:52px;padding:0 24px;background:rgba(255,255,255,.72);-webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);border-bottom:1px solid var(--hair);overflow-x:auto;white-space:nowrap}
+nav .brand{flex:1;font-weight:600;font-size:14px;letter-spacing:-.01em;color:var(--txt)}
+nav .brand i{display:inline-block;width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,#0a84ff,#5ac8fa);margin-right:9px}
+nav::after{content:"";flex:1}
+nav a{font-size:12.5px;font-weight:500;letter-spacing:.01em;color:rgba(29,29,31,.8);padding:6px 12px;border-radius:999px;transition:background .15s,color .15s}
+nav a:hover{background:rgba(0,0,0,.05);color:#000;text-decoration:none}
+nav a.on{background:rgba(0,113,227,.11);color:var(--cyan);font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:0 28px 96px}
+section{padding-top:72px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--cyan);text-transform:uppercase}
+h1{font-size:56px;line-height:1.04;font-weight:700;letter-spacing:-.03em;margin:8px 0 6px}
+h2{font-size:36px;line-height:1.1;font-weight:700;letter-spacing:-.025em;margin:6px 0 18px}
+h3{font-size:24px;line-height:1.2;font-weight:600;letter-spacing:-.015em;margin:44px 0 14px}
+h3 .tiertag{vertical-align:2px}
+p.lead{color:var(--mut);font-size:17px;line-height:1.5;max-width:880px;margin:6px 0 18px}
+.sub{color:var(--mut);font-size:19px;font-weight:500}
+.secband{position:relative;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;padding:6px 0 22px;margin:0 0 30px;border-bottom:1px solid var(--line)}
+.secband:after{content:"";position:absolute;left:0;bottom:-1px;width:72px;height:4px;border-radius:4px;background:var(--cyan)}
+.secband.o:after{background:#ff9500}
+.secband .sn{font-size:46px;line-height:1.05;font-weight:700;letter-spacing:-.025em;color:var(--txt)}
+.secband .sd{font-size:14px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.secband.o .sd{color:var(--org)}
+.hero{padding-top:44px;display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:start}
+.hero h1{font-size:54px;margin:4px 0 6px}
+.herotop{display:grid;grid-template-columns:192px 1fr;gap:30px;align-items:start}
+.photo{position:relative;width:192px;height:192px;border-radius:40px;overflow:hidden;background:var(--gray-t);box-shadow:0 2px 6px rgba(0,0,0,.08),0 14px 36px rgba(0,0,0,.10)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);gap:4px}
+.photo .ph span{font-size:56px;font-weight:700;letter-spacing:-.03em;color:#c7c7cc;line-height:1}
+.photo .ph small{font-size:11px;font-weight:600;letter-spacing:.06em}
+.photo .chg{display:none;opacity:0;transition:opacity .15s;position:absolute;top:10px;right:10px;background:rgba(255,255,255,.85);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--txt);border:0;border-radius:999px;font:600 11px var(--sans);padding:5px 10px;cursor:pointer}
+.photo:hover .chg{opacity:1}
+.photocap{margin-top:14px;font-size:18px;font-weight:600;letter-spacing:-.01em}
+.photocap small{display:block;font-size:12px;font-weight:500;color:var(--mut);letter-spacing:.04em;margin-top:2px}
+@media(max-width:980px){.hero,.herotop{grid-template-columns:1fr}.hero h1{font-size:42px}}
+.card{background:var(--card);border:1px solid var(--hair);border-radius:20px;padding:22px 24px;box-shadow:var(--shadow)}
+.card h4{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--mut);text-transform:uppercase}
+.card.org{background:#fffaf4;border-color:rgba(255,149,0,.22)}
+.card.org h4{color:var(--org)}
+.card.stage{position:relative;overflow:hidden}
+.card.stage:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--cyan)}
+.card.stage.o:before{background:#ff9500}
+.card.stage b{font-size:17px;letter-spacing:-.01em}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g6{grid-template-columns:repeat(6,1fr)}
+@media(max-width:980px){.g2,.g3,.g4,.g6{grid-template-columns:1fr}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:980px){.two{grid-template-columns:1fr}}
+.kpi{background:var(--card);border:1px solid var(--hair);border-radius:20px;padding:16px 18px;box-shadow:var(--shadow)}
+.kpi b{display:block;font-size:34px;line-height:1.1;font-weight:700;letter-spacing:-.025em;color:var(--cyan)}
+.kpi.o b{color:#ff9500}
+.kpi span{display:block;margin-top:4px;font-size:13px;font-weight:600;color:var(--txt)}
+.kpi small{display:block;color:var(--dim);font-size:11.5px;margin-top:2px;line-height:1.35}
+.profile h4{margin-bottom:6px}
+.profile dl{margin:0;display:grid;grid-template-columns:132px 1fr;gap:0}
+.profile dt{font-size:12px;font-weight:600;color:var(--mut);padding:11px 0;border-top:1px solid var(--hair)}
+.profile dd{margin:0;padding:10px 0;border-top:1px solid var(--hair)}
+.profile dt:first-of-type,.profile dd:first-of-type{border-top:0}
+.chip{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.03em;padding:2px 9px;border-radius:999px;vertical-align:middle;white-space:nowrap;border:0}
+.chip.ok{background:var(--ok-t);color:var(--ok)}.chip.cf{background:var(--org-t);color:var(--org)}.chip.un{background:var(--warn-t);color:var(--warn)}.chip.na{background:var(--gray-t);color:var(--mut)}.chip.pv{background:#f4eafc;color:#8944ab}
+.chip.hi{background:var(--ok-t);color:var(--ok)}.chip.md{background:var(--warn-t);color:var(--warn)}.chip.lo{background:#fdecee;color:var(--bad)}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--hair);border-radius:18px;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);text-align:left;padding:12px 14px;background:#fafafc;border-bottom:1px solid var(--line)}
+td{padding:11px 14px;border-top:1px solid var(--hair);vertical-align:top}
+tbody tr:first-child td{border-top:0}
+tbody tr:hover td{background:#fafafc}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tr.hl td{color:var(--cyan);font-weight:600}
+table.sort th{cursor:pointer}table.sort th:hover{color:var(--txt)}
+.card table th{background:transparent;padding-left:0}.card table td{padding-left:0}
+.card .tw table th{padding-left:14px}.card .tw table td{padding-left:14px}
+.card .tw{box-shadow:none}
+.note{font-size:13px;color:#3a3a3c;background:var(--blue-t);border-radius:12px;padding:10px 14px;margin:14px 0}
+.note.o{background:var(--org-t)}.note.w{background:var(--warn-t)}
+.note b{color:var(--txt)}
+.banner{background:var(--org-t);color:#7a3a05;border-radius:16px;padding:12px 18px;margin:14px 0;font-size:13.5px}
+.radarwrap{display:grid;grid-template-columns:minmax(300px,560px) 1fr;gap:22px;align-items:start}
+@media(max-width:980px){.radarwrap{grid-template-columns:1fr}}
+.radarbox{background:#fff;border-radius:20px;border:1px solid var(--hair);box-shadow:var(--shadow);padding:6px;overflow:hidden}
+.radarbox svg{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px}
+.legend button{display:flex;align-items:center;gap:8px;font:600 12px var(--sans);background:#fff;color:var(--txt);border:1px solid var(--line);border-radius:999px;padding:6px 13px;cursor:pointer;transition:opacity .15s,background .15s}
+.legend button:hover{background:#fafafc}
+.legend button i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.legend button.off{opacity:.38}
+#tip{position:fixed;z-index:99;pointer-events:none;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--line);color:var(--txt);padding:9px 12px;border-radius:12px;font-size:12.5px;max-width:270px;display:none;box-shadow:0 10px 34px rgba(0,0,0,.16)}
+.bar{display:grid;grid-template-columns:170px 1fr 120px;gap:12px;align-items:center;margin:7px 0;font-size:13px}
+.bar .t{height:10px;background:#ececf0;border-radius:999px;position:relative}
+.bar .f{height:100%;border-radius:999px}
+.bar .w{position:absolute;top:-2px;height:14px;border-left:2px solid #1d1d1f;border-right:2px solid #1d1d1f;opacity:.55}
+.bar .v{font-size:12px;color:var(--mut)}
+.mono{font-family:var(--sans)}
+label.mono{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.tiertag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--cyan);border-radius:999px;padding:2px 11px;margin-right:10px}
+.tiertag.o{background:#ff9500}
+button.btn{background:var(--cyan);color:#fff;border:0;border-radius:999px;padding:9px 18px;font:600 13px var(--sans);cursor:pointer;transition:background .15s}
+button.btn:hover{background:#0077ed}
+button.btn.alt{background:rgba(0,113,227,.10);color:var(--cyan)}
+button.btn.alt:hover{background:rgba(0,113,227,.18)}
+input[type=number],input[type=text],input[type=date],select.s{width:100%;background:#fff;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:inherit;font-size:14px}
+input:focus,select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 4px rgba(0,113,227,.15)}
+.subh{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--org);margin:22px 0 10px}
+/* methodology */
+.meth{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:980px){.meth{grid-template-columns:1fr}}
+.mcard{background:var(--card);border:1px solid var(--hair);border-radius:20px;padding:16px;box-shadow:var(--shadow)}
+.mcard svg{width:100%;height:auto;display:block;border-radius:12px;margin-bottom:12px}
+.mcard h5{margin:0 0 4px;font-size:16px;font-weight:700;letter-spacing:-.01em}
+.mcard p{margin:0;font-size:13.5px;color:var(--mut)}
+.mcard p b{color:var(--txt)}
+.phasehead{display:flex;align-items:center;gap:14px;margin:38px 0 4px}
+.phasehead h3{margin:0;font-size:26px;font-weight:700;letter-spacing:-.02em}
+.phasehead i{flex:1;height:1px;background:var(--line)}
+.sub-phase{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin:22px 0 10px}
+.ncards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:980px){.ncards{grid-template-columns:1fr}}
+.nc{background:var(--card);border:1px solid var(--hair);border-radius:18px;padding:16px 20px;box-shadow:var(--shadow)}
+.nc .hd{display:flex;gap:10px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.nc .tag{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--org);background:var(--org-t);border-radius:999px;padding:3px 10px}
+.nc.pos .tag{color:var(--ok);background:var(--ok-t)}.nc.mix .tag{color:var(--warn);background:var(--warn-t)}
+button.ts,span.ts{font:600 12px var(--sans);font-variant-numeric:tabular-nums;border-radius:999px;padding:4px 12px;border:0}
+button.ts{background:rgba(0,113,227,.10);color:var(--cyan);cursor:pointer;transition:background .15s,color .15s}
+button.ts:hover{background:var(--cyan);color:#fff}
+span.ts{background:var(--gray-t);color:var(--mut)}
+.nc p{margin:7px 0;font-size:14.5px}
+.nc p.rec b{color:var(--cyan)}
+.nc p.cp{color:var(--mut)}.nc p.cp b{color:var(--mut)}
+.nc p.dl{font-size:12.5px;color:var(--mut);border-top:1px solid var(--hair);padding-top:9px;margin-top:10px}
+.nc p.dl b{color:var(--org)}
+.tally{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+/* video */
+.vidslot{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:22px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.10),0 22px 60px rgba(0,0,0,.16)}
+.vidslot iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;display:block}
+a.btn{display:inline-block;border-radius:999px;padding:9px 18px;font:600 13px var(--sans);cursor:pointer}
+a.btn.alt{background:rgba(0,113,227,.10);color:var(--cyan)}
+a.btn.alt:hover{background:rgba(0,113,227,.18);text-decoration:none}
+.vidph{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;color:#d2d2d7;font-size:15px;background:#1d1d1f;padding:24px}
+.vidbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px;font-size:12px;font-weight:600;color:var(--mut)}
+.vidbar input[type=text]{width:170px;padding:7px 10px}
+.grph{margin:16px 0 4px;font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--txt);text-transform:uppercase}
+.grph span{color:var(--dim);font-weight:500;margin-left:8px;text-transform:none;letter-spacing:0}
+/* SWOT */
+.swot{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:980px){.swot{grid-template-columns:1fr}}
+.sw{border-radius:22px;padding:20px 24px;border:1px solid var(--hair)}
+.sw h4{margin:0 0 10px;font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.sw.S{background:var(--ok-t)}.sw.S h4{color:var(--ok)}
+.sw.W{background:var(--org-t)}.sw.W h4{color:var(--org)}
+.sw.O{background:var(--blue-t)}.sw.O h4{color:var(--cyan)}
+.sw.T{background:var(--pink-t)}.sw.T h4{color:var(--pink)}
+.sw ul{margin:0;padding-left:18px}.sw li{margin:8px 0;font-size:14px}
+.pl{margin:10px 0;font-size:14px;display:grid;grid-template-columns:62px 1fr;column-gap:8px;align-items:start}
+.pl span{display:block;padding-top:2px;font-size:10.5px;font-weight:700;letter-spacing:.07em;color:var(--cyan)}
+.pl ul{margin:4px 0 0;padding-left:18px}
+.card.stage.o .pl span{color:var(--org)}
+details{background:var(--card);border:1px solid var(--hair);border-radius:14px;margin:8px 0;padding:6px 16px}
+summary{cursor:pointer;font-weight:600;color:var(--cyan);padding:6px 0}
+footer{margin-top:60px;padding:28px;text-align:center;color:var(--dim);font-size:11.5px;letter-spacing:.04em;border-top:1px solid var(--line)}
+@media print{body{background:#fff}nav,.btn,.legend,.vidbar{display:none}.card,.kpi,.tw,.note,.nc,.mcard,.sw{box-shadow:none!important}section{break-inside:avoid-page}}
+
+.vidslot video{position:absolute;inset:0;width:100%;height:100%;background:#000;display:block}
+.byline{margin:6px 0 0;font-size:13px;color:var(--mut)}.byline b{color:var(--txt)}
+a.ts{display:inline-flex;align-items:center;gap:6px;font:600 12px var(--sans);font-variant-numeric:tabular-nums;border-radius:999px;padding:4px 12px;background:rgba(0,113,227,.10);color:var(--cyan);cursor:pointer;text-decoration:none;transition:background .15s,color .15s}
+a.ts:hover{background:var(--cyan);color:#fff;text-decoration:none}
+a.ts small{font-weight:600;opacity:.7;font-size:10.5px}
+.nc{transition:box-shadow .2s,border-color .2s}
+.nc.playing{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,113,227,.18),var(--shadow)}
+.tl{position:relative;height:42px;margin-top:14px;background:#e9e9ee;border-radius:12px;overflow:hidden;cursor:pointer;user-select:none}
+.tl .seg{position:absolute;top:0;bottom:0;display:flex;align-items:center;justify-content:center;font:700 13px var(--sans);color:#fff;border-right:2px solid #fff;opacity:.9;transition:opacity .15s,filter .15s}
+.tl .seg:hover{opacity:1;filter:brightness(1.06)}
+.tl .seg.on{opacity:1;box-shadow:inset 0 0 0 3px rgba(255,255,255,.95)}
+.tl .seg.pos{background:#34c759}.tl .seg.dev{background:#ff9500}.tl .seg.mix{background:#ffcc00;color:#4a3b00}
+.tl .head{position:absolute;top:0;bottom:0;width:2px;background:#1d1d1f;pointer-events:none;left:0}
+.tlkey{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--mut);margin-top:8px}
+.tlkey i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.nowp{margin-top:12px;padding:12px 16px;background:var(--blue-t);border-radius:14px;font-size:14px;min-height:46px}
+.nowp b{color:var(--cyan)}
+.printonly{display:none}
+@media print{
+@page{size:A4;margin:14mm}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.vidslot,.tl,.tlkey,.nowp,.vidbar{display:none!important}
+.printonly{display:block}
+body{font-size:12.5px}
+section#p1,section#p2,section#p3,section#plan,section#src{break-before:page}
+.card,.nc,.sw,.mcard,.kpi,.radarbox,tr{break-inside:avoid}
+h2,h3,.sub-phase,.phasehead,.secband{break-after:avoid}
+.tw{overflow:visible!important;max-height:none!important}
+table{font-size:11px}th,td{padding:8px 10px}
+.secband .sn{font-size:32px}h2{font-size:26px}h3{font-size:19px}
+a{color:var(--cyan)}
+.hero{padding-top:8px}
+}
+@media print{
+.hero{grid-template-columns:1.15fr .85fr!important;gap:18px!important}
+.herotop{grid-template-columns:140px 1fr!important;gap:16px!important}
+.photo{width:140px!important;height:140px!important;border-radius:28px!important}
+.hero h1{font-size:34px!important}
+.g3{grid-template-columns:repeat(3,1fr)!important}.g2,.two,.ncards,.swot{grid-template-columns:repeat(2,1fr)!important}
+.meth{grid-template-columns:repeat(3,1fr)!important}
+.mcard{padding:10px!important}.mcard svg{max-height:110px}
+.radarbox svg{max-height:430px}
+.tw:has(#benchTbl){display:none!important}
+.card,.nc,.sw,.kpi{padding:12px 14px!important}
+}
+/* ===== Scouting report additions ===== */
+.chip.r3{background:var(--ok-t);color:var(--ok)}.chip.r2{background:var(--blue-t);color:var(--cyan)}.chip.r1{background:var(--warn-t);color:var(--warn)}.chip.r0{background:#fdecee;color:var(--bad)}
+.sm{font-size:12px;color:var(--mut);font-weight:400}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}
+.flow span{background:#fff;border:1px solid var(--hair);border-radius:999px;padding:6px 14px;font-size:13px}
+.flow span.n{background:var(--cyan);color:#fff;border-color:transparent;font-weight:600}
+.flow i{font-style:normal;color:var(--dim)}
+.stack{display:flex;height:30px;border-radius:10px;overflow:hidden;background:#eee}
+.stack i{font-style:normal;font-size:11px;font-weight:600;color:#1d1d1f;display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;border-right:2px solid #fff}
+.stack i:last-child{border-right:0}
+.tc{display:inline-block;background:var(--blue-t);color:var(--cyan);font-weight:600;font-variant-numeric:tabular-nums;border-radius:5px;padding:0 3px;font-size:.92em;white-space:nowrap}
+
+/* candidate cards in the hero */
+.cands{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.cand{background:#fff;border-radius:20px;padding:16px 10px 14px;text-align:center;box-shadow:var(--shadow);border-top:4px solid var(--c)}
+.cand img{width:92px;height:92px;object-fit:cover;object-position:50% 18%;border-radius:50%;border:3px solid var(--c);display:block;margin:0 auto 8px;background:var(--gray-t)}
+.cand b{display:block;font-size:15px}
+.cand small{display:block;color:var(--mut);font-size:12px;margin:2px 0 8px}
+@media(max-width:560px){.cands{grid-template-columns:1fr}}
+
+/* head-to-head */
+.h2hbar{position:sticky;top:58px;z-index:40;display:flex;gap:6px 22px;flex-wrap:wrap;align-items:center;justify-content:center;padding:8px 16px;margin:16px auto;width:max-content;max-width:100%;background:rgba(255,255,255,.86);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);border:1px solid var(--hair);border-radius:999px;box-shadow:0 4px 18px rgba(0,0,0,.07);font-size:13px;font-weight:600}
+.h2hbar .k{display:inline-flex;align-items:center;gap:7px;color:var(--c)}
+.h2hbar em{font-style:normal;color:var(--mut);font-weight:500;font-size:12px}
+.sh{display:inline-block;width:11px;height:11px;background:currentColor;flex:none}
+.sh.c{border-radius:50%}.sh.d{transform:rotate(45deg) scale(.82)}.sh.s{border-radius:2px}
+.th-s{display:inline-flex;align-items:center;gap:7px;color:var(--c);letter-spacing:.04em}
+.th-p{display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:0}
+.th-p img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:50% 18%;border:2.5px solid var(--c);flex:none;background:var(--gray-t)}
+.th-p span{font-size:13.5px;font-weight:700;color:var(--c);line-height:1.2}
+.th-p small{display:block;font-weight:400;color:var(--mut);font-size:11.5px;margin-top:1px}
+table.prof td:first-child,table.fit td:first-child{width:17%;color:var(--txt)}
+@media(max-width:820px){
+.prof,.fit{min-width:760px}
+.prof th:first-child,.prof td:first-child,.fit th:first-child,.fit td:first-child{position:sticky;left:0;z-index:2;background:#fff;box-shadow:1px 0 0 var(--hair)}
+.prof th:first-child,.fit th:first-child{background:#fafafc}
+.h2hbar{top:54px;font-size:12px;gap:4px 14px;padding:6px 12px}
+}
+
+/* pivot and single-column case */
+.pivot{display:grid;grid-template-columns:190px 1fr;gap:30px;align-items:center;background:linear-gradient(135deg,#fff 0%,#eef5ff 100%);border:1px solid var(--hair);border-radius:30px;padding:30px;margin:20px 0 40px;box-shadow:var(--shadow)}
+.pivot img{width:190px;height:240px;object-fit:cover;object-position:50% 15%;border-radius:26px;box-shadow:0 14px 36px rgba(0,0,0,.16)}
+.pivot h2{font-size:40px;letter-spacing:-.02em}
+@media(max-width:700px){.pivot{grid-template-columns:1fr;text-align:center}.pivot img{margin:0 auto}.pivot .flow{justify-content:center}}
+.solo{max-width:860px;margin:0 auto}
+.solo h2{font-size:34px}
+.solo p.lead{font-size:19px;line-height:1.5}
+.solo h3{margin-top:40px}
+.solo .card{font-size:15.5px}
+
+/* video timeline: one colour per player */
+.tl .seg.pM{background:#007AFF}.tl .seg.pL{background:#FF9500}.tl .seg.pB{background:#34C759}
+.tlkey .pM{background:#007AFF}.tlkey .pL{background:#FF9500}.tlkey .pB{background:#34C759}
+.kpi span a{color:var(--cyan);font-weight:600;border-bottom:1px dotted var(--cyan)}.kpi span a:hover{text-decoration:none;border-bottom-style:solid}
+/* embedded in the Forza IQ console: the console supplies the navigation */
+html.embedded nav{display:none}
+html.embedded{scroll-padding-top:14px}
+html.embedded .h2hbar{top:8px}
+html.embedded .hero{padding-top:20px}
+html.embedded footer{display:none}
+.tlkey i.pM{background:#007AFF}.tlkey i.pL{background:#FF9500}.tlkey i.pB{background:#34C759}
+a.ts.tcl{all:unset;cursor:pointer;display:inline}.tc.lk{background:var(--cyan);color:#fff}.tc.lk:hover{background:#0058b8}
+tr.playing td{background:var(--blue-t)}
+table.cmt td:nth-child(2) .pl{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+</style>
+</head>
+<body>
+<div id="tip"></div>
+<nav>
+<span class="brand"><i></i>FORZA IQ / SCOUTING</span>
+<a href="#top">PROFILE</a><a href="#brief">ASSIGNMENT</a><a href="#context">CONTEXT</a><a href="#s1">HEAD-TO-HEAD</a><a href="#s2">DATA &amp; INSIGHTS</a><a href="#s3">VIDEO</a><a href="#s4">DATA &amp; VIDEO LINKAGE</a><a href="#s5">CLUB FIT</a><a href="#s6">DECISION</a><a href="#src">SOURCES</a>
+</nav>
+<main>
+
+<!-- ============ HERO ============ -->
+<header id="top" class="hero">
+<div class="secband" style="grid-column:1/-1;margin-bottom:6px"><span class="sn">PROFILE</span><span class="sd">Scouting report: recruitment recommendation</span></div>
+<div>
+<div class="eyebrow">Scouting Report / Recruitment Recommendation / Eintracht Frankfurt</div>
+<h1>Sign Adri Mehmeti</h1>
+<div class="sub">Central midfielder for Eintracht Frankfurt &middot; three candidates, one signing</div>
+<p class="lead" style="margin-top:10px">Three non-EU candidates tested against the profile Frankfurt needs: data first, then video, then club fit. One signing: <b>Mehmeti</b>. Ranking: 1 Mehmeti (first choice), 2 Lira (fallback), 3 Bangoura (ready-now, low-value option). Where evidence is missing it says <b>NOT AVAILABLE</b>, never zero.</p>
+<p class="byline">Prepared by <b>Rolando Bouloy</b> &middot; Transfermarkt data pulled 18 Oct 2026 &middot; video clip sets reviewed Nov 2026</p>
+
+<div class="cands">
+<div class="cand" style="--c:#007AFF"><img src="data:image/jpeg;base64,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" alt="Adri Mehmeti"><b>Adri Mehmeti</b><small>A &middot; NY Red Bulls &middot; age 17</small><div class="rk"><span class="chip ok">1 &middot; FIRST CHOICE</span></div></div>
+<div class="cand" style="--c:#FF9500"><img src="data:image/jpeg;base64,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" alt="Erik Lira"><b>Erik Lira</b><small>B &middot; Cruz Azul &middot; age 26</small><div class="rk"><span class="chip un">2 &middot; FALLBACK</span></div></div>
+<div class="cand" style="--c:#34C759"><img src="data:image/jpeg;base64,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" alt="Sekou Bangoura"><b>Sekou Bangoura</b><small>C &middot; Columbus Crew &middot; age 24</small><div class="rk"><span class="chip na">3 &middot; READY-NOW, LOW-VALUE</span></div></div>
+</div>
+
+<div class="grid g3" style="margin-top:18px">
+<div class="kpi"><b>18 / 21</b><span><a href="#s5" title="Go to the Club fit section">Club-fit</a> score, Mehmeti</span><small>Lira 12 &middot; Bangoura 8</small></div>
+<div class="kpi o"><b>&euro;10.2m</b><span>Median model fee, Mehmeti</span><small>range 7.8&ndash;15.6m &middot; Uzun &euro;13.0m (not a quote)</small></div>
+<div class="kpi"><b>0.25</b><span>xT created per 90</span><small>Lira 0.13 &middot; Bangoura 0.12</small></div>
+<div class="kpi"><b>1.16</b><span>Opp.-half recoveries / 90</span><small>1st of the five &middot; Lira 0.97 &middot; Bangoura 0.83</small></div>
+<div class="kpi o"><b>2,324</b><span>Minutes, 26 matches</span><small>High sample confidence (Bangoura 757, low)</small></div>
+<div class="kpi"><b>12 / 10 / 10</b><span>Telestrated clips reviewed</span><small>Mehmeti / Lira / Bangoura</small></div>
+</div>
+
+<div class="note o" style="margin-top:16px"><b>360-degree report, component 1 of 3.</b> This page is the <b>Scouting Report</b>. Next: the Individual Development Plan (see the <a href="https://rolomagnus.github.io/ForzaIQ-public/" target="_blank" rel="noopener">Jamar Ricketts example</a>) and the Opponent Analysis.
+<div class="flow" style="margin-bottom:0"><span class="n">1 &middot; Scouting Report (this page)</span><i>&rarr;</i><span>2 &middot; Individual Development Plan</span><i>&rarr;</i><span>3 &middot; Opponent Analysis</span></div></div>
+</div>
+
+<div class="card profile">
+<h4>Recommendation</h4>
+<dl>
+<dt>Decision</dt><dd><b>Sign Adri Mehmeti</b> (Player A)</dd>
+<dt>Ranking</dt><dd>1 Mehmeti (first choice) &middot; 2 Lira (fallback) &middot; 3 Bangoura (ready-now, low-value option)</dd>
+<dt>Role needed</dt><dd>A central midfielder who wins the ball high, progresses it under pressure, starts play from deep and protects the central channel in transition</dd>
+<dt>Why Mehmeti</dt><dd>The balanced profile: comfortable deep (DMC in all 26 sample matches; drops between the centre-backs on video) and able to progress into the attacking block. Leads the five on xT, xA, box touches, interceptions and opposition-half recoveries</dd>
+<dt>Main trade-off</dt><dd>Cannot be registered before turning 18 on 6 Apr 2027, so summer 2027 is the window; unproven outside MLS</dd>
+<dt>Model fee</dt><dd>&euro;7.8&ndash;15.6m (median &euro;10.2m), below Frankfurt's largest recent midfield purchase (Uzun, &euro;13.0m). An estimate, not a quote</dd>
+<dt>Next step</dt><dd>Open talks with New York Red Bulls and his agent now; agree terms for registration after 6 Apr 2027</dd>
+<dt>Would change it</dt><dd>A full-match review showing his ball-winning or discipline failing against stronger opposition</dd>
+<dt>Data basis</dt><dd>Driblab (assignment dataset), Wyscout team report, Transfermarkt (18 Oct 2026), analyst clip review (Nov 2026)</dd>
+</dl>
+</div>
+</header>
+
+<!-- ============ ASSIGNMENT ============ -->
+<section id="brief">
+<div class="secband"><span class="sn">ASSIGNMENT</span><span class="sd">Brief: objective and deliverable rules</span></div>
+<h2>Recruitment Recommendation brief</h2>
+<div class="grid g2">
+<div class="card"><h4>Objective</h4><p style="margin:0">Act as a club's Recruitment Analyst: compare transfer targets using their profiles, statistics and match footage, and conclude with one signing recommendation that is justified by objective evidence and a clearly separated subjective evaluation. The assignment compares two targets; this extended version compares three.</p></div>
+<div class="card"><h4>Deliverable rules</h4>
+<ul style="margin:0;padding-left:18px"><li>A concise, easy-to-scan <b>PDF dossier</b> plus a <b>recorded explanation</b> (3&ndash;5 minutes); both must support the same signing decision.</li><li>Integrate age, market value and injury history with performance data.</li><li>Distinguish objective evidence from interpretation; explain where video and data agree or differ.</li><li>Acknowledge missing information; do not invent it. Market value is an estimate, not a confirmed transfer fee.</li></ul></div>
+</div>
+</section>
+
+<!-- ============ CONTEXT ============ -->
+<section id="context">
+<div class="secband"><span class="sn">CONTEXT</span><span class="sd">Why Frankfurt needs a central midfielder</span></div>
+<h2>The need, in four numbers</h2>
+<div class="grid g4">
+<div class="kpi o"><b>57%</b><span>of midfield minutes have left</span><small>845 of 1,492 report minutes: Skhiri, Larsson, Dahoud</small></div>
+<div class="kpi"><b>12 vs 9</b><span>conceded vs scored</span><small>6 league matches, Apr&ndash;May 2026; 4 of 12 between 42' and 45+4'</small></div>
+<div class="kpi"><b>22</b><span>median age of the midfield group</span><small>10 players (TM); only G&ouml;tze (34) is over 28</small></div>
+<div class="kpi o"><b>&euro;175m</b><span>net transfer surplus, 5 windows</span><small>largest recent midfield buy: Uzun, &euro;13.0m</small></div>
+</div>
+<p class="sm" style="margin:14px 0 8px">Left and middle columns are facts from the Wyscout team report (6 league matches, Apr&ndash;May 2026) and Transfermarkt; the right column is the analyst's reading.</p>
+<div class="tw"><table><thead><tr><th>Evidence</th><th>What the reports show (objective)</th><th>Why it matters (analyst reading)</th></tr></thead><tbody>
+<tr><td><b>The pivot has left</b></td><td>Of 1,492 report minutes played by DMF/CMF players (Skhiri 397, Larsson 352, Cha&iuml;bi 344, H&oslash;jlund 303, Dahoud 96), 845 (57%) came from three who have since left: Skhiri (to K&ouml;ln), Larsson (loan to Fulham), Dahoud (free).</td><td>The two most-used defensive pivots are gone. Remaining cover is Onyedika (DM, 25), As&eacute;ko (DM, 20) and H&oslash;jlund (CM, 21): young and thin.</td></tr>
+<tr><td><b>The game model needs the role</b></td><td>Possession 54&ndash;61%, PPDA 8.8&ndash;11.2 (opponents 13&ndash;26), tempo 14&ndash;17 passes per minute. A pivot is used in all five shapes (4-2-3-1 33%, 4-3-3, 4-1-4-1, 5-4-1, 3-4-3).</td><td>A pressing, possession side needs a central midfielder who wins the ball high and moves it forward; the role exists in every shape.</td></tr>
+<tr><td><b>A protection gap, not only a scoring one</b></td><td>12 conceded vs 9 scored in 6 league matches; 6 goals in each half, 4 of 12 between 42' and 45+4'. Scorers: 4 wingers, 3 centre-forwards, 3 midfielders, 1 wing-back, 1 centre-back. 20 shots (3.00 xG) followed lost own-third duels; 3 of 12 goals did (1 after a pivot-player loss).</td><td>Only 1 of 12 goals followed a pivot duel loss, so the pivot is not the whole problem; but the central channel and the pre-half-time spell are exposed. The report does not split goals by shot type, so this analysis does not either.</td></tr>
+<tr><td><b>Thin, young, non-EU-limited squad</b></td><td>Midfield and wide-midfield group (10 players, TM): median age 22, mean 23.4; only G&ouml;tze (34) is over 28. Only Onyedika and Doan hold a non-EU passport only.</td><td>Experienced cover is scarce. All three candidates are non-EU (USA/Albania, Mexico, Guinea) and need a German work permit and a squad-rule check.</td></tr>
+<tr><td><b>Money is not the constraint, fit is</b></td><td>Net transfer surplus &euro;175m over five windows; largest recent midfield purchase: Uzun, &euro;13.0m.</td><td>A &euro;1&ndash;16m target is inside precedent; Lira's upper range (&euro;27.3m) is not.</td></tr>
+</tbody></table></div>
+<h3>The profile Frankfurt needs</h3>
+<div class="grid g4">
+<div class="card"><h4>1 &middot; Wins the ball high</h4>Pressing, regains in the opposition half (PPDA 8.8&ndash;11.2).</div>
+<div class="card"><h4>2 &middot; Progresses under pressure</h4>Moves the ball forward at 14&ndash;17 passes a minute and 54&ndash;61% possession.</div>
+<div class="card"><h4>3 &middot; Starts play from deep</h4>Drops between the centre-backs; a pivot is used in all five shapes.</div>
+<div class="card"><h4>4 &middot; Protects the central channel</h4>Transition cover; 12 conceded, 4 of them just before half-time.</div>
+</div>
+<div class="note">The steps below test each candidate against that profile with <b>data first, then video, then fit</b>.</div>
+</section>
+
+<div id="h2h">
+<div class="h2hbar" aria-label="Who is who"><span class="k" style="--c:#007AFF"><i class="sh c"></i>A &middot; Mehmeti</span><span class="k" style="--c:#FF9500"><i class="sh d"></i>B &middot; Lira</span><span class="k" style="--c:#34C759"><i class="sh s"></i>C &middot; Bangoura</span><em>head-to-head comparison</em></div>
+<!-- ============ STEP 1 ============ -->
+<section id="s1">
+<div class="secband"><span class="sn">HEAD-TO-HEAD</span><span class="sd">Player profiles: age, market value, injury history, style</span></div>
+<h2>Three candidates, three different risk profiles</h2>
+<div class="tw"><table class="prof"><thead><tr>
+<th></th>
+<th><div class="th-p" style="--c:#007AFF"><img src="data:image/jpeg;base64,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" alt=""><span>A &middot; Adri Mehmeti<small>NY Red Bulls</small></span></div></th>
+<th><div class="th-p" style="--c:#FF9500"><img src="data:image/jpeg;base64,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" alt=""><span>B &middot; Erik Lira<small>Cruz Azul</small></span></div></th>
+<th><div class="th-p" style="--c:#34C759"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwQDAwQEBAQFBQQFBwsHBwYGBw4KCggLEA4RERAOEA8SFBoWEhMYEw8QFh8XGBsbHR0dERYgIh8cIhocHRz/2wBDAQUFBQcGBw0HBw0cEhASHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBz/wAARCAEEAMgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7+ooooAKKKKACiiigAorm/GfjXSfA+iXOr6xeLbWVupZ3YE9jwAOSeOgr5b8U/wDBQLwhpWmzNoemXuq6gWxDHLGbZNuAQ7kkkA84AyeATjOAmwPsG7vILC3knuJAkMal3Y9FUDJJ9q4S7+Mng+O3m26/pxuVha4WITgkxhwhbA9GYDHXJAr8tPin+0749+K8DWWpambTSjM0/wBismZELHjDNncwAwAvTvivHfOfaw3sC3XB+99aLiufo54k/b98P6LeX9nBod1eSW7qkctvNG6S8fMc8Bcf8CznHGDnwzXf29viBqF9cT6dp2l2CSjCBkMrwnBAKsfTg4IIJz2OK+UQzZ5OaUtQI+nf+G8/it9nt4Xk0lnRSJphaYefrjvhMZ/hA6Vd1T9vL4g309s1rBZWEMQyY4EyGc5OTuzx0GOmM9zkfKhPzGkxzSHc/RHwr/wUK8OmewtNa0DVkhI/0i9MsblDjPCAZIB49xj8fpf4Z/HTwX8VtJk1DQNWjPkuY5oJ2CSxEf3lPQEcg9D9QRX4sfWrFre3Fk/mW1xLA/8Aejcqf0oBM/elW9j+VPFfkl8FP2tfFvw11OODW7u78QeHpHBlhu52ea3GfmeFieDjscg19weDv20fhh4zu7Kwt9Tn06+un8sR6nCYUB7DzOV57ZI64pjPo2io45VcZU5HqKkpgFFFFABRRRQAUUUUAFFFFABRRRQAVleItdsfDejX2q6ndJaWFnE0ssz9FUDP4n0A5JrSmlWGJ5GICqMkk4Ffmz+3F8YbnXvEB8FwXEiW+lyBrmOFmVHLKCofnDEdRx0b1oBs86/aO/aS1P4v3y6VBJEfDdjcGe1cQ+XK7YK5bngY7e+CTXz62MUhYgdaYH3A/TFSQxcgdOaaTmg0lAJAetLnmk5ooGHXrSmkpT2oAQ07tTcZpQxU5HBHNAATxSo5BoKlcZ780Uxn1h8D/wBtzxR4B8jSvFcMniLRVRYomDBLqEAAKA3RxgYwRn3r9I/DfjHSPE2jafqen30NxBewJOhiYNgMM4OOh7c9xX4XpJsGSMt0Fen/AAS+NGs/B7xDJfWBMtndgRXEDsxTH97YDgsAT1B9uaLiuftCrBgCDkGlrB8GeKrDxr4W0nxBpjq9hqVulxEVOeGHT6g5H4VvUygooooAKKKKACiiigAoopCcCgDzv42/EOD4Z/DzWddkuLeKeCHECzjIkkJwFAyMk81+OXjXxTc+NvFGra/eQxQ3eqTtdSJCMIrN1x+NfYf/AAUE+IVzN4i0fwdaXbLZQ2wu7qBRgSysSEJbuFAOB2JNfEU0ZXnkCQblB649aTJbICc4/Wm+p9KtWto8zZIGMZyaunTo1VQRkgdqhzSKVNyMgcUc1qiyjOAV4JqVdPjXBCDOeDuNL2sS/YyexidKXacZxxXS/wBmoqkoq7jxkdDUUtmqNGCFxmp9shuhJHP4oOccDmt17dQoQISGPr0p8ViUUZJ2ZwFPP4+1P2qD2LMDb3ojQyMQoJIrqbW0gMilolJHp39q6XTfD9nLcrKI9gzkIR1GP5ZrOWJUVexccM29zzpbC6kA2QOc89KhaGRCSVwR1zX0HB4XtreyMzeW8ZIDKud6+oyP/wBXFcxr/g+wETSqCUZVPyjoe9c8MwjKVmjaeAlFXueP55yRUiZ3ZGOOau6jp/8AZ9yYnO4dQccMKrqNxcsSC3Iz3rvTTV0cEk07M+/v2Dvje95Fd/DzXdTnkngIl0lZRuXy8fPEpAyMH5hnjBPevu1enNfiH8LvGurfD3xvoWv6GVOo2tyoRTgiRWO1kIPTcpK57Z4r9tLK4NzbRStGY2dQxQnO045GfaqQ0WaKKKYwooooAKKKKACoblmVNwbAH+zk5+lTV598avGP/CB/DbxHrpuYbd7WzkELzHC+cylYxgcklyoAH5igD8rP2kfGM3jf4weJ9Ul2rFDcGyhQJtKJESgBHrwcnvXlAT94oK5PBWrE8kl9PLJcylpnJd3YklnPJz685NaGnW3nHzGH3RtAIx06VnN2VxRjd2J7K2ARSwwx7EZqKVyshx06c1rooVO+aZLB58gORtxyMfrXE5a3PQUdLGWi5IPerkcKnA2k4HU1ZjsUyOuCO4q8llIygBGAxn8KlyNYQZmMpQkHHSopbfdGDnJXnA71s/ZH3MFHA747Ux9P9Adx9ulQpWNHTbMZYpFAI68Zx7+lThdy4UnntmtJrFsgY+gpJNOdMNnn/a/pVOSZCpNGeqeXI5HpgZrptEvGgjCMRg9N3asr7FKNoKZPUgU6JSADggE9xjIqZrmVikuU9D07WI7cMrLw45xzjP8AP+lR6jqFpMG27E3dgciuLW5lRSzFgCe46VTuL+TcWT9ecVzrD63NHWshviTSPMg85RlgTjjqK4loXB3Dg13h1Zp7VoiuR2B7H1rkbuMBy5c4bJBA6GvRw0mlZnmYmKbujPjle1lhmjOHQ7lbtkHj9RX7R/A74hxfFD4Z6D4jW4hmubi3VLvyVKiO4UASJg9MNX4vGMww7wRtJO3PPfGfpX2j/wAE/wD4nSaZr+s+A72d2h1LF9ZRlhtSVRiTA/2lxn/dHvXYjmR+i1FICe9LTGFFFFABRRRQAV8e/wDBQnXGtfhtoOjgyIL/AFES7gwCt5SkkEdSfmB9sV9hV+Z/7ePimbV/i5b6K6P9k0OzjQfNlS0w8wnHY42j149KTEz5St4mEzZVsKPm45ro7a1MNhBgffLMCcjpU2j6LLqF8GRQUk2swzt3J7enfJ9vrXTaxZCEROsjBLcZjPBG3p26D6+tc9RtmtKOtzn3iiS0L+YxmV8MrDgDH6nP+eaqW6kk5GfxxTLqUHHQOQO2e3+R71Np7bnI6g/wgc1zHdE3bWyeRSUXeeoYjIX3roodAYqVjO7HfHf6/wBKq6bO8UKRohyzKcEY3enPauitL27CljdFWZcsigdBz3/+tWUjrpxRlzaE0BC7GDqQCrEc8/549xVCazIbDRMjKM44J/Ouua4nkjjiMpmzkHc2Tx06dcfypohDBicBwDn+eP6Vm5W3N407nEw2byHciEqvzYJ6D/GrcsLKRH5Jzg5z0APQ/wCfSuhvQqOrmNNmNoYY/E+/XGe1UryRlZSCCCcBBxz9KFMbpJGCbNRuZ4SuB2PH4Aev+fSq4iQmTejbiemAcj/P8qvXkqjeGZcE8c4xx1zVFtzRnEinnKqMZ4781rBnLNWMq+h3KTG5DAZ2McE9vxFZh45JbJ5/Gta4wx+YcZ+8Dxk1l3EJDD5yMfpWiOaREQylQE5boRTDbLKku2MK23Lcd/XFXI4wy7mXedvUdvrWjZ27M+DneTkFD0P+c1pHQwnrucjNZOjeWdsiL/dyeB+HvXU/CnXbjwH8U/CesQNFvtdQhJaUjaEdgrEnt8rNz2rTvdIlhjZ0t1eO4QEyyfKVIYcA9P8AJ7VzF7amxv2yVLAoSS2QxXG44+v6GumLZyyWp+3FvIJYw6kFW5BHcVLWP4YOdB0zbB5KfZYtsZ6qNg4x2rYrRCCiiimAUUUUANckKdoye1flT+0jqFxr3x58ZS3LqyQX6WCgjhVRAq5B/HHqTnFfquehr8x/jLpUM3x48aKJnill1Nv3hO+MFkUKWXPADDJJIx2pNCZi6J4S+zeDrW9gXcXZj5jJghc4A7HAAK4x97vgisLx5atZWgg2GOXy1Mi7Rkg9vT0HHpX0hpumbNNNpeW9rdz6epZyIxxM2UdmweN+3jHGFHfBry74gW0zpHHdurztCQfNXDnY23I4yAAR9RmsZxsrm9M+apgQwXac+lXrB3j2bUJzyxB6Cr2q2kcVwxGAQccd6gt4TJgjPXoO9cbdjtpxbNyykYbSpbacjPrW3DfeWoby3LAjO3Azz69en5+1ULK2dUVymUxxtHHbvWpaWLXDKWVijEklTnPXnj0rJyOuEX2JhqEr7CsRIyF5wMAfSrXmuWzHGQewJPf6VU/s+Tfh42ZR0IJ6+vbvWjbo+9wikkjBXPT3/pXNNnZBMrvFc3BTzGjU9vkJI/EmqjWuBtcgpg8Dj9ev4Vt+VNjKqAeBlQOp7c+/9KSTTJiWZlAJx7ZAqVLU0dO5yNxYbwOACOnOT/KqU1mVOcE5J4x79K7g6AzqRIw9l7rj+dUbnRrWPaplWMnkknp9TW0Ki2Ry1KVtWcJLG6NlFwynBUcVl3W5nBz8p5213F5pltGCTdwdt3z/AM65O9WISlQSQeARyK6E+pwzilpcbAUggyw+U8EnPX/9Vdh4T04SwSEnBchYs9STyDnHFcMmRKA2dq9jXsHw5tVv760shnJOHwMY/wD1njNdENXY5J7HdweDY10GSZ42eeJGuV8lxKpJHyAr/wAD49j3rxDxfpEKrGrSf6ZbK8YSRTljzkrjsBjqeq+lfW5S50WK5MTqYhH+8QKCgyoIY5ywHYgDPA9K+d9dsBaW1+XtY4Le6mQySeTzLJ91ow3qvJJBwc9TnA6krHNLc/TzwNJdT+DPD0t9EIr2TT7dpowc7X8tcjP1roKzdChjt9G0+KHPkx28apkY+UIMfpWlVkhRRRQAUUUUAB6V8B/GvQYl/aB1mCWS3miv/wB9JHcLsVUNsp8sOASmSC28c5XHXr9+V8QftheGRD8Q9G1ZX+zf2jYiNp8ZJeFmIA+u5AfY+woYHTeBFhntIbXzvMt2hXbEGytypyG3sM+bjC4IOOmMDFcT8R9JtrlmKiKR4Sx3oCcfxFj68/qKv/CECzskd50EsokV41RVBO1gD8vAwV+8MZI5Gea7CLSYbu01OSSeSTzlaWMyAfI2xQyg9CuQT64J9M1MldGkNGfCOsW5GoyBzt2sck9T9f8APaotPv0ik3hQIwdobv8A/WrS8XRn+3LuJ1CP5jBgBg5zz603QfC0Orn7OSUJAI5zz0/OvMla7TPSipW9w6G08T6dHCFFuv3TnD+nfHWrln4ls7i4C7kCnnZnHH+RXMat4AstOYqZ7gup6l+cfT1rnJvDywuXjllcdAC2Mily031LVSvDc9ot7+1vVDiNS6Z5UgkelXy1qpZlQDcezck143ZXV1aOu2Z1AGMHjB966my1cXO0ygbwevTn1rjqUpRemx3UMQpaSO6k1CLaBld+7LMOQM5zg9/rUdxqcMcC5kjaRVztxx1rlnu3MYQNtjP/AOusXU9RZF4bOBniojTbdjedeMVc19e8WLChSNT5jZGMevYGvO9Q13U7uR0hh3AZVS55xV+Pzb65WGPOScEsSa6K3tdI0kJ9ok33LHtk8/QV20oez2R5NSTrP3nY4+HR9Z1Fd1xLFGjHJHzH9adJ4bn00b5Azop5dMEde4611txqdojrgXKDPQwOP5imahqVld23kRyhZB8phbKMT64NV7SbeqF7Ckl8Wpx9pAbu8hiVPvk7QTkse2Peve/A+kT6NDa3km0OQr4+np+PHHrXlPhvQ5LqaS58uTy4Tl2VCSg55/SvqWKwhPgTztkKXuxfkjII+78uDn05z3BB+nTS7nNVWljTv/EkQt9PntrT7SRbM21SC0+7Cgdsksw5JGMnvXit1YPr96kEM0U9w10sICxF2IZ1BKjPyrubk9ztPrjrYNVeexn02UsTMNpCnbtIwQCQCcHb07nqaPhJorah470OMbTHdapHO7P88jbGU4Y/wnGflGQME5J6dcXzHHJan6F28XkRJECSEULk+wxU1NX+dOqiQooooAKKKKAEJxXzp+2B4bm1bwRpWsW8Lu2i3vmSuqhvKjkXbvI6kB/LPHpzXH/tPftI6p4M8SReEPCusxaZqSKGuboWf2hkJXIHOQo6ZwrHnPbB8xh/bE1a98Ea14V+Inhp768ubZoYtR0tkTzSRlXdD8p5wdyHB9KydWKdrmipSaukZPw41KZNWunkkSRHB8sou0oCyhgATnbu3fLg7fXmvSvEev8A9m6NeuZsSsMll6sOnT868Q+E96mptrWsxRyR2X28iOJxzHlQTyOOrdBUHxk8YObqwtoHIYx7mVTwuCQOnrkj8Kmc/dLpw11OU8Y2lsbQaxJcR/v5TGjYwxwOePyrkrHxO+mXIktf3Jzw8oLMfooqnOLzUlCeaCkOfKH93JycelbXga81DwvNez28OnXV3PEEWe7iLtEwJ4B9+h9RXIlF6s7lKd7R0Gax4w+1aSNVSDVZ7UXH2R7lvKjjaYLv2jGW+7k81K+i+JJE1Nh4e1YLpcogu5IgtykDsoYBtvHIIPBrm9R8EODJLa+XmVlYRylVKAjJAwxAGeADz0r0jwP4z1L4f+CZdD0m3s7Sa+n+0XGovmWRn+6AicKABwM5PXpWslTUbxWphF1ZStJnG6U41YoYwGP3XAPCn/PP5+lbmkgS3rBMkKcHH86qTBp7q5vnRFnuss8aRqiknGTx7jOPUk96rW11JDcOIyVAI5Heuapa2h10Pdld6noN/YwW7RNgZZeCp59/pXBa8UjlUrztOCM4xVufVZpJFLliQuBk+lYeqTPOgY8fTNYUk4vc6q8oyjaKL6GK3sZLpJCE2qMKCWyTgAepzXoXgv4Maz4n8LX+uX+pTaYPs809tbRLieVxGWj8x+Su44wAM4PavLNPuM24imRJI2bIQ+vrXSaX4hvdAuBf6bc3VscbBcWkzxyepDYJGfqK63JpaHByp7nB+dYzX2kTzwa/LHDAV1Yfbl82Sfc2TESPkABT5WBOQ3rW1aeFtSuPAtv4lutQUgyunkXhP7yNcfMrdcEnFal3bRa5qr6tcTC4upX8yVpGTMrdiwwA3vkc07W5Hv5ImvZpLpxgBWfIVO6qowFHsoFayrpq1jGGHtfU0/hp4vtNC1yym2yz6PdJ5d3Zz4Z4xyCyHo6jr6gGva7rxtpMgtNMtbkSRsWy+c8HG0Y9ccZ69emK8F8T6q/iPULG5S0+zR2dolpGinGVQHHA4HU8fz5rD0+SfT72GUhiEYM2T0Gf60KpHoLkl1PfLm7icB2hSRWlAKligA3AE8d8d/xr0T9l+yi8QeOptcdtmmaNNdkSyPn5YwqKXc4BA3E/nXlnhhl1S1wwyGyCoGMA9T74yfpj8vE/7E1qC8vNEhu7pbd5WhktVmcJJtYn5kztI/iJPHetfaKKuzP2bk7I/V7Tvj78N9U8RxeHrLxhplxqsz+XHHE5ZHf+6JMbCfQZ5r0kHNfjdbeL9U8EW1qfCt7JbR20qPcSKi7rxunz5GfK6gJ0wSTyeP1n+GviZPGHgLw5rqdNQsopiPRiMMPwINXTqKa0M6lJw3OrooorUyCkPQ0tFAH5aftBxk/tD+NmlG4xvlcnsUXH6Vl+H/Bk/ijw9fXFvJG93YQC4WFmA3xg/MBnv3A9a9G/ay8Py6L8fLm9SI+XrmnLKhxwXWJlYfX5Ca83sr+XSfDd1p8abJL54d86qfMRACPLHqCSK8bE+7UPosFFSoao9K8AeHlsvh3aPsaJb9prklOgy4AP1wo/nXinxBtZ5dcYuThAeSfVie9fV/gvSvt3wv8ACl5bBmeWyw3mMBhw7rg+uTntx9K8c+L3h1Yp5ZhEC3zEMv8AGAAfzH+Nd9Re5c8qH8Q8W06FiwC8qeg+vetyDSZhMrxsN/cAdfrVTR4w8qg9c13It0jiBIk3Hp0wOO9ea5u569GkpLU5u6t51iThCBjkDk1mrZsZFP3pCfw/z2rdu5/mVQpLdAF4x60ljZyKGlGWbAyccBfb8DTU7Il0eZmFewCyQxgq0jjk981RtogGyzDcefp71oauot5FWZvnY5fnOKpWrGV2K8gDBxUyk7alRjFOyJn2qQCrKRnnvVG9lVULFcgHkEj8K3Y9IleJZSGbfyB3qhd2O5SgyOMHI/rURmr7mlSk+W9jEi2ibCkEZH4fSti2k8h2dBnPyyL2cf41z8om0+Xfs3Q54Yeldxp9tHfWgeDawJyee/8AnrW7dlc5Ix5nylFLa0kkLxIBn+D/AOtVlLa2ibd5eDjaDtGPwpZ9NeNwUyhz19TUcN1OkgjkjLDnnHHXoalz5ti/Zcj1RLPAvlnbjGOCOc1hIglmCEEOflB966Kdy8ecrtX+7VLQbI3uromA4HzHBzx3qqK94mtblPWPhxZyXFpCF527gcAHsMc/n6/0rF8fPZeD/FGvQiDzbvVRh2zlbZDGh2g+rNzn+6Md69q+GPhZVsBO/wAoLfKu3oAo3AHvycfpXhnxjnhv/iP4iVSq/Z5kiByBkJGq8+//AOrtXXiFamjgw2tQ8Z1YEabeFj96QDH61+sP7NKSp8CPAQnUrIdNQkH3LEfpivzOsvAV74z1vw7o+luJV1a/jgwByrMDyfYBWz9K/XXQdHt/D2i6fpNmgS0sIEt4gBj5UUAfyrTCr3bk41+9Y06KKK6jiCiiigD5f/a88NieHwr4jVD5lhJcwOVGSQ0EhUfThq+O7TVEvta+zgqx813VQRjCBmP5Bf0r9B/2l9LkvvhDrd3BF50+lGO/WP8AvqjfvF9sxs4/Gvy81NBFMNU0y7bzIpSwVkKNweDn3/xHNefiqXPJXPVwNdwptH3D8BJzc/DWztWKs1hfzW7Z7DcJB+Pz+lY3x40LdpV/co2DBEZNu4jJXvkfTtk8fhXK/sreMU12w8T6crkTwNbXRV2xjduRj/46v6V6p8X4VuvDs8wcMWt2XK4ZiOBx7dOnr7V0xi3ROWbSrNnw/o03lzhmAbPbH8/zrsp5TdQ/f2oeApPT8uv8q4OJHsdVnjlAypGR1/Ee1dlYSiSJWYEnnovSvJnGzPZozUkS6fpQmlYGJnZTk9uD3/z1q5dPFaLMRsbkg88HGMfXrU1vdGEOEJkZ+Q3QD0Hvj1NY19Ibm5ZiwG1ifm9zWVru50p6GMmjTeKNaZI+iffLnCj1yfQCuptNA0jSLuKC5dpyPvlCBj6VydzfXWn6bd2+myLHqE7Eq5P8JJNYWleCdYa4We98ULBcH5/LSUu+P5Vap86blKxh7ZU2owhd9T6Jv9O0U21oNO81omTc2/GQ3pxwf/r1yfiG30PT9MWWWMtfu3EPQL7k/wBPxrm117U9KiEYjkuo8gRzRrw3uawfEjXniDcNWW5tYjwiRnbu+tc1OlJz1Z2VMSlStFalu3n8PavI9r9tigvSSoSNwQT6YrCkN34e1KRUcqp6Y4BGef8APvWHbeH/AA/bXEc7Xd5FJEQREY87iPQ1pXN4+r3nmLFJsUbAZF6+9d/Iov3XdHlyrSnG8laXkdxp2pxarb7XVVOcH0JqC6tFx2xnjPcdvpVHQrP7KX3vgkg+lX7ub5yBtD46Y5P41g4WlodalzRTZjXkpEUqgbcd8/5+tdX8LNJS7nlupJFEsbxpHCUJ3qQxLZHoQo99xHauLuAbqTarglgB8x9P/wBVe0fCXQkhngR+LguuS44UkcZHoCF/P8K7cPG8jzcRPdH0t4YsI7LRbZnL7pNoxgfJ0yMfma+Gvil4ig03xV4shkRbjUtRublYo+vk+Y5AdvQhOg65we3P3fLMlpDZw8eXEC7Y5PGT09Bj8K/O/TNEJ1zVtcvGldQ091tZRJ5zNuZFGfvZYrnPbJ9BXbXtZXOGi3d8p9XfsR+CTd6kdc1D5pLKM3FvHjIUOGiSQ/X98F9QpPcV91BcCvl/9h3w7fWHw01PXNUd5L7Wb7/WOc5jhQRoB6KPmAA4AGBX1FV00lHQyqSbk7hRRRVmYUUUUAVdRsYNTsbiyuoxJbXMbRSxnoysCCD+Br8xPHfwr1X4P/EC/wBFuoDc6Ffho7aZlH76AkMjj0dSqgj1B9a/UXFct448CaT480wWWqwBjGd8M4A3xN6j2PQjvWVWHMjSlPklc/O79nzU10v4qy2zRRQ2+qW0ttiIeWN64kTntyh/lX1BrYTUNOubV03745IS+ACAoBGR6YP4VjeHf2QL3SviDb+IrrxVAbGyuBcw21paGN5GUEKrZJVV5wcZyM9M1a155LJZkIdduZP3aZHHBAxz9c+lFGLULSNKslOV4nxZ46046X4juWXgGVgWQcHB6g9x7+1VtPu2cFc4OfpxjrXoHxGtYdQ+aOSPfIU5IwFJHOD75Bx9a8tSOS0uWiZWDROVfcPukHBzXn1o2kehQqO1jr4r8LAcknPIycYqpcXCYLAdOnPWsA3TiQqrN1qyRJPhV7ngVzuJ3c+hTvxHOwM8W5ewNQ2aRibMKJFGgGT0J70t2JHfyoF3yMdqgDJNXrPwhMJmkvtQ8uUHd5FuvmEHHHzZx/XrWsY6HM21K6OlsdTNtDEIncKvGwnjOOD+tVteu0lQMxUFuWwcn3qsnhuFYi8VzcwSjgZwQfak/s+zC/6QLi6lx/rHYKPyrJUnzXN/btx5TBLpuBJBx71L9oVs4xn2NTTaLCoP2aaSJmP3ZMMP05/SsSdZbOdRcDCN0dfun3rXlfU5uexvxXjKMKSAB2OOPSi41Dz485JLDjHUGq6xAqGG4g1OuiyyQ28sYIScnaPU/wCf5UKN2U6jSLPhy1a5v4p9u/7PIj7T0bB3YPscYPsTX0R8ONMMGuLeTKXwS68cE9cd+OnH09K898I+HYbW1juJxuj2NnPA3Dv+HPX0/GvUdBucMtrAzIY43ZBtBDAgDjj/AD+Fd9CCR51edz0O5S/1mG/ttJCS6ncWjx2cbSgJ5zxsFBboOe/bj0rxv4X/ALNXjK/W4sNf0LUNNuVKRNNceX5GzI3EMCd3A4x1r6L+FOmK3iCzMccUMUabjBGMKm0dvX5mH0xXvwUYracFPc5ozcdjJ8MeHrLwpoNjo+nx+XZ2UYjjXvgdz7nrWxSYpapK2hD1CiiimAUUUUAFFFFACFa+efitYDT9QvGEYy7lhnoyN6+3Jr6Hryn4zaZFPaWMrtt8wtC2O/ykrz6A5/yKTGnY+AfFU82mWrxSBXS3uSA2MkKwC8n0zgfn05FZdppK6xaXsygNKw/h5IY/Nn/x3H/666L4i6U7XF9ExZJCXCt6MDuIx+HT/GsHwFe+Xq8UByEnBVhyQDjAP6muGpZux30nbUpnw59l03zpWXdIGJbocKpJ/XNUDeWul6UkssgDSHaGP0r0rxvaDT9CmTjILOB1wGAByfTqOnWvKpYo7qwWKaNXVMkKwyPxrCUNdTqjN20IhqNnDDuiuYjJI2Wbdk47Cpl1MjElvBcOFPLpG232qC1RNPdGggt1D9T5Q/Oun0G2uNcu5FZ8bQCx3Acew7/Sle2xtTpRqv35WKNrrLzytGbe4MkeTIFiZiABnJwOOOamS01DW7aC+0nT5ZrSY7YbmR1iibnGdzYyMgj8K7W58KXS26SQHdGhKkkldv589KqWfha+jeNUMJ2EAoMEIvXAXpjntQqlt0dry+LVlNHn40jX5dUnsJtNWIxOyGZ5lETMDj5XBIYZ7jiuYv7jVrWWS1ltFdAdpYSKyg/XNer+JLTAQmU3BVckAEAenHYVyVn4Wm8RXMxklEFvDG8jysM5wDhFHck4+nNVCbb95aHBi6FKkuWDuzH0CS78mdLwoCDhVjYMAPqK9Q8KQC80i2mZslGwo7j5T39eT/OvKYbWSwmkiG7KnAAwQfWvcfhzphn03T4pUKhZZJJHLdCcAE+2M1tFJs4rtR1Nq4kjsrWyhXLSYGcfLxgn09D19q6jwesjShVUFjIVZyoX5c5JH6ADPPWud8QKi3ilcN5YRlCjAAwecj3H4V2/gG2WIoSW3JHgnpz/ABYA+v6GuqJyyZ9CfB3Sjbx3tyyBQqrCigYx1Zvz4P416qK4/wCGS27+DbC6tyrLd75iy9GJYjj8q7AdK1MBaKKKACiiigAooooAKKKKACvI/wBoO5Nj4TsLwAk296rY9fkbivXK8e/aSTd8OXbul1GR6dGHNKWw4q7sfJfjm3i1uManbhsFAoXdk4A2jPvj+XNeS6dbNp2sRSMCoLkkg4OcY/Ou3tfEQjV7GRzmXcY5Dk7W/hBGehqC8s4pLlWiyWRQSCcFhxk/q35VxvV3OyL5VY6Lx4PtelCYopV4lUnHqFB/UY+ma8TRQgCj7ufrXrms3P2vRpLRtiS2qHJ3AjH8OfcrjPpkV461xlmUZ61jX0tY6cPLcsNCCzKuSCcYFXtL1G40C4SWDrnuAwA+hqlZsTKuMd+tXyUIBOc9fQVy8zOxWtdG1rHxP1G/SNZ3Z1AA2rGE4AA7ACsaLxlqUgCxRTKhyCS4FQtD5sm5gAp5HHWn/ZWYHgLt/Sqv3Hzz6Mgn1i4vHLSl2U5yCTg85P8AOpINQnb92MBf4VHcelSPCItocjJ6YINVLzdFh4vlI7j1+tUmYyg37zZqW0EUEUkhAE+7O8jPIzj9a9M8F3SWFuLdQdvlllYnIyOcHv0I/I+hrxAapNHsVTuVeTknnHSvX/h7Yy6lZWl5cu8CGOWdByyvs3Aggfx/I2FPqD6V10kcVZ9DqrfTf7QvW3EhvNJO0cbABgZGeOp+grr7/UxomiPHHMUuLs+RHtUDAP3j78EfiRVHTIbfTbWa+uJUjhKrI7bfuLt3HI9ecD/69eZap4rk17XXmjL+XGm2BQxIAz8oJ9cnJPvjpXRscl7n3z8GJVl+GPhwqcqLcqPwdh/Su8rzn4E5/wCFUeG0cYaOJ0P1EjCvRq1RmwooopiCiiigAooooAKKKKACvJv2jAP+FY324j/Xw4z/AL1es15J+0af+LZ3fJB+0w4x1zk0pbMcd0fm/wCIbo2d2Rkkq3Tpg+3+e9XdC8VkBEZv33AUeoHOT+oNZHjAst424N14z1/L6VyrGTcCvytgZIOMEd81wrQ7LXR7tbzCaS5aNZ7iNtsmZJQkZjKY+ZsDO1yM47cjNeUNbNBfzLKwfazZI4Oc88dqgsfGd5pdrJbz5khYBhtxwRkjqOBk8jvnIrCHih5blXu0C+YQD83AHf8AlTqRco6Cp1FCVpHaW8OGB25zz9BWxHAhkXcA28EjOP1rlNN1xZ5ZIiFCIARheOef8+lb8WpwQhpNyrngdD071yOnJdD1I1oM1JYVjUgbsLjocEnvWe7gyLypLZ6c8/hVa612J2CgYGec/wAI9T+tZ8+sWXkbi5VxyPmGBngZqlBsUqsV1NFn2bxjgDOw/Wq84URNuHOPzrMk12ARqWdZZZMqCAAAfr+lUNT8QxqDGjBkGQcHGc9B657VSpu5hLERsU9Su44Z5Ig20heWDdR6V6t4E8U3kN9ZWkSK0UfO0sWwg5HzDg4PGD2H4V8/30r3FxJJG25Dxge/+H8q2fDniC50d2mBkCMnA3d+wI+vPT3rshDlV2eXOpzyZ9AfELx4t+yadAALWP5tgOAW7/UcdK4/w/e+ZOs0gQl2wisT83PBz2+teay6tNcStLK24nkg9/8A61dZ4QuRJcGdmLTYBAUkKv8As59OaTlctK25+nf7PFwJvhTow3Z8t50z/wBtW/xr1Kvh/wCGH7Tei/B+10fw/wCKba4Gi6lLLIupwHf9kfK5V4+vl4IOVyRzwa+2LG+ttSs4LyznjuLS4RZIpomDJIjDIZSOCCDnNdEXdGMtGWKKKKoQUUUUAFFFFABRRWdrut2Hh3SbzVNUu4rTT7KJp57iVsLGijJJNAGJ8QviP4c+GHhu417xLqKWVjCdq5G55nPSONByzHHQfU4HNfFeoftU3nx4n13R7XQotK8PaeiXMLSMZbqV/MCqWx8qjBb5QD9TivnT9pH47ah8bfG9xqCvLD4csd0GlWbcbI88yMP774yfQYXtUv7PEhgh8UvgkSrbxjHsXY/yFTJ6MqHxIj8ZqVulP8JLEA8kc9Kw4FRl3cgDjnr+db/jfnUCqMdm7gEf5xXPQZTn+dcDZ3wRILQT/IcBCRgY4rntf0dokEqoRsUkDtj+VdWh9DtI5OehodQysrg4I/i5BpwqcoVKCktDzq21GWByWLkkAHd359PrirS6xMsDoHOCclf6/XpW3daHFctJj5JQOCq/pisC/wBAmsmiZwxjkXO4fdH410RnGWxxOFSCHvrs7M0hkfLrtYZ46VVl1RyVUPuUKATjAP4VUks5I0D87c7eRjmo/IY/KvzGr5YkXl1LH2+bcMMeFGKaxln3EMflGeB0+tWLbSnmJHlsHXnI5B9q0IbZgu98+ZuGAfQD+nShyUdhxjJlK2t7lJgThRwwIP8An1rVWJAAOTjjNIEUHDHB6/SpWZVUKOnYgVi53NYU7ald+/rXSeGdQjtZSHPykdO/GK5eRiz9eOtCysmSMfWkimdj8T9Zg1TQNPiBHm21wzg5ycMuDz+Ar6I/Yd/aPk0PUrb4Z+JbstpV9Jt0a4lb/j2mY/6gn+45+76Nx/Fx8d6nMz2b7++Bn1NZWn3M1pdRTW8jR3EbB43U4KupypB9iBXRS2MJvU/fAEEcUtcd8K/GKePfhz4X8SqQW1SwhuHx2kK4cfgwauxrS5IUUUUAFHSkLAdSKqX1/FZQNLI4CgfifYVlVqxpRc5uyQ0m9Ec78SPiBp3wz8Gax4o1QO1ppkBlMUZAeVsgKi54ySQPxr8vvjV+0v4y+NNu1rqMsem+HPM8xNKsshCR0Mj9ZCPfA74r139oL4j3/wAQ/gx4t16R3WzufFaaZaQE/LFa24bAx6s+5ie5I7AV8ZGYmHZnisMHivrPO0tIu33WJrLksihccxn2xXb/AA28QNosdzEGKrcspJBxyOn864qVSynjJq9oMm1ZVzhwQce1dNTYdF+8eiaxff2lcB2bJH8WOv4VWWM8YY571nW7k7cjkd+1akS7dnGARzXnyPThoTReYSNwDAVZ27ozgkc4J7UsbKVwTyemBxUwjGDjPHr2rNnQkZ0kXI9KkiDuDGXUxn+F+B+dWJYeoz26VViYwsWOTgfX86aZDiSSaVbXqmGZT8/B6BsenTn8DUf/AAj9naO7C3/d4/hXOfqasLc4jO184HVTxVa6v5CBHjAPTB/nVKUu5LjDqjInRIgwVdqAjnPWs6UlnYAMIx0zWvJBvIGdxB6gD9Kr/Y2DA4wpHU1afcxa7GYqZGCMnrmmtHkfKCTWv9mjYEBC3rzVS4iGPvgduDTTJcTNKcZ9RULDHB5x36VdZOMc/jWVqV2LddiH5zWkU3oZystzO1K482XYCSFqK2Q7ww6LzTIYjIc969X+A/w4b4j/ABG0nSZYy2mwt9rv2xkCCPlh/wACOFH+9WmIr08LRlWqO0Yq7+Ry2c5cqPRl+Nfjv9nm+8I6dpeozSWX/COWVzJpF27G3EkweQnb/CfmGcYzX1j8Df21vCvxHSPTfFIt/DPiAnapllzZ3HpslbGxv9l8exNfEX7WWt2utfGjWPsgQQWEEFh8mNu6JNrAewYlfwr1X4XeDvg/8R/Bum6PCLMeJ4LUGd4Ge3uzIBlmAbiVc9Rgj6V5VXNY4XC08ZUpyala9le2l7tG8aDqScItJo/SuOeOVFZHDKwyCDwR6iivjb4TXnjT4BzQWN3q0vib4an/AFqzIftuiqf+WqpzugH8SrnaMsAMHJXdhMzwuMpqrQmpIidKcHaSPdvjF471XwXod9daYLcTQw+YplQtz+Yr4v8AgB8ZvGfxW+OQHiXV5J7SGyvGis4spCjAABtueTgnk5oorwsxfPRxPNraLt5G1HRxsYyQpqH7KfxFScZGneKHmgx2bzYxz+DGvlo8D8aKK9HJNq/+N/kjnxe8fQb3pNOYx6gm3jfkH6UUV7UtjOj8R2dmNzNnsBitqMAYGAceooorzJHqwJoXO4H06VdjG85NFFZvc6IihFbJI5C5qrLGoDOODRRTQMqy8qc8/Wowo2MQMbemKKKsxe5KYFDcM33tvWkCqA+FHBwPzoopDRDOxIxxj6VlXMKsu45zyaKKqJEypL+7hJHUdM1x1wTJcHcc5NFFdNHc462xatlAHTkGvtj9li1h8L/BPxx4vsI1/tvfcqJZBuAW3h3xrj03MSfUgUUV4fFj/wCE63eUV/5MicJ/FR8qeMLCJvBPhDXnLvqeqz6j9qmY5MhSVCCff52/OuY0S4ltbz7TDI0c8ETyRujFSrAcEEciiivoKSvBr1/Mzb1ue9/AH46+OLXx3oHh+51d9S0rULhYHjvwZWjB7o+QwP4ke1FFFfnfElClTxfuRSuuiR6OHk3TV2f/2Q==" alt=""><span>C &middot; Sekou Bangoura<small>Columbus Crew</small></span></div></th>
+</tr></thead><tbody>
+<tr><td><b>Age / contract</b></td><td>17 (born 6 Apr 2009). Contract to Dec 2028 (26 months).</td><td>26 (born 8 May 2000). Contract to Jun 2029 (32 months).</td><td>24 (born 5 Apr 2002). Contract to Jun 2029 (32 months). Joined from Ironi Kiryat Shmona for &euro;1.0m in Jan 2026.</td></tr>
+<tr><td><b>Market value (TM estimate)</b></td><td>&euro;8.0m, first valuation (Sep 2026). No trend yet.</td><td>&euro;14.0m, a peak (+65% in 12 months).</td><td>&euro;0.9m, a peak (doubled from 0.45m in 12 months).</td></tr>
+<tr><td><b>Expected fee (model, not a quote)</b></td><td>&euro;7.8&ndash;15.6m (median 10.2m). Buy-out proxy &euro;10.2m at Jul 2027.</td><td>&euro;13.7&ndash;27.3m (median 17.8m). Buy-out proxy &euro;22.5m.</td><td>&euro;0.9&ndash;1.8m (median 1.1m). Buy-out proxy &euro;1.4m.</td></tr>
+<tr><td><b>Injury history (TM)</b></td><td>One 29-day calf injury (Feb&ndash;Mar 2025), 4 games missed.</td><td>None recorded.</td><td>None on TM, but prior leagues (Turkey, Israel) have thin coverage: unknown, not clean.</td></tr>
+<tr><td><b>Playing time and role tags</b></td><td>2,324 min, 26 matches, all tagged DMC. <span class="chip hi">HIGH CONFIDENCE</span></td><td>2,876 min, 33 matches; tagged DC in 20, DMC 9, MC 9 (tags overlap). <span class="chip hi">HIGH CONFIDENCE</span></td><td>757 min, 18 matches, average 42 min; Sub tag in all 18; tagged MC 17, DMC 2. <span class="chip lo">LOW CONFIDENCE</span></td></tr>
+<tr><td><b>Pedigree</b></td><td>3 USA caps; MLS NEXT Pro Cup 2024/25 (Red Bulls II).</td><td>32 Mexico caps; Gold Cup 2025, Champions Cup 2024/25, Liga MX Clausura 2025/26.</td><td>3 Guinea caps (1 goal); Turkish U19 title 2022/23 (TM).</td></tr>
+<tr><td><b>Style (analyst reading)</b></td><td>Balanced. Comfortable deep and low, and progressing into the attacking block.</td><td>Defence-oriented. Used as a centre-back in some games (DC 20 of 33).</td><td>Attacking-oriented. Most of the footage sits between the mid and high block.</td></tr>
+<tr><td><b>Main risks</b></td><td>FIFA minors rule until 6 Apr 2027, Red Bull network priority (unverified), adaptation at 17, discipline (6 yellow, 1 red).</td><td>Price near peak, work permit, lowest attacking output of the three, aerial win rate 44%.</td><td>Small sample, high turnovers (0.83 p90) and fouls (2.14 p90), work permit, adaptation from MLS.</td></tr>
+</tbody></table></div>
+
+<h3>Price against precedent</h3>
+<div class="two">
+<div class="radarbox" id="feeChart"></div>
+<div class="card"><h4>Reading the fee ranges</h4><ul style="margin:0;padding-left:18px"><li><b>Mehmeti:</b> the modelled range sits around Frankfurt's biggest recent midfield buy (Uzun, &euro;13.0m); the median is below it, and his contract shrinks to 18 months by Jul 2027.</li><li><b>Lira:</b> the median (&euro;17.8m) is above Uzun and the top of the range (&euro;27.3m) is far outside precedent; his value is at a peak.</li><li><b>Bangoura:</b> a fraction of the cost (&euro;0.9&ndash;1.8m); the risk is the sample, not the price.</li></ul>
+<div class="note" style="margin-bottom:0">Model fees come from 11 comparable moves with no league-strength adjustment. They are estimates, not quotes. Not available: wages, agent fees, release clauses, Frankfurt's transfer budget.</div></div>
+</div>
+
+<h3>Availability screen: all five midfielders considered</h3>
+<div class="tw"><table class="sort" id="availTbl"></table></div>
+<div class="note">Sands and Nwobodo were excluded as nominees on injury history, sample size or role. The availability flag is an analyst judgement derived from Transfermarkt injury records, not a Transfermarkt field; treat it as a hypothesis.</div>
+</section>
+<!-- ============ STEP 2 ============ -->
+<section id="s2">
+<div class="secband"><span class="sn">DATA &amp; INSIGHTS</span><span class="sd">Performance: role-relevant metrics, playing time, sample size</span></div>
+<h2>Where each candidate leads</h2>
+<p class="lead">The radar compares <b>only the three nominees</b>. Each axis places a player between the <b>weakest (0) and strongest (100) of the three</b>. Per 90 = Driblab total / (minutes / 90). Driblab is not Wyscout and there is no league adjustment. Fouls and turnovers are inverted (fewer is better). This is a position within three players, not a percentile; the table beside the chart gives the raw values.</p>
+<div class="radarwrap"><div class="radarbox" id="radScout"></div><div id="radScoutside"></div></div>
+
+<h3>Every metric, with the two excluded midfielders as context</h3>
+<div class="radarbox" id="dotChart" style="padding:14px"></div>
+<div class="note">Blue circle Mehmeti &middot; orange diamond Lira &middot; green square Bangoura &middot; grey dots Sands and Nwobodo (not nominated). Values on the right are for the three nominees. The tracks run from worst to best of the five.</div>
+
+<h3>What the numbers say</h3>
+<div class="grid g3">
+<div class="card stage"><h4>Mehmeti &middot; creation and high regains</h4><b>Leads the five</b><ul style="margin:8px 0 0;padding-left:18px"><li>xT 0.25 (Lira 0.13, Bangoura 0.12)</li><li>xA 0.15; box touches 0.85</li><li>Interceptions 1.51; opposition-half recoveries 1.16</li><li>Aerial win rate 57%</li></ul></div>
+<div class="card stage o"><h4>Lira &middot; duelling and security</h4><b>Safest circulator</b><ul style="margin:8px 0 0;padding-left:18px"><li>Tackles won 3.44; fouls 0.72</li><li>Pass completion over expected +3.8pp</li><li>Lowest attacking output: xA 0.02, shots 0.25</li></ul></div>
+<div class="card stage"><h4>Bangoura &middot; carrying and volume</h4><b>Upside, on a small sample</b><ul style="margin:8px 0 0;padding-left:18px"><li>Dribbles attempted 1.43 (Mehmeti 0.58); crosses 0.83; shots 0.71; tackle success 85%</li><li>But xA 0.00, xT 0.12, 0.36 box touches and 0.83 turnovers (worst of five)</li></ul></div>
+</div>
+<div class="banner"><b>Sample size.</b> Bangoura's numbers rest on 757 minutes (about 8.4 ninety-minute periods): roughly 12 dribble attempts, 6 shots, 7 crosses and 27 tackles. Read the rank, not the decimals. Driblab's turnover metric counts very few events (likely dangerous losses only), so use it cautiously.</div>
+<div class="tw"><table class="sort" id="sampleTbl"></table></div>
+</section>
+
+<!-- ============ STEP 3 ============ -->
+<section id="s3">
+<div class="secband"><span class="sn">VIDEO</span><span class="sd">Video review: timestamps as logged by the analyst</span></div>
+<h2>What the footage shows</h2>
+<p class="lead">Timestamps are the broadcast game clock at clip start. Video shows where each player was filmed, not how often he plays there. Click a timestamp, a clip in the map or a segment of the timeline to play that clip; the timeline highlights what is playing and shows the player.</p>
+
+<div class="vidslot" id="vidslot"><video id="vid" controls playsinline preload="metadata" src="scouting_recommendation.mp4"></video>
+<div class="vidph" id="vidph"><div style="max-width:520px"><div style="font-size:18px;font-weight:700;color:#fff;margin-bottom:6px">Scouting video</div>The video file was not found next to this page. Keep <code>scouting_recommendation.mp4</code> in the same folder.</div></div></div>
+<div class="tl" id="timeline" aria-label="Clip timeline" style="display:none"></div>
+<div class="tlkey" id="tlkey" style="display:none"><span><i class="pM"></i>A &middot; Mehmeti</span><span><i class="pL"></i>B &middot; Lira</span><span><i class="pB"></i>C &middot; Bangoura</span></div>
+<div class="nowp" id="nowPlaying" style="display:none"></div>
+<div class="vidbar"><button class="btn alt" id="prevClip" type="button">&#9664; PREVIOUS CLIP</button><button class="btn alt" id="nextClip" type="button">NEXT CLIP &#9654;</button><span id="vidMsg" style="color:var(--org)"></span></div>
+<h3>Clip map: 32 telestrated clips</h3>
+<div class="tw"><table class="cmt" id="clipMapTbl"></table></div>
+<p class="sm" style="margin:8px 0 0">The match clock is the broadcast game clock at clip start. Tags are the labels printed on each transition card: they describe the evidence in the clip, not a rating. Timestamps in the tables below that match a clip in this reel are links.</p>
+
+<h3>Timestamps by theme</h3>
+<div class="tw"><table class="tcw"><thead><tr><th>Theme</th><th>A &middot; Mehmeti (NYRB, USMNT)</th><th>B &middot; Lira (Cruz Azul, Mexico)</th><th>C &middot; Bangoura (Columbus Crew)</th></tr></thead><tbody>
+<tr><td><b>Deep low support</b><br><span class="sm">drops into a deep role to help the build-up</span></td><td><b>5 clips.</b> RBNY vs San Diego 5:04; NYC vs RBNY 68:11; US vs Chile 3:09, 7:44, 9:45.</td><td><b>8 clips.</b> UNAM vs CAZ 0:43, 2:38, 8:04, 11:28, 11:53, 46:17; MTY vs CAZ 71:55; USA vs MEX 38:42.</td><td><b>2 clips (low block).</b> CLB vs CIN 12:33 (#17 named: first-line outlet, carries into space, releases left); CLB vs MIA 87:25 (team context, #17 not verified).</td></tr>
+<tr><td><b>High press / attacking build-up</b><br><span class="sm">supports the press and the attack in the opponent's half</span></td><td><b>8 entries.</b> RBNY vs SD 4:53, 69:13, 95:23, 96:27; US vs Canada 92:44; US vs Chile 4:08, 10:08 to 11:08, 14:31.</td><td><b>5 entries.</b> UNAM vs CAZ 38:52, 47:01, 88:30; MTY vs CAZ 19:10; USA vs MEX 45:35.</td><td><b>7 clips (mid and high block), none verified as #17.</b> CLB vs CIN 33:30, 36:28, 43:16; CLB vs MIA 87:09; MIA vs CLB 64:27; ORL vs CLB 93:47, 94:23.</td></tr>
+<tr><td><b>Aerial duels</b></td><td><b>2 clips, both won.</b> US vs Canada 6:43, 6:56.</td><td><b>None logged.</b></td><td><b>1 clip, result not assigned to #17.</b> CLB vs CIN 45:03.</td></tr>
+</tbody></table></div>
+
+<h3>Clip-set check: where each player was filmed</h3>
+<p class="sm" style="margin:0 0 8px">Second pass over each player's telestrated clip set (clock = broadcast game clock at clip start; * = #6 flagged as not verified in the clip). It shows where on the pitch each player was filmed, not how often he plays there.</p>
+<div class="tw"><table class="tcw"><thead><tr><th>Candidate</th><th>Low block</th><th>Mid block</th><th>High block</th><th>Other</th><th>Named in caption</th><th>Style read</th></tr></thead><tbody>
+<tr><td><b>Mehmeti</b> (12 clips)</td><td>3: 88:06, 22:25, 3:00</td><td>3: 14:53, 16:51, 26:03</td><td>4: 57:42, 4:05, 11:42, 24:49</td><td>Aerial 89:32; free kick 30:28</td><td>10 of 12</td><td><span class="chip ok">BALANCED 3 / 3 / 4</span></td></tr>
+<tr><td><b>Lira</b> (10 clips)</td><td>4: 20:19, 82:17, 38:39, 69:44</td><td>3: 46:58, 6:27, 13:57</td><td>3: 38:42*, 45:31, 18:37</td><td>-</td><td>5 of 10 (+1 flagged)</td><td><span class="chip un">DEFENCE-ORIENTED 4 / 3 / 3</span></td></tr>
+<tr><td><b>Bangoura</b> (10 clips)</td><td>2: 12:33, 87:25</td><td>3: 33:30, 36:28, 87:09</td><td>5: 43:16, 93:47, 64:27, 94:23, 45:03</td><td>-</td><td>1 of 10</td><td><span class="chip cf">ATTACKING-ORIENTED 2 / 3 / 5</span></td></tr>
+</tbody></table></div>
+<div id="clipShare" class="radarbox" style="margin-top:14px;padding:14px"></div>
+</section>
+
+<!-- ============ STEP 4 ============ -->
+<section id="s4">
+<div class="secband"><span class="sn">DATA &amp; VIDEO LINKAGE</span><span class="sd">Connecting the evidence: objective vs interpretation</span></div>
+<h2>Where video and data agree, and where they differ</h2>
+<div class="tw"><table class="evt"><thead><tr><th>Topic</th><th>Objective (measured or seen)</th><th>Interpretation (analyst judgment)</th><th>Data-video nuance or discrepancy</th></tr></thead><tbody>
+<tr><td><b>Role and style</b></td><td>Data: Mehmeti DMC 26/26; Lira DC 20/33; Bangoura MC 17/18 (Sub tag in all 18). Video: low / mid / high clips 3/3/4, 4/3/3, 2/3/5.</td><td>Mehmeti is balanced, Lira defence-oriented, Bangoura attacking-oriented.</td><td>Agree: tags and clip spread point the same way for all three. Discrepancy: Mehmeti's DMC-only tag understates what the footage shows (he drops between the centre-backs and joins the attack).</td></tr>
+<tr><td><b>Press and progression</b></td><td>Data: opp.-half recoveries 1.16 / 0.97 / 0.83; xT 0.25 / 0.13 / 0.12. Video: 8 vs 5 press entries (Mehmeti vs Lira); none verified for Bangoura.</td><td>Mehmeti is the more active press-and-progress presence; the late presses (95:23, 96:27) suggest work rate, which a clip cannot measure.</td><td>Nuance: the recovery gap is small and Lira presses too, so the difference is progression value (xT). Bangoura's press is untested by video.</td></tr>
+<tr><td><b>Attacking output</b></td><td>Data: dribbles 0.58 / 0.47 / 1.43, shots 0.54 / 0.25 / 0.71, xA 0.15 / 0.02 / 0.00, box touches 0.85 / 0.19 / 0.36. Video: 4 named Mehmeti high-block clips; 1 named Lira clip (45:31); 0 verified Bangoura attacking clips.</td><td>Mehmeti's attacking value is creation and arrival; Bangoura's upside is carrying and shot volume, not yet creation.</td><td>Not confirmed by video: Bangoura's upside rests on data alone (about 12 dribbles, 6 shots, 7 crosses). It is a hypothesis to test on full matches.</td></tr>
+<tr><td><b>Aerial, duels, discipline</b></td><td>Data: aerial win 57% / 44% / 50%; tackle success 72% / 79% / 85%; fouls 1.20 / 0.72 / 2.14 p90; cards 0.27 / 0.16 / 0.48 p90. Video: 2 Mehmeti aerial wins; none for Lira; Bangoura captions say not to assign a tackle or aerial result to #17.</td><td>Mehmeti's fouls read as coachable young-player aggression; Bangoura's fouls and turnovers are the cost of his risk-taking.</td><td>Gap: no clip tests duelling or discipline for any candidate, so these risks are untested by video.</td></tr>
+<tr><td><b>Context and limits</b></td><td>Driblab has no league adjustment; model fees come from 11 comparable moves; clips are analyst-tagged, not full matches; Bangoura has 757 minutes.</td><td>Ranks are reliable, decimals are not; video supports the data for Mehmeti and Lira and cannot yet do so for Bangoura.</td><td>Limit: MLS, Liga MX and international opposition differ; no wages, release clauses or Frankfurt budget are known.</td></tr>
+</tbody></table></div>
+</section>
+
+<!-- ============ STEP 5 ============ -->
+<section id="s5">
+<div class="secband"><span class="sn">CLUB FIT</span><span class="sd">Club fit: how each candidate fits Frankfurt's style</span></div>
+<h2>Seven criteria, equal weights</h2>
+<p class="lead">Ratings (Strong 3, Good 2, Partial 1, Weak 0) are the analyst's ordinal reading of the evidence in each cell, from the data and clips above. They are <b>not a statistical model</b>. Scores are summed in this page from the ratings shown.</p>
+<div class="radarwrap" style="margin-bottom:18px"><div class="radarbox" id="radFit"></div><div id="radFitside"></div></div>
+<div class="tw"><table class="fit" id="fitTbl"></table></div>
+<div class="two" style="margin-top:16px">
+<div class="card"><h4>Fit score (of 21)</h4><div id="fitBars"></div></div>
+<div class="card org"><h4>Fit verdicts</h4><ul style="margin:0;padding-left:18px"><li><b>Mehmeti, first choice.</b> Balanced 6/8: wins it high, progresses, joins the attacking block. Best fit with the press-and-possession model.</li><li><b>Lira, fallback.</b> Defensive stabiliser: safest and best in duels, weakest on the attacking-block need, premium price.</li><li><b>Bangoura, ready-now, low-value option.</b> Attacking carrier for the mid-high block at minimal cost; best as an option, not as the pivot, until his sample grows.</li></ul></div>
+</div>
+</section>
+
+</div><!-- /h2h -->
+
+<!-- ============ DECISION (pivot) ============ -->
+<section id="s6">
+<div class="secband o"><span class="sn">DECISION</span><span class="sd">From three columns to one candidate</span></div>
+<div class="pivot">
+<img src="data:image/jpeg;base64,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" alt="Adri Mehmeti">
+<div>
+<div class="eyebrow" style="color:var(--org)">Best fit for the team</div>
+<h2 style="margin:4px 0 6px">Sign Adri Mehmeti</h2>
+<p class="lead" style="margin:0 0 12px">The only candidate who leads on both halves of Frankfurt's need: he wins the ball high and progresses it, and the footage agrees. From here the report is about one player.</p>
+<div class="flow" style="margin:0"><span class="n">Mehmeti &middot; fit 18 / 21</span><span>Lira &middot; 12 / 21 &middot; fallback</span><span>Bangoura &middot; 8 / 21 &middot; ready-now option</span></div>
+</div>
+</div>
+
+<div class="solo">
+<h2>The case for Mehmeti</h2>
+<p class="lead">Open talks with New York Red Bulls and his agent now, agree terms for registration after 6 Apr 2027, and target the summer 2027 window.</p>
+
+<h3>Why he fits: Frankfurt's needs, one by one</h3>
+<div class="tcw">
+<div class="card" style="margin-bottom:14px"><h4>1 &middot; Wins the ball high <span class="chip ok">STRONG</span></h4><p style="margin:0">Opposition-half recoveries 1.16 (1st of the five) and interceptions 1.51 (1st). On video, 8 press entries: RBNY vs SD 4:53, 69:13, 95:23, 96:27; US vs Canada 92:44; US vs Chile 4:08, 10:08 to 11:08, 14:31. The late presses (95:23, 96:27) suggest work rate, which a clip cannot measure.</p></div>
+<div class="card" style="margin-bottom:14px"><h4>2 &middot; Progresses under pressure <span class="chip ok">STRONG</span></h4><p style="margin:0">xT 0.25 (1st, double Lira), 54 passes per 90, +1.6pp pass completion over expected, turnovers 0.23.</p></div>
+<div class="card" style="margin-bottom:14px"><h4>3 &middot; Starts play from deep <span class="chip ok">STRONG</span></h4><p style="margin:0">Tagged DMC in all 26 sample matches. Five deep-support clips: RBNY vs San Diego 5:04; NYC vs RBNY 68:11; US vs Chile 3:09, 7:44, 9:45. On video he drops between the centre-backs, which the DMC-only tag understates.</p></div>
+<div class="card" style="margin-bottom:14px"><h4>4 &middot; Protects the central channel <span class="chip hi">GOOD</span></h4><p style="margin:0">Tackle success 72%, interceptions 1.51, aerial win 57%, fouls 1.20 per 90. Mid-block clips (14:53, 16:51, 26:03) show him recovering goal-side. Two aerial clips, both won (US vs Canada 6:43, 6:56).</p></div>
+<div class="card" style="margin-bottom:14px"><h4>Bonus &middot; Joins the attacking block <span class="chip ok">STRONG</span></h4><p style="margin:0">xA 0.15 (1st), box touches 0.85 (1st), shots 0.54. Four named high-block clips (57:42, 4:05, 11:42, 24:49) show second-line support and timed arrival.</p></div>
+</div>
+
+<h3>His profile in one view</h3>
+<div class="tw"><table><tbody>
+<tr><td><b>Age / passports</b></td><td>17 (born 6 Apr 2009); United States and Albania (non-EU: needs a German work permit)</td></tr>
+<tr><td><b>Club and contract</b></td><td>New York Red Bulls (MLS); contract to Dec 2028 (26 months), shrinking to about 18 months by Jul 2027</td></tr>
+<tr><td><b>Market value / model fee</b></td><td>&euro;8.0m (first valuation, Sep 2026). Modelled fee &euro;7.8&ndash;15.6m (median &euro;10.2m); buy-out proxy &euro;10.2m at Jul 2027. Estimates, not quotes</td></tr>
+<tr><td><b>Availability</b></td><td>One 29-day calf injury (Feb&ndash;Mar 2025), 4 games missed. 2,324 minutes in 26 matches: high sample confidence</td></tr>
+<tr><td><b>Pedigree</b></td><td>3 USA caps; MLS NEXT Pro Cup 2024/25 (Red Bulls II)</td></tr>
+<tr><td><b>Footage</b></td><td>12 telestrated clips: 3 low block, 3 mid block, 4 high block, plus an aerial and a free kick; named in the caption in 10 of 12</td></tr>
+</tbody></table></div>
+
+<h3>What video adds to the data</h3>
+<div class="card"><ul style="margin:0;padding-left:18px"><li><b>Agrees:</b> tags and clip spread point the same way: balanced, 3 / 3 / 4 across low, mid and high block.</li><li><b>Adds:</b> the DMC-only tag understates him: he drops between the centre-backs and joins the attack.</li><li><b>Reads as coachable:</b> his fouls look like young-player aggression, not recklessness.</li><li><b>Untested by video:</b> no clip tests duelling or discipline for any candidate, so those risks are open.</li></ul></div>
+
+<h3>Risks, and what to confirm</h3>
+<div class="tw"><table><thead><tr><th>Risk</th><th>Detail</th><th>Status</th></tr></thead><tbody>
+<tr><td><b>Registration timing</b></td><td>Cannot be registered before turning 18 on 6 Apr 2027 (FIFA RSTP Article 19; the EU/EEA exception does not cover the USA or Albania)</td><td><span class="chip un">NOT LEGALLY VERIFIED</span></td></tr>
+<tr><td><b>Work permit and squad rules</b></td><td>Non-EU: needs a German work permit and a squad-rule check. The Bundesliga foreigner rule is unresolved between sources</td><td><span class="chip un">UNRESOLVED UNTIL DFL CONFIRMS</span></td></tr>
+<tr><td><b>Red Bull network priority</b></td><td>A possible pre-emption of any deal</td><td><span class="chip un">UNVERIFIED</span></td></tr>
+<tr><td><b>Adaptation</b></td><td>Age 17 and unproven outside MLS</td><td><span class="chip cf">MANAGEABLE</span></td></tr>
+<tr><td><b>Discipline</b></td><td>6 yellow cards and 1 red; fouls 1.20 and cards 0.27 per 90</td><td><span class="chip cf">MANAGEABLE</span></td></tr>
+<tr><td><b>Wages, agent fees, release clause, budget</b></td><td>Not available to the analyst</td><td><span class="chip na">NOT AVAILABLE</span></td></tr>
+</tbody></table></div>
+<div class="note">Confirm the minors and foreigner rules with the club's legal team. This is analysis, not legal advice.</div>
+
+<h3>Deal path</h3>
+<div class="flow"><span class="n">Open talks with NYRB and his agent now</span><i>&rarr;</i><span>Agree terms for registration after 6 Apr 2027</span><i>&rarr;</i><span>Summer 2027 window</span><i>&rarr;</i><span>Contract about 18 months left (Jul 2027)</span></div>
+
+<div class="grid g2" style="margin-top:18px">
+<div class="card org"><h4>Main trade-off</h4>We give up Lira's certainty and Bangoura's price and immediacy for balanced, long-horizon upside at a fee (median &euro;10.2m) below Frankfurt's largest recent midfield purchase. Frankfurt's sell-high model rewards the third.</div>
+<div class="card"><h4>What would change my decision</h4>A full-match review showing Mehmeti's ball-winning or discipline failing against stronger opposition.</div>
+</div>
+
+<h3>If the deal fails: the fallback ladder</h3>
+<div class="tw"><table><thead><tr><th>Priority</th><th>Player and role</th><th>Model fee</th><th>When</th><th>Use him when</th></tr></thead><tbody>
+<tr class="hl"><td>1</td><td>Mehmeti: first choice, balanced 6/8</td><td>&euro;7.8&ndash;15.6m</td><td>Summer 2027</td><td>This is the signing.</td></tr>
+<tr><td>2</td><td>Lira: fallback, defence-oriented</td><td>&euro;13.7&ndash;27.3m</td><td>January 2027 possible (work permit)</td><td>NYRB asks well above &euro;15.6m, the Red Bull network pre-empts the deal, or no Art. 19 route exists and Frankfurt needs a midfielder before summer 2027.</td></tr>
+<tr><td>3</td><td>Bangoura: ready-now, low-value, attacking option</td><td>&euro;0.9&ndash;1.8m</td><td>January 2027 possible (work permit)</td><td>Frankfurt wants immediate low-cost midfield cover with attacking carrying, or both Mehmeti and Lira fail on price or timing. Verify #17 on full matches first.</td></tr>
+</tbody></table></div>
+</div>
+</section>
+
+
+<!-- ============ SOURCES ============ -->
+<section id="src">
+<div class="secband"><span class="sn">SOURCES</span><span class="sd">Method and data not in the assignment dataset</span></div>
+<h2>Where each number comes from</h2>
+<p class="lead">The assignment dataset (Driblab attacking and defensive CSVs, the Frankfurt Wyscout team report, the basic profiles and the video clips) is used as provided. Everything else was added or derived. Web sources were accessed on 18 Oct 2026. Market values and model fees are estimates, not confirmed transfer fees.</p>
+<div class="tw"><table class="srcs"><thead><tr><th>Data point</th><th>What was done</th><th>Basis</th><th>Source / link</th></tr></thead><tbody>
+<tr><td>Player profiles: DOB, contract end, market value, passports, caps, honours, injury list</td><td>Read from each player's Transfermarkt page and normalised into one comparison table (Mehmeti, Lira, Bangoura plus Sands and Nwobodo).</td><td><span class="chip ok">SOURCED</span></td><td><a href="https://www.transfermarkt.com/adri-mehmeti/profil/spieler/1193844" target="_blank" rel="noopener">Mehmeti</a> &middot; <a href="https://www.transfermarkt.com/erik-lira/profil/spieler/602324" target="_blank" rel="noopener">Lira</a> &middot; <a href="https://www.transfermarkt.com/sekou-bangoura/profil/spieler/666929" target="_blank" rel="noopener">Bangoura</a> &middot; <a href="https://www.transfermarkt.com/james-sands/profil/spieler/393321" target="_blank" rel="noopener">Sands</a> &middot; <a href="https://www.transfermarkt.com/obinna-nwobodo/profil/spieler/364299" target="_blank" rel="noopener">Nwobodo</a></td></tr>
+<tr><td>Market value history (+65% Lira, doubled Bangoura)</td><td>Valuation points read from Transfermarkt's value-development data.</td><td><span class="chip ok">SOURCED</span></td><td>Transfermarkt market-value development (ids in the profile links)</td></tr>
+<tr><td>International caps and squads</td><td>Caps counted from the national-team tab; World Cup inclusion flagged unverified where sources disagreed.</td><td><span class="chip ok">SOURCED</span></td><td><a href="https://www.transfermarkt.com/erik-lira/nationalmannschaft/spieler/602324" target="_blank" rel="noopener">Lira</a> &middot; <a href="https://www.transfermarkt.com/adri-mehmeti/nationalmannschaft/spieler/1193844/verein/3505/plus/1" target="_blank" rel="noopener">Mehmeti</a></td></tr>
+<tr><td>Frankfurt midfield: ages, passports, values, departures</td><td>Current squad and player status read from Transfermarkt; minutes from the supplied Wyscout report; non-EU-only flag derived from passports.</td><td><span class="chip ok">SOURCED</span></td><td><a href="https://www.transfermarkt.com/eintracht-frankfurt/kader/verein/24/plus/1" target="_blank" rel="noopener">Frankfurt squad (TM)</a></td></tr>
+<tr><td>Frankfurt net transfer spend (&euro;175m surplus) and largest midfield buy (Uzun)</td><td>Arrival and departure fees summed per window, 2022/23 to 2026/27 (2026/27 partial).</td><td><span class="chip ok">SOURCED</span></td><td><a href="https://www.transfermarkt.com/eintracht-frankfurt/transfers/verein/24" target="_blank" rel="noopener">Frankfurt transfers (TM)</a></td></tr>
+<tr><td>Comparable transfers and fee/value ratio</td><td>11 hand-picked moves of similar profiles; ratio = fee / TM value at the move. Small sample, no league-strength adjustment.</td><td><span class="chip pv">OWN CALCULATION</span></td><td>Frankfurt_Midfield_Support.xlsx, tab Comparable_Transfers</td></tr>
+<tr><td>Expected fee range and buy-out proxy</td><td>TM value x comparable ratio; proxy by contract months left. Not a release clause (none found publicly).</td><td><span class="chip pv">OWN CALCULATION</span></td><td>Frankfurt_Midfield_Support.xlsx, tabs Candidate_Fee_Range and Release_Clause_BuyOut</td></tr>
+<tr><td>Per-90 values, ranks, xT and xA, chart, Bangoura sample counts</td><td>Driblab totals / (minutes / 90); rank among five. Counts such as about 12 dribbles, 6 shots, 7 crosses = per-90 rate x 8.41 ninety-minute periods.</td><td><span class="chip ok">ASSIGNMENT DATA</span></td><td>Recruitment_Targets_Player_Profiles_v2.xlsx, tabs Profile_Compare and Metric_Definitions</td></tr>
+<tr><td>Conceded goals, scorers, own-third duel losses, PPDA, possession, tempo, shapes</td><td>Read from the Frankfurt Wyscout team report supplied with the assignment (PPDA row, page 6).</td><td><span class="chip ok">ASSIGNMENT DATA</span></td><td>Assignment file Frankfurt.pdf</td></tr>
+<tr><td>Club-fit ratings and fit score (Club fit)</td><td>Ordinal ratings from the cell evidence, 7 criteria, equal weights. Not a statistical model.</td><td><span class="chip pv">OWN JUDGMENT</span></td><td>No external source</td></tr>
+<tr><td>Bundesliga foreigner rules; Albanian passport</td><td>Albania is not EU/EEA. German Wikipedia (citing Die Welt, 2006) says the non-European cap ended in 2006/07; English Wikipedia still shows a 5-player limit. Unresolved until the DFL confirms.</td><td><span class="chip un">UNRESOLVED</span></td><td><a href="https://de.wikipedia.org/wiki/Fu%C3%9Fball-Bundesliga" target="_blank" rel="noopener">de.wikipedia</a> &middot; <a href="https://en.wikipedia.org/wiki/Bundesliga" target="_blank" rel="noopener">en.wikipedia</a></td></tr>
+<tr><td>Minors rule (Mehmeti under 18 until 6 Apr 2027)</td><td>FIFA Regulations on the Status and Transfer of Players, Article 19; the EU/EEA exception does not cover the USA or Albania. Confirm with the club's legal team.</td><td><span class="chip un">NOT LEGALLY VERIFIED</span></td><td><a href="https://inside.fifa.com" target="_blank" rel="noopener">FIFA legal documents</a></td></tr>
+<tr><td>Unverified background (Wikipedia only)</td><td>Mehmeti's 4-year deal (Dec 2024) and Salzburg training; Lira as Cruz Azul captain and the collapsed Monaco move. Background only; not used in the decision.</td><td><span class="chip un">UNVERIFIED</span></td><td><a href="https://en.wikipedia.org/wiki/Adri_Mehmeti" target="_blank" rel="noopener">Mehmeti</a> &middot; <a href="https://en.wikipedia.org/wiki/Erik_Lira" target="_blank" rel="noopener">Lira</a></td></tr>
+<tr><td>Video evidence</td><td>Analyst's own timestamp log (Video, themes) and telestrated clip sets (clip-start clock read from the broadcast scoreboard; captions as written in the clips). Bangoura (#17) and one Lira clip are flagged unverified in the source captions.</td><td><span class="chip pv">ANALYST REVIEW</span></td><td>Analyst's clip review (matches named in Step 3)</td></tr>
+</tbody></table></div>
+<div class="note">Non-nominees (Sands, Nwobodo) were excluded on injury history, sample size or role. Not available to the analyst: wages, agent fees, release clauses, Frankfurt's transfer budget.</div>
+
+<h3>Definitions and data limits</h3>
+<div class="grid g2">
+<div class="card"><ul style="margin:0;padding-left:18px"><li><b>Per 90</b> = Driblab total / (minutes / 90).</li><li><b>Position between worst and best of five</b> = (value &minus; worst) / (best &minus; worst) &times; 100, inverted for fouls and turnovers.</li><li><b>xT</b> (expected threat) and <b>xA</b> (expected assists) are Driblab metrics; <b>pass completion over expected</b> = pass % minus expected pass % (percentage points).</li><li><b>Fit rating</b>: Strong 3, Good 2, Partial 1, Weak 0, equal weights across 7 criteria.</li></ul></div>
+<div class="card org"><ul style="margin:0;padding-left:18px"><li>Driblab has no league adjustment; its match dates, competition and season are not in the CSVs, and sample lengths differ (757 to 2,876 minutes).</li><li>Players are often used in several positions; multiple role tags are normal.</li><li>Driblab's turnover counts are very small; read them as dangerous losses only.</li><li>Market value is a crowd-sourced estimate, not a fee. Ranks are reliable, decimals are not.</li></ul></div>
+</div>
+</section>
+</main>
+<footer>FORZA IQ / SCOUTING REPORT &nbsp;&bull;&nbsp; RECRUITMENT RECOMMENDATION: EINTRACHT FRANKFURT &nbsp;&bull;&nbsp; PREPARED BY ROLANDO BOULOY &nbsp;&bull;&nbsp; COMPONENT 1 OF 3 OF THE 360-DEGREE REPORT</footer>
+
+<script>
+(function(){
+'use strict';
+var COL={cyan:'#007AFF',org:'#FF9500',green:'#34C759',yellow:'#F5B800',violet:'#AF52DE',pink:'#FF2D55',gray:'#8E8E93'};
+var $=function(s,r){return (r||document).querySelector(s)};
+var fx=function(v,d){return v==null?'n/a':(Math.round(v*Math.pow(10,d))/Math.pow(10,d)).toFixed(d)};
+var f2=function(v){return fx(v,2)};
+var p90=function(x,m){return x*90/m};
+var clean=function(a){return a.filter(function(v){return v!=null})};
+var med=function(a){a=clean(a).sort(function(x,y){return x-y});var n=a.length;if(!n)return null;return n%2?a[(n-1)/2]:(a[n/2-1]+a[n/2])/2};
+var mean=function(a){a=clean(a);return a.length?a.reduce(function(s,v){return s+v},0)/a.length:null};
+var sign=function(v,d){return (v>=0?'+':'')+fx(v,d)};
+var esc=function(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')};
+var RETR='2026-11-05';
+/* ---------------- helpers ---------------- */
+function T(el,heads,rows,cls){
+  var h='<thead><tr>'+heads.map(function(x){var n=x.charAt(0)==='#';return '<th class="'+(n?'n':'')+'">'+esc(n?x.slice(1):x)+'</th>'}).join('')+'</tr></thead><tbody>';
+  h+=rows.map(function(r,i){return '<tr'+(cls&&cls[i]?' class="'+cls[i]+'"':'')+'>'+r.map(function(c,j){var n=heads[j].charAt(0)==='#';return '<td class="'+(n?'n':'')+'">'+c+'</td>'}).join('')+'</tr>'}).join('')+'</tbody>';
+  el.innerHTML=h;
+  if(el.classList.contains('sort'))sortable(el);
+}
+function sortable(t){
+  var ths=t.querySelectorAll('th');
+  ths.forEach(function(th,ci){th.addEventListener('click',function(){
+    var dir=th.dataset.d==='1'?-1:1;th.dataset.d=dir===1?'1':'0';
+    var rows=Array.prototype.slice.call(t.tBodies[0].rows);
+    var val=function(r){var s=r.cells[ci].textContent.replace(/[,%+]/g,'').trim();var n=parseFloat(s);return isNaN(n)?s.toLowerCase():n};
+    rows.sort(function(a,b){var x=val(a),y=val(b);return (x>y?1:x<y?-1:0)*dir});
+    rows.forEach(function(r){t.tBodies[0].appendChild(r)});
+  })});
+}
+var chip=function(k,t){return '<span class="chip '+k+'">'+t+'</span>'};
+var ST={ok:chip('ok','VERIFIED'),cf:chip('cf','CONFLICTED'),un:chip('un','UNVERIFIED'),na:chip('na','NOT AVAILABLE'),pv:chip('pv','PROVISIONAL'),inf:chip('un','INFERRED')};
+
+/* Poisson interval (Wilson-Hilferty approximation of the Garwood interval) */
+function chi2q(z,v){var a=2/(9*v);return v*Math.pow(1-a+z*Math.sqrt(a),3)}
+function poisCI(k){var lo=k===0?0:0.5*chi2q(-1.959964,2*k);var hi=0.5*chi2q(1.959964,2*k+2);return [lo,hi]}
+
+/* horizontal bars */
+function hbars(el,rows,o){
+  o=o||{};var mx=o.max||Math.max.apply(null,rows.map(function(r){return Math.max(r.value==null?0:r.value,r.hi||0)}));
+  el.innerHTML=rows.map(function(r){
+    var w=r.value==null?0:Math.min(r.value/mx*100,100);
+    var wh=(r.lo!=null)?'<span class="w" style="left:'+(r.lo/mx*100)+'%;width:'+((r.hi-r.lo)/mx*100)+'%"></span>':'';
+    return '<div class="bar"><div>'+r.label+'</div><div class="t"><div class="f" style="width:'+w+'%;background:'+(r.color||COL.cyan)+'"></div>'+wh+'</div><div class="v">'+(r.text||'')+'</div></div>';
+  }).join('');
+}
+
+/* ---------------- radar engine ---------------- */
+var TIPS={};
+var tip=$('#tip');
+document.addEventListener('mousemove',function(e){
+  var t=e.target;
+  if(t&&t.getAttribute&&t.getAttribute('data-i')!=null){
+    var q=t.getAttribute('data-i').split(':');tip.innerHTML=TIPS[q[0]][+q[1]];tip.style.display='block';
+    tip.style.left=Math.min(e.clientX+14,window.innerWidth-280)+'px';tip.style.top=(e.clientY+14)+'px';
+  }else tip.style.display='none';
+});
+function radar(boxId,cfg){
+  var box=$('#'+boxId),side=$('#'+boxId+'side');
+  var W=600,H=610,cx=300,cy=315,Rr=195,n=cfg.axes.length;
+  var on={};cfg.series.forEach(function(s){on[s.id]=s.on!==false});
+  cfg.axes.forEach(function(a){
+    if(cfg.mode==='pct')a.max=100;
+    else if(cfg.ref&&cfg.ref[a.k]!=null)a.max=cfg.ref[a.k];
+    else a.max=Math.max.apply(null,clean(cfg.series.map(function(s){return s.vals[a.k]})).concat([1e-9]));
+  });
+  var ang=function(i){return -Math.PI/2+i*2*Math.PI/n};
+  var pt=function(i,r){return [cx+r*Math.cos(ang(i)),cy+r*Math.sin(ang(i))]};
+  function fmtv(a,v){return v==null?'n/a (blank in source)':fx(v,a.d==null?2:a.d)+(a.u||'')}
+  function draw(){
+    TIPS[boxId]=[];
+    var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(cfg.title)+'"><rect width="'+W+'" height="'+H+'" fill="#ffffff"/>';
+    s+='<text x="22" y="32" fill="#1d1d1f" font-size="20" font-weight="700" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+esc(cfg.title)+'</text>';
+    s+='<text x="22" y="52" fill="#6e6e73" font-size="12" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+esc(cfg.subtitle||'')+'</text>';
+    for(var k=1;k<=5;k++){s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(Rr*k/5)+'" fill="none" stroke="'+(k===5?'#c7c7cc':'#e5e5ea')+'" stroke-width="'+(k===5?2:1)+'"/>';
+      s+='<text x="'+(cx+Rr*k/5+3)+'" y="'+(cy-3)+'" fill="#8e8e93" font-size="9" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+(k*20)+'</text>'}
+    if(cfg.refRing!=null)s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+(Rr*cfg.refRing/100)+'" fill="none" stroke="#FF9500" stroke-dasharray="6 5" stroke-width="1.6"/>';
+    cfg.axes.forEach(function(a,i){var p=pt(i,Rr);s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="#e5e5ea"/>'});
+    cfg.series.forEach(function(se){
+      if(!on[se.id])return;
+      var pts=cfg.axes.map(function(a,i){var v=se.vals[a.k];var f=v==null?0:Math.max(0,Math.min(v/a.max,1));return pt(i,Rr*f)});
+      s+='<polygon points="'+pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ')+'" fill="'+se.color+'" fill-opacity="0.18" stroke="'+se.color+'" stroke-width="2.4" stroke-linejoin="round"/>';
+      cfg.axes.forEach(function(a,i){
+        var v=se.vals[a.k],p=pts[i];
+        var idx=TIPS[boxId].length;
+        var idxv=v==null?'n/a':(cfg.mode==='pct'?fx(v,0)+' (rank position)':fx(v/a.max*100,0)+' index');
+        var raw=cfg.raw&&cfg.raw[se.id]&&cfg.raw[se.id][a.k]?cfg.raw[se.id][a.k]:fmtv(a,v);
+        var extra=cfg.tipx?cfg.tipx(se,a,v):'';
+        TIPS[boxId].push('<b style="color:'+se.color+'">'+esc(se.name)+'</b><br>'+esc(a.label.replace(/\n/g,' '))+': <b>'+esc(raw)+'</b><br>'+idxv+extra);
+        if(v==null)s+='<circle data-i="'+boxId+':'+idx+'" cx="'+p[0]+'" cy="'+p[1]+'" r="5" fill="#ffffff" stroke="'+se.color+'" stroke-dasharray="2 2"/>';
+        else s+='<circle data-i="'+boxId+':'+idx+'" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="4.5" fill="'+se.color+'" stroke="#ffffff" stroke-width="1.5"/>';
+      });
+    });
+    cfg.axes.forEach(function(a,i){
+      var p=pt(i,Rr+16),c=Math.cos(ang(i)),an=c>0.3?'start':c<-0.3?'end':'middle';
+      var lines=a.label.split('\n');
+      var y0=p[1]+(Math.sin(ang(i))>0.5?10:Math.sin(ang(i))<-0.5?-4*lines.length+2:4);
+      s+='<text x="'+p[0].toFixed(1)+'" y="'+y0.toFixed(1)+'" text-anchor="'+an+'" fill="#1d1d1f" font-size="12.5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+lines.map(function(l,j){return '<tspan x="'+p[0].toFixed(1)+'" dy="'+(j?14:0)+'">'+esc(l)+'</tspan>'}).join('')+'</text>';
+    });
+    s+='<text x="22" y="'+(H-12)+'" fill="#8e8e93" font-size="10" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">'+esc(cfg.foot||'')+'</text></svg>';
+    box.innerHTML=s;
+  }
+  function drawSide(){
+    var h='<div class="legend">'+cfg.series.map(function(se){return '<button data-id="'+se.id+'" class="'+(on[se.id]?'':'off')+'"><i style="background:'+se.color+'"></i>'+esc(se.name)+'</button>'}).join('')+'</div>';
+    if(cfg.note)h+='<div class="note">'+cfg.note+'</div>';
+    h+='<div class="tw"><table><thead><tr><th>Axis</th>'+cfg.series.map(function(se){return '<th class="n" style="color:'+se.color+'">'+esc(se.short||se.name)+'</th>'}).join('')+'</tr></thead><tbody>'+
+      cfg.axes.map(function(a){return '<tr><td>'+esc(a.label.replace(/\n/g,' '))+'</td>'+cfg.series.map(function(se){var v=se.vals[a.k];var raw=cfg.raw&&cfg.raw[se.id]&&cfg.raw[se.id][a.k]?cfg.raw[se.id][a.k]:fmtv(a,v);return '<td class="n">'+(v==null?'<span style="color:var(--dim)">n/a</span>':esc(raw))+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>';
+    if(cfg.after)h+=cfg.after;
+    side.innerHTML=h;
+    side.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){on[b.dataset.id]=!on[b.dataset.id];b.classList.toggle('off');draw()})});
+  }
+  draw();drawSide();
+}
+
+/* ================= page data (Driblab via Recruitment_Targets_Player_Profiles_v2.xlsx; PDF Steps 1-5) ================= */
+var NOM=[{id:'M',name:'Mehmeti',full:'Adri Mehmeti',col:COL.cyan,i:0,shape:'c'},{id:'L',name:'Lira',full:'Erik Lira',col:COL.org,i:1,shape:'d'},{id:'B',name:'Bangoura',full:'Sekou Bangoura',col:COL.green,i:4,shape:'s'}];
+/* values order: Mehmeti, Lira, Sands, Nwobodo, Bangoura */
+var MET=[
+ {k:'score',l:'Driblab match score (min-weighted)',v:[67.88,62.508,67.879,59.263,57.882],dir:1,d:1,u:''},
+ {k:'xt',l:'xT created p90',v:[0.252,0.125,0.053,0.129,0.119],dir:1,d:2,u:''},
+ {k:'xa',l:'xA p90',v:[0.147,0.016,0.006,0.081,0],dir:1,d:2,u:''},
+ {k:'box',l:'Touches in opp. box p90',v:[0.852,0.188,0.412,0.808,0.357],dir:1,d:2,u:''},
+ {k:'shots',l:'Shots p90',v:[0.542,0.25,0.353,0.754,0.713],dir:1,d:2,u:''},
+ {k:'drib',l:'Dribbles attempted p90',v:[0.581,0.469,0.236,0.592,1.427],dir:1,d:2,u:''},
+ {k:'cross',l:'Crosses p90',v:[0.349,0.376,0,0.646,0.832],dir:1,d:2,u:''},
+ {k:'pcoe',l:'Pass completion over expected (pp)',v:[1.625,3.784,6.394,-0.792,-0.351],dir:1,d:1,u:' pp',signed:true},
+ {k:'int',l:'Interceptions p90',v:[1.51,0.657,1.237,0.7,0.713],dir:1,d:2,u:''},
+ {k:'oppr',l:'Opp.-half recoveries p90',v:[1.162,0.97,0.295,0.7,0.832],dir:1,d:2,u:''},
+ {k:'tkw',l:'Tackles won p90',v:[2.866,3.442,1.767,3.178,2.734],dir:1,d:2,u:''},
+ {k:'tks',l:'Tackle success %',v:[71.8,78.6,81.1,84.3,85.2],dir:1,d:0,u:'%'},
+ {k:'aer',l:'Aerial win %',v:[56.9,44.2,72.5,54.5,50.0],dir:1,d:0,u:'%'},
+ {k:'fouls',l:'Fouls committed p90 (fewer = better)',v:[1.201,0.72,0.648,2.154,2.14],dir:-1,d:2,u:''},
+ {k:'turn',l:'Turnovers p90 (fewer = better)',v:[0.232,0.282,0,0.054,0.832],dir:-1,d:2,u:''}
+];
+var MK={};MET.forEach(function(m){MK[m.k]=m});
+function fmtv(m,x){var s=fx(x,m.d);if(m.signed&&x>=0)s='+'+s;return s+(m.u||'')}
+
+/* ================= performance radar: three candidates only ================= */
+(function(){
+  var AX=[['xt','Threat created\n(xT)'],['xa','Expected\nassists (xA)'],['box','Box\ntouches'],['shots','Shots'],['drib','Dribbles\nattempted'],['int','Interceptions'],['oppr','Opp.-half\nrecoveries'],['tkw','Tackles\nwon'],['pcoe','Pass completion\nvs expected'],['aer','Aerial\nwin rate'],['fouls','Discipline\n(fewer fouls)'],['turn','Ball security\n(fewer turnovers)']];
+  function idx3(m,p){var v3=[m.v[0],m.v[1],m.v[4]],mn=Math.min.apply(null,v3),mx=Math.max.apply(null,v3),x=m.v[p.i];var q=mx===mn?50:(x-mn)/(mx-mn)*100;return m.dir<0?100-q:q}
+  var series=NOM.map(function(p){var vals={},raw={};AX.forEach(function(a){var m=MK[a[0]];vals[a[0]]=idx3(m,p);raw[a[0]]=fmtv(m,m.v[p.i])+'  (index '+fx(vals[a[0]],0)+')'});return {id:p.id,name:p.full,short:p.name,color:p.col,vals:vals,_raw:raw}});
+  var raw={};series.forEach(function(s){raw[s.id]=s._raw});
+  radar('radScout',{title:'Performance: the three candidates',subtitle:'Position among the three: 0 = weakest of the three, 100 = strongest | per 90',mode:'pct',
+    axes:AX.map(function(a){return {k:a[0],label:a[1],d:0}}),series:series,raw:raw,
+    note:'Each axis is scaled <b>across the three candidates only</b> (weakest = 0, strongest = 100; fouls and turnovers inverted). Scaling magnifies small gaps, so check the raw values in the table. Bangoura rests on 757 minutes: read the rank, not the decimals.',
+    foot:'Source: Driblab via Recruitment_Targets_Player_Profiles_v2.xlsx. Per 90 = total / (minutes / 90). No league adjustment.'});
+})();
+
+/* ================= club-fit data (PDF Step 5) ================= */
+var RT={S:{n:3,t:'STRONG',c:'r3'},G:{n:2,t:'GOOD',c:'r2'},P:{n:1,t:'PARTIAL',c:'r1'},W:{n:0,t:'WEAK',c:'r0'}};
+var CRIT=[
+ {n:'1. Role in the shapes',s:'pivot in all five shapes; 4-2-3-1 = 33%',short:'Role in\nthe shapes',c:[['S','DMC in 26 of 26; low, mid and high clips 3/3/4. Fits a 6 or an 8.'],['P','DC in 20 of 33, DMC 9, MC 9. A screen in front of the back line (6) or in a back three; not an 8.'],['P','MC in 17 of 18; 8 of 10 clips mid or high. An 8 or a 10; no deep-pivot evidence.']]},
+ {n:'2. Pressing and regains',s:'PPDA 8.8-11.2',short:'Pressing and\nregains',c:[['S','Opp.-half recoveries 1.16 (1st), interceptions 1.51 (1st); 8 press entries on video.'],['G','Recoveries 0.97 (2nd), tackles won 3.44 (1st), interceptions 0.66.'],['P','Recoveries 0.83 (3rd), interceptions 0.71; press clips not verified as #17.']]},
+ {n:'3. Progression and security',s:'54-61% possession; 14-17 passes per minute',short:'Progression\nand security',c:[['S','xT 0.25 (1st, double Lira), 54 passes p90, +1.6pp over expected, turnovers 0.23.'],['G','+3.8pp over expected (1st), 44 passes p90, xT 0.13: a safe circulator.'],['W','xT 0.12, -0.4pp, turnovers 0.83 p90 (worst of five).']]},
+ {n:'4. Attacking-block contribution',s:'',short:'Attacking-block\ncontribution',c:[['S','xA 0.15 (1st), box touches 0.85 (1st), shots 0.54; 4 named high-block clips (second-line support, timed arrival).'],['W','xA 0.02, box touches 0.19, shots 0.25: least attacking of the three.'],['G','Dribbles 1.43 and crosses 0.83 (both 1st), shots 0.71; but xA 0.00 and about 12 dribbles, 6 shots in 757 min. Upside, unproven.']]},
+ {n:'5. Protection in transition',s:'12 conceded; central channel',short:'Protection in\ntransition',c:[['G','Tackle success 72%, interceptions 1.51, aerial 57%, fouls 1.20; mid-block clips on recovering goal-side.'],['S','Tackles won 3.44 (1st), fouls 0.72, centre-back experience; aerial 44% is the weak spot.'],['P','Tackle success 85% (about 27 tackles) but fouls 2.14, cards 0.48 p90, turnovers 0.83.']]},
+ {n:'6. Availability and sample confidence',s:'',short:'Availability\nand sample',c:[['G','2,324 min (high); one 29-day calf injury; age 17.'],['S','2,876 min (high); no injuries recorded.'],['W','757 min (low), 42 min per match, Sub tag in 18 of 18; injury record unknown.']]},
+ {n:'7. Squad, money and timing',s:'surplus EUR 175m; Uzun EUR 13.0m',short:'Squad, money\nand timing',c:[['G','Fee 7.8-15.6m (median 10.2m, below Uzun); value should rise; registrable only after 6 Apr 2027.'],['P','Fee 13.7-27.3m (median 17.8m, above Uzun); near peak; work permit; could join in January.'],['S','Fee 0.9-1.8m (median 1.1m); work permit; could join in January; low financial risk.']]}
+];
+var FITSCORE=NOM.map(function(p,j){return CRIT.reduce(function(a,c){return a+RT[c.c[j][0]].n},0)});
+
+/* fit radar: ordinal ratings 0-3 for the seven criteria */
+(function(){
+  var series=NOM.map(function(p,j){var vals={},raw={};CRIT.forEach(function(c,i){var r=RT[c.c[j][0]];vals['c'+i]=r.n/3*100;raw['c'+i]=r.t+' ('+r.n+' of 3)'});return {id:p.id,name:p.full+' ('+FITSCORE[j]+' of 21)',short:p.name,color:p.col,vals:vals,_raw:raw}});
+  var raw={};series.forEach(function(s){raw[s.id]=s._raw});
+  radar('radFit',{title:'Club fit: the three options',subtitle:'Analyst ratings against Frankfurt\'s seven needs | Weak 0, Partial 1, Good 2, Strong 3',mode:'pct',
+    axes:CRIT.map(function(c,i){return {k:'c'+i,label:c.short,d:0}}),series:series,raw:raw,
+    note:'The bigger and more even the shape, the better the fit. Mehmeti covers six of seven needs at Good or Strong; Lira is lopsided toward defending; Bangoura peaks only on price. Ratings are ordinal judgments, not a statistical model.',
+    foot:'Source: analyst ratings, the Club fit section. Equal weights across 7 criteria.'});
+})();
+
+/* ================= tables ================= */
+(function(){
+  /* fit matrix */
+  var h='<thead><tr><th>Frankfurt need (source)</th>'+NOM.map(function(p){return '<th><span class="th-s" style="--c:'+p.col+'"><i class="sh '+p.shape+'"></i>'+(p.id==='M'?'A':p.id==='L'?'B':'C')+' &middot; '+p.name+'</span></th>'}).join('')+'</tr></thead><tbody>';
+  CRIT.forEach(function(c){h+='<tr><td><b>'+esc(c.n)+'</b>'+(c.s?'<br><span class="sm">'+esc(c.s)+'</span>':'')+'</td>'+c.c.map(function(x){var r=RT[x[0]];return '<td><span class="chip '+r.c+'">'+r.t+'</span> '+esc(x[1])+'</td>'}).join('')+'</tr>'});
+  h+='<tr class="hl"><td><b>Fit score (of 21)</b></td>'+NOM.map(function(p,j){var cnt={S:0,G:0,P:0,W:0};CRIT.forEach(function(c){cnt[c.c[j][0]]++});return '<td><b style="font-size:22px">'+FITSCORE[j]+'</b> <span class="sm">Strong '+cnt.S+', Good '+cnt.G+', Partial '+cnt.P+', Weak '+cnt.W+'</span></td>'}).join('')+'</tr>';
+  h+='<tr><td><b>Fit verdict</b></td><td><b>First choice.</b> Balanced 6/8: wins it high, progresses, joins the attacking block. Best fit with the press-and-possession model.</td><td><b>Fallback.</b> Defensive stabiliser: safest and best in duels, weakest on the attacking-block need, premium price.</td><td><b>Ready-now, low-value option.</b> Attacking carrier for the mid-high block at minimal cost; best as an option, not as the pivot, until his sample grows.</td></tr></tbody>';
+  $('#fitTbl').innerHTML=h;
+  hbars($('#fitBars'),NOM.map(function(p,j){return {label:esc(p.full),value:FITSCORE[j],color:p.col,text:'<b>'+FITSCORE[j]+'</b> / 21'}}),{max:21});
+
+  /* availability screen */
+  T($('#availTbl'),['Player','#Age','Injury episodes (TM)','#Days missed','#Layoffs of 60+ days','Analyst flag','Role'],[
+   ['<b>Adri Mehmeti</b>','17','1','29','0',chip('ok','LOW'),chip('ok','NOMINEE A')],
+   ['<b>Erik Lira</b>','26','none recorded','none recorded','none recorded',chip('ok','LOW'),chip('ok','NOMINEE B')],
+   ['<b>Sekou Bangoura</b>','24','none recorded','none recorded','none recorded',chip('un','UNKNOWN (thin prior-league coverage)'),chip('ok','NOMINEE C')],
+   ['James Sands','26','6','402','3',chip('lo','HIGH'),chip('na','EXCLUDED')],
+   ['Obinna Nwobodo','29','8','225','1',chip('md','MODERATE-HIGH'),chip('na','EXCLUDED')]]);
+
+  /* playing time and sample */
+  T($('#sampleTbl'),['Candidate','#Matches','#Minutes','#Avg min / match','#Matches 85+ min','Role tags (matches)','Sample confidence','#Cards p90'],[
+   ['<b>Mehmeti</b>','26','2,324','89.4','18','DMC 26',chip('hi','HIGH'),'0.27'],
+   ['<b>Lira</b>','33','2,876','87.2','24','DC 20 | DMC 9 | MC 9',chip('hi','HIGH'),'0.16'],
+   ['<b>Bangoura</b>','18','757','42.1','3','MC 17 | DMC 2',chip('lo','LOW'),'0.48']]);
+})();
+
+/* timestamps become chips; evidence labels become chips */
+(function(){
+  var re=/\b\d{1,3}:\d{2}\*?/g;
+  document.querySelectorAll('.tcw td, .tcw li, .tcw p').forEach(function(el){
+    var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,null),nodes=[],n;while(n=w.nextNode())nodes.push(n);
+    nodes.forEach(function(t){
+      if(!re.test(t.nodeValue)){re.lastIndex=0;return}re.lastIndex=0;
+      var f=document.createDocumentFragment(),last=0,s=t.nodeValue,m;
+      while((m=re.exec(s))){f.appendChild(document.createTextNode(s.slice(last,m.index)));var sp=document.createElement('span');sp.className='tc';sp.textContent=m[0];f.appendChild(sp);last=m.index+m[0].length}
+      f.appendChild(document.createTextNode(s.slice(last)));t.parentNode.replaceChild(f,t);
+    });
+  });
+  var map={'Agree':'ok','Discrepancy':'cf','Nuance':'pv','Not confirmed by video':'un','Gap':'na','Limit':'na'};
+  document.querySelectorAll('.evt tbody td:last-child').forEach(function(td){
+    td.innerHTML=td.innerHTML.replace(/(Agree|Discrepancy|Nuance|Not confirmed by video|Gap|Limit):/g,function(m,k){return '<span class="chip '+map[k]+'">'+k.toUpperCase()+'</span>'});
+  });
+})();
+
+/* ================= charts ================= */
+/* fee ranges vs Uzun */
+(function(){
+  var W=620,H=300,x0=150,x1=590,max=30,X=function(v){return x0+(x1-x0)*v/max};
+  var rows=[{n:'Mehmeti',col:COL.cyan,lo:7.8,hi:15.6,med:10.2,tm:8.0},{n:'Lira',col:COL.org,lo:13.7,hi:27.3,med:17.8,tm:14.0},{n:'Bangoura',col:COL.green,lo:0.9,hi:1.8,med:1.1,tm:0.9}];
+  var F='-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif';
+  var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Modelled fee ranges against the largest recent Frankfurt midfield purchase"><rect width="'+W+'" height="'+H+'" fill="#fff"/>';
+  s+='<text x="20" y="30" font-size="18" font-weight="700" fill="#1d1d1f" font-family="'+F+'">Modelled fee range vs precedent</text><text x="20" y="50" font-size="11.5" fill="#6e6e73" font-family="'+F+'">EUR million | estimates from 11 comparable moves, not quotes</text>';
+  for(var t=0;t<=30;t+=5){s+='<line x1="'+X(t)+'" y1="78" x2="'+X(t)+'" y2="234" stroke="#e5e5ea"/><text x="'+X(t)+'" y="252" font-size="10.5" fill="#8e8e93" text-anchor="middle" font-family="'+F+'">'+t+'</text>'}
+  s+='<line x1="'+X(13)+'" y1="70" x2="'+X(13)+'" y2="234" stroke="#1d1d1f" stroke-dasharray="5 4" stroke-width="1.6"/><text x="'+(X(13)+6)+'" y="74" font-size="11" font-weight="700" fill="#1d1d1f" font-family="'+F+'">Uzun 13.0 (largest recent midfield buy)</text>';
+  rows.forEach(function(r,i){var y=104+i*54;
+    s+='<text x="20" y="'+(y+5)+'" font-size="13" font-weight="700" fill="#1d1d1f" font-family="'+F+'">'+r.n+'</text>';
+    s+='<rect x="'+X(r.lo)+'" y="'+(y-11)+'" width="'+Math.max(X(r.hi)-X(r.lo),6)+'" height="22" rx="11" fill="'+r.col+'" fill-opacity="0.28" stroke="'+r.col+'" stroke-width="1.6"><title>'+r.n+': '+r.lo+' to '+r.hi+' (median '+r.med+', TM value '+r.tm+')</title></rect>';
+    s+='<polygon points="'+X(r.med)+','+(y-8)+' '+(X(r.med)+8)+','+y+' '+X(r.med)+','+(y+8)+' '+(X(r.med)-8)+','+y+'" fill="'+r.col+'" stroke="#fff" stroke-width="1.5"/>';
+    s+='<circle cx="'+X(r.tm)+'" cy="'+(y+20)+'" r="4.5" fill="#fff" stroke="'+r.col+'" stroke-width="2"/>';
+    s+='<text x="'+(X(r.hi)+10)+'" y="'+(y+4)+'" font-size="11.5" fill="#3a3a3c" font-family="'+F+'">'+r.lo+' to '+r.hi+' (median '+r.med+')</text>';
+  });
+  s+='<text x="20" y="284" font-size="10.5" fill="#6e6e73" font-family="'+F+'">Bar = modelled fee range | diamond = median | hollow circle = Transfermarkt market value</text></svg>';
+  $('#feeChart').innerHTML=s;
+})();
+
+/* five-candidate dot chart (as in the PDF): blue circle, orange diamond, green square; grey = not nominated */
+(function(){
+  var rowH=30,top=64,W=940,H=top+MET.length*rowH+40,tx0=290,tx1=700,F='-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif';
+  var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Every metric for the five candidates"><rect width="'+W+'" height="'+H+'" fill="#fff"/>';
+  s+='<text x="'+tx0+'" y="40" font-size="11" fill="#8e8e93" font-family="'+F+'">worst of 5</text><text x="'+tx1+'" y="40" font-size="11" fill="#8e8e93" text-anchor="end" font-family="'+F+'">best of 5</text>';
+  NOM.forEach(function(p,j){s+='<text x="'+(745+j*62)+'" y="40" font-size="11.5" font-weight="700" fill="'+p.col+'" font-family="'+F+'">'+p.name+'</text>'});
+  MET.forEach(function(m,r){var y=top+r*rowH+8,mn=Math.min.apply(null,m.v),mx=Math.max.apply(null,m.v);
+    function pos(x){var q=mx===mn?50:(x-mn)/(mx-mn);if(m.dir<0)q=1-q;return tx0+(tx1-tx0)*q}
+    s+='<text x="'+(tx0-14)+'" y="'+(y+4)+'" font-size="12" fill="#1d1d1f" text-anchor="end" font-family="'+F+'">'+esc(m.l)+'</text>';
+    s+='<line x1="'+tx0+'" y1="'+y+'" x2="'+tx1+'" y2="'+y+'" stroke="#ececf0" stroke-width="7" stroke-linecap="round"/>';
+    [2,3].forEach(function(i){s+='<circle cx="'+pos(m.v[i])+'" cy="'+y+'" r="3.6" fill="#c7c7cc"><title>'+(i===2?'Sands':'Nwobodo')+' (not nominated): '+fmtv(m,m.v[i])+'</title></circle>'});
+    NOM.forEach(function(p){var x=pos(m.v[p.i]),t='<title>'+p.full+': '+fmtv(m,m.v[p.i])+'</title>';
+      if(p.shape==='c')s+='<circle cx="'+x+'" cy="'+y+'" r="6.5" fill="'+p.col+'" stroke="#fff" stroke-width="1.5">'+t+'</circle>';
+      else if(p.shape==='d')s+='<polygon points="'+x+','+(y-8)+' '+(x+7.5)+','+y+' '+x+','+(y+8)+' '+(x-7.5)+','+y+'" fill="'+p.col+'" stroke="#fff" stroke-width="1.5">'+t+'</polygon>';
+      else s+='<rect x="'+(x-6)+'" y="'+(y-6)+'" width="12" height="12" rx="2" fill="'+p.col+'" stroke="#fff" stroke-width="1.5">'+t+'</rect>';
+    });
+    NOM.forEach(function(p,j){s+='<text x="'+(745+j*62)+'" y="'+(y+4)+'" font-size="12" fill="#3a3a3c" font-family="'+F+'">'+fmtv(m,m.v[p.i])+'</text>'});
+  });
+  s+='</svg>';$('#dotChart').innerHTML=s;
+})();
+
+/* clip distribution by block */
+(function(){
+  var rows=[['Mehmeti',COL.cyan,[3,3,4],'12 clips: balanced'],['Lira',COL.org,[4,3,3],'10 clips: defence-oriented'],['Bangoura',COL.green,[2,3,5],'10 clips: attacking-oriented']];
+  var C=['#ffb3c1','#ffe27a','#97e3ab'],L=['Low block','Mid block','High block'];
+  var h='<h4 style="margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)">Where each player was filmed (clips by block)</h4>';
+  rows.forEach(function(r){var t=r[2].reduce(function(a,b){return a+b},0);h+='<div style="display:grid;grid-template-columns:110px 1fr 200px;gap:12px;align-items:center;margin:8px 0;font-size:13px"><b style="color:'+r[1]+'">'+r[0]+'</b><div class="stack">'+r[2].map(function(n,i){return '<i style="width:'+(n/t*100)+'%;background:'+C[i]+'">'+n+' '+L[i]+'</i>'}).join('')+'</div><span style="color:var(--mut)">'+r[3]+'</span></div>'});
+  $('#clipShare').innerHTML=h;
+})();
+
+/* ===== Forza IQ clip map: timeline, now-playing, timecode links, prev/next, deep link (#clip=N) ===== */
+function ClipMap(cfg){
+  var Q=function(s){return document.querySelector(s)};
+  var v=Q('#vid'),ph=Q('#vidph'),slot=Q('#vidslot'),tl=Q('#timeline'),now=Q('#nowPlaying'),key=Q('#tlkey'),msg=Q('#vidMsg');
+  var CL=cfg.clips,DUR=cfg.dur,active=0,head=null,pending=null;
+  function dur(){return isFinite(v.duration)&&v.duration>0?v.duration:DUR}
+  function clip(n){return CL.filter(function(c){return c.n===n})[0]}
+  function mmss(s){s=Math.round(s);return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2)}
+  function draw(){
+    tl.style.display='block';now.style.display='block';if(key)key.style.display='flex';
+    tl.innerHTML=CL.map(function(c){var w=(c.e-c.s)/dur()*100;
+      return '<div class="seg '+c.k+'" data-n="'+c.n+'" style="left:'+(c.s/dur()*100)+'%;width:'+w+'%" title="Clip '+c.n+' · '+(c.sec?c.sec+' · ':'')+c.t+' · '+cfg.tcLabel+' '+c.tc+'">'+(w>2.2?c.n:'')+'</div>'}).join('')+'<div class="head" id="head"></div>';
+    head=Q('#head');mark(active);
+  }
+  function mark(n){
+    active=n;
+    tl.querySelectorAll('.seg').forEach(function(s){s.classList.toggle('on',+s.dataset.n===n)});
+    document.querySelectorAll('[data-clip]').forEach(function(c){c.classList.toggle('playing',+c.dataset.clip===n)});
+    var c=n?clip(n):null;
+    now.innerHTML=c?'<b>Clip '+c.n+' of '+CL.length+'</b> &middot; '+(c.ph?c.ph+' &middot; ':'')+(c.sec?c.sec+' &middot; ':'')+'<b>'+c.t+'</b> <span style="color:var(--mut)">('+cfg.tcLabel+' '+c.tc+')</span>':(cfg.idle||'Click a timecode, a clip on the timeline, or press play.');
+  }
+  function at(t){for(var i=0;i<CL.length;i++)if(t>=CL[i].s&&t<CL[i].e)return CL[i].n;return 0}
+  function seek(t,play){
+    if(msg)msg.textContent='';
+    if(v.readyState>=1)v.currentTime=t;else pending=t;
+    if(play){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+  }
+  function goClip(n,play,noScroll){var c=clip(n);if(!c)return;seek(c.s,play!==false);mark(n);if(!noScroll&&slot)slot.scrollIntoView({behavior:'smooth',block:'center'})}
+  v.addEventListener('loadedmetadata',function(){if(ph)ph.style.display='none';draw();if(pending!=null){v.currentTime=pending;pending=null}});
+  v.addEventListener('timeupdate',function(){var t=v.currentTime;if(head)head.style.left=(t/dur()*100)+'%';var n=at(t);if(n!==active)mark(n)});
+  v.addEventListener('seeked',function(){var n=at(v.currentTime);if(n!==active)mark(n)});
+  v.addEventListener('error',function(){if(ph)ph.style.display='flex'});
+  setTimeout(function(){if(v.readyState===0&&ph)ph.style.display='flex'},2500);
+  draw();
+  tl.addEventListener('click',function(e){var s=e.target.closest&&e.target.closest('.seg');if(s){goClip(+s.dataset.n);return}var r=tl.getBoundingClientRect();seek((e.clientX-r.left)/r.width*dur(),true)});
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a.ts[data-n]');if(!a)return;e.preventDefault();goClip(+a.dataset.n)});
+  var pv=Q('#prevClip'),nx=Q('#nextClip');
+  if(pv)pv.addEventListener('click',function(){goClip(Math.max(1,(active||2)-1))});
+  if(nx)nx.addEventListener('click',function(){goClip(Math.min(CL.length,(active||0)+1))});
+  var m=location.hash.match(/clip=(\d+)/);
+  if(m&&clip(+m[1])){pending=clip(+m[1]).s;mark(+m[1]);setTimeout(function(){goClip(+m[1],true)},400)}
+  window.addEventListener('message',function(e){var d=e.data;if(d&&d.forza&&d.type==='clip'&&clip(d.n))goClip(d.n)});
+  return {goClip:goClip};
+}
+
+var CLIPS=[{"n": 1, "player": "Mehmeti", "pn": "1 of 12", "s": 8.0, "e": 23.5, "ph": "Mehmeti", "sec": "Low block · Central cover", "t": "Central low-block cover", "tc": "88:06", "k": "pM", "tag": "Analyst observation"}, {"n": 2, "player": "Mehmeti", "pn": "2 of 12", "s": 23.5, "e": 42.0, "ph": "Mehmeti", "sec": "Low block · Support outlet", "t": "Support outlet behind pressure", "tc": "22:25", "k": "pM", "tag": "Analyst observation"}, {"n": 3, "player": "Mehmeti", "pn": "3 of 12", "s": 42.0, "e": 67.0, "ph": "Mehmeti", "sec": "Low block · Compactness", "t": "Pressure and cover", "tc": "3:00", "k": "pM", "tag": "Analyst observation"}, {"n": 4, "player": "Mehmeti", "pn": "4 of 12", "s": 71.0, "e": 90.0, "ph": "Mehmeti", "sec": "Mid block · Build-up support", "t": "Midfield build-up support", "tc": "14:53", "k": "pM", "tag": "Analyst observation"}, {"n": 5, "player": "Mehmeti", "pn": "5 of 12", "s": 90.0, "e": 107.5, "ph": "Mehmeti", "sec": "Mid block · Central decision", "t": "Central decision under pressure", "tc": "16:51", "k": "pM", "tag": "Analyst observation"}, {"n": 6, "player": "Mehmeti", "pn": "6 of 12", "s": 107.5, "e": 123.5, "ph": "Mehmeti", "sec": "Mid block · Last man", "t": "Last-man decision", "tc": "26:03", "k": "pM", "tag": "Analyst observation"}, {"n": 7, "player": "Mehmeti", "pn": "7 of 12", "s": 128.0, "e": 147.5, "ph": "Mehmeti", "sec": "High block · Finishing", "t": "Second-line support to finishing", "tc": "57:42", "k": "pM", "tag": "Positive evidence"}, {"n": 8, "player": "Mehmeti", "pn": "8 of 12", "s": 147.5, "e": 162.5, "ph": "Mehmeti", "sec": "High block · Central link", "t": "Central link between the lines", "tc": "4:05", "k": "pM", "tag": "Positive evidence"}, {"n": 9, "player": "Mehmeti", "pn": "9 of 12", "s": 162.5, "e": 176.5, "ph": "Mehmeti", "sec": "High block · Build-up", "t": "Attacking support near the box", "tc": "11:42", "k": "pM", "tag": "Positive evidence"}, {"n": 10, "player": "Mehmeti", "pn": "10 of 12", "s": 176.5, "e": 188.5, "ph": "Mehmeti", "sec": "High block · Finishing", "t": "Timed arrival in the final third", "tc": "24:49", "k": "pM", "tag": "Positive evidence"}, {"n": 11, "player": "Mehmeti", "pn": "11 of 12", "s": 193.0, "e": 209.0, "ph": "Mehmeti", "sec": "Aerial and set pieces · Aerial duel", "t": "Aerial challenge at first contact", "tc": "89:32", "k": "pM", "tag": "Watch point"}, {"n": 12, "player": "Mehmeti", "pn": "12 of 12", "s": 209.0, "e": 230.0, "ph": "Mehmeti", "sec": "Aerial and set pieces · Free kicks", "t": "Set-piece role", "tc": "30:28", "k": "pM", "tag": "Watch point"}, {"n": 13, "player": "Lira", "pn": "1 of 10", "s": 237.0, "e": 252.5, "ph": "Lira", "sec": "Low block · Low build-up", "t": "Passing outlets ahead of the back line", "tc": "20:19", "k": "pL", "tag": "Analyst observation"}, {"n": 14, "player": "Lira", "pn": "2 of 10", "s": 252.5, "e": 266.5, "ph": "Lira", "sec": "Low block · Rest-defence", "t": "Recycle possession, keep cover behind", "tc": "82:17", "k": "pL", "tag": "Analyst observation"}, {"n": 15, "player": "Lira", "pn": "3 of 10", "s": 266.5, "e": 283.5, "ph": "Lira", "sec": "Low block · Deep build-up", "t": "Pressure release from the back", "tc": "38:39", "k": "pL", "tag": "Analyst observation"}, {"n": 16, "player": "Lira", "pn": "4 of 10", "s": 283.5, "e": 299.0, "ph": "Lira", "sec": "Low block · Midfield cover", "t": "Midfield cover as play resets", "tc": "69:44", "k": "pL", "tag": "Player named · #6"}, {"n": 17, "player": "Lira", "pn": "5 of 10", "s": 303.5, "e": 322.0, "ph": "Lira", "sec": "Mid block · Central support", "t": "Central passing option", "tc": "46:58", "k": "pL", "tag": "Player named · #6"}, {"n": 18, "player": "Lira", "pn": "6 of 10", "s": 322.0, "e": 338.5, "ph": "Lira", "sec": "Mid block · Central link", "t": "Central link near halfway", "tc": "6:27", "k": "pL", "tag": "Player named · #6"}, {"n": 19, "player": "Lira", "pn": "7 of 10", "s": 338.5, "e": 388.5, "ph": "Lira", "sec": "Mid block · Circulation", "t": "Central cover and progression", "tc": "13:57", "k": "pL", "tag": "Player named · #6"}, {"n": 20, "player": "Lira", "pn": "8 of 10", "s": 393.0, "e": 409.5, "ph": "Lira", "sec": "High block · Central support", "t": "Inside option behind the front line", "tc": "38:42", "k": "pL", "tag": "Scene-level · #6 not verified"}, {"n": 21, "player": "Lira", "pn": "9 of 10", "s": 409.5, "e": 427.5, "ph": "Lira", "sec": "High block · Second phase", "t": "Inside option beneath the attack", "tc": "45:31", "k": "pL", "tag": "Player named · #6"}, {"n": 22, "player": "Lira", "pn": "10 of 10", "s": 427.5, "e": 443.0, "ph": "Lira", "sec": "High block · Central screen", "t": "Central screen and midfield reset", "tc": "18:37", "k": "pL", "tag": "Analyst observation"}, {"n": 23, "player": "Bangoura", "pn": "1 of 10", "s": 450.0, "e": 477.0, "ph": "Bangoura", "sec": "Low block · Build-up support", "t": "First-line outlet from depth", "tc": "12:33", "k": "pB", "tag": "Player named · #17"}, {"n": 24, "player": "Bangoura", "pn": "2 of 10", "s": 477.0, "e": 498.0, "ph": "Bangoura", "sec": "Low block · Penalty area", "t": "Pressure and spacing at the box", "tc": "87:25", "k": "pB", "tag": "Team context · #17 not verified"}, {"n": 25, "player": "Bangoura", "pn": "3 of 10", "s": 502.0, "e": 545.0, "ph": "Bangoura", "sec": "Mid block · Connection", "t": "Midfield connection and right-side link", "tc": "33:30", "k": "pB", "tag": "Team context · #17 not verified"}, {"n": 26, "player": "Bangoura", "pn": "4 of 10", "s": 545.0, "e": 579.0, "ph": "Bangoura", "sec": "Mid block · Build-up shape", "t": "Build-up shape and rest-support", "tc": "36:28", "k": "pB", "tag": "Team context · #17 not verified"}, {"n": 27, "player": "Bangoura", "pn": "5 of 10", "s": 579.0, "e": 604.5, "ph": "Bangoura", "sec": "Mid block · Screen", "t": "Midfield screen and transition support", "tc": "87:09", "k": "pB", "tag": "Team context · #17 not verified"}, {"n": 28, "player": "Bangoura", "pn": "6 of 10", "s": 608.5, "e": 636.0, "ph": "Bangoura", "sec": "High press · Attacking third", "t": "Wide channel in the attacking third", "tc": "43:16", "k": "pB", "tag": "Team context · #17 not verified"}, {"n": 29, "player": "Bangoura", "pn": "7 of 10", "s": 636.0, "e": 667.5, "ph": "Bangoura", "sec": "High press · Final third", "t": "Final-third structure, two separate phases", "tc": "93:47", "k": "pB", "tag": "Team context · #17 not verified"}, {"n": 30, "player": "Bangoura", "pn": "8 of 10", "s": 667.5, "e": 688.5, "ph": "Bangoura", "sec": "High press · Defensive shape", "t": "Central compression behind the attack", "tc": "64:27", "k": "pB", "tag": "Team context · #17 not verified"}, {"n": 31, "player": "Bangoura", "pn": "9 of 10", "s": 688.5, "e": 744.5, "ph": "Bangoura", "sec": "High press · Tackle", "t": "Touchline duel and second-ball response", "tc": "94:23", "k": "pB", "tag": "Team context · #17 not verified"}, {"n": 32, "player": "Bangoura", "pn": "10 of 10", "s": 744.5, "e": 785.1, "ph": "Bangoura", "sec": "High press · Aerial", "t": "Box contest and aerial duel", "tc": "45:03", "k": "pB", "tag": "Team context · #17 not verified"}];
+(function(){
+  /* clip map table */
+  var col={Mehmeti:'#007AFF',Lira:'#FF9500',Bangoura:'#34C759'};
+  var h='<thead><tr><th>Clip</th><th>Player</th><th>Block and theme</th><th>What the clip shows</th><th>Tag on the card</th><th>Match clock</th></tr></thead><tbody>';
+  CLIPS.forEach(function(c){h+='<tr data-clip="'+c.n+'"><td><b>'+c.n+'</b></td><td><span class="pl" style="background:'+col[c.player]+'"></span>'+c.player+' <span class="sm">'+c.pn+'</span></td><td>'+c.sec+'</td><td><b>'+c.t+'</b></td><td><span class="sm">'+c.tag+'</span></td><td><a class="ts tcl" data-n="'+c.n+'" href="#clip='+c.n+'" title="Play clip '+c.n+'"><span class="tc lk">&#9654; '+c.tc+'</span></a></td></tr>'});
+  document.getElementById('clipMapTbl').innerHTML=h+'</tbody>';
+  /* timestamps in the tables and the decision section become links when they match a clip of that player */
+  function find(player,tc){return CLIPS.filter(function(c){return c.player===player&&c.tc===tc})[0]}
+  function link(sp,player){
+    var tc=sp.textContent.replace('*','').trim(),c=find(player,tc);if(!c)return;
+    var a=document.createElement('a');a.className='ts tcl';a.dataset.n=c.n;a.href='#clip='+c.n;a.title='Play clip '+c.n+': '+c.t;
+    sp.classList.add('lk');sp.innerHTML='&#9654; '+sp.textContent;sp.parentNode.replaceChild(a,sp);a.appendChild(sp);
+  }
+  var P=['Mehmeti','Lira','Bangoura'];
+  document.querySelectorAll('table.tcw').forEach(function(t){
+    var first=t.querySelector('thead th').textContent.trim();
+    t.querySelectorAll('tbody tr').forEach(function(tr){
+      var cells=tr.children;
+      for(var i=0;i<cells.length;i++){
+        var pl=first==='Theme'?P[i-1]:(P.filter(function(p){return cells[0].textContent.indexOf(p)>=0})[0]);
+        if(!pl)continue;
+        cells[i].querySelectorAll('.tc').forEach(function(sp){link(sp,pl)});
+      }
+    });
+  });
+  document.querySelectorAll('.solo .tc').forEach(function(sp){link(sp,'Mehmeti')});
+})();
+ClipMap({clips:CLIPS,dur:785,tcLabel:'match clock'});
+
+/* active section in the nav */
+(function(){
+  var links={},ids=[];document.querySelectorAll('nav a').forEach(function(a){var k=a.getAttribute('href').slice(1);links[k]=a;ids.push(k)});
+  function upd(){var cur=ids[0];ids.forEach(function(k){var el=document.getElementById(k);if(el&&el.getBoundingClientRect().top<=140)cur=k});
+    ids.forEach(function(k){links[k].classList.toggle('on',k===cur)})}
+  window.addEventListener('scroll',upd,{passive:true});upd();
+})();
+
+})();
+</script>
+<script>
+/* Forza IQ console bridge: works standalone and inside the console iframe */
+(function(){
+  var root=document.documentElement,MOD=root.getAttribute('data-module')||'page',emb=window.parent!==window;
+  if(emb)root.classList.add('embedded');
+  var links={},ids=[];
+  document.querySelectorAll('nav a[href^="#"]').forEach(function(a){var k=a.getAttribute('href').slice(1);links[k]=a;ids.push(k)});
+  var last=null;
+  function cur(){var c=ids[0];ids.forEach(function(k){var e=document.getElementById(k);if(e&&e.getBoundingClientRect().top<=(emb?90:140))c=k});
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4)c=ids[ids.length-1];return c}
+  function report(){var c=cur();if(c===last)return;last=c;
+    ids.forEach(function(k){links[k].classList.toggle('on',k===c)});
+    if(emb)parent.postMessage({forza:1,type:'active',module:MOD,id:c},'*')}
+  window.addEventListener('scroll',report,{passive:true});
+  function go(id,instant){var el=document.getElementById(id);if(!el)return;
+    if(instant){root.style.scrollBehavior='auto';el.scrollIntoView({block:'start'});root.style.scrollBehavior=''}else el.scrollIntoView({behavior:'smooth',block:'start'})}
+  window.addEventListener('message',function(e){var d=e.data;if(d&&d.forza&&d.type==='goto')go(d.id,d.instant)});
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var id=a.getAttribute('href').slice(1);
+    if(!id||!document.getElementById(id)||/^clip=/.test(id))return;e.preventDefault();go(id,false)});
+  if(emb)parent.postMessage({forza:1,type:'ready',module:MOD},'*');
+  report();
+})();
+</script>
+</body>
+</html>

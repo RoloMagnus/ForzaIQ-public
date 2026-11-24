@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forza IQ | 360-Degree Report Console</title>
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--hair:rgba(0,0,0,.07);--line:rgba(0,0,0,.10);--txt:#1d1d1f;--mut:#6e6e73;--dim:#86868b;--cyan:#0071e3;--org:#c4560a;--blue-t:#eef5ff;--gray-t:#f2f2f7;
+--sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue","Segoe UI",Roboto,Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:15px;-webkit-font-smoothing:antialiased;overflow:hidden;display:flex;flex-direction:column}
+button{font:inherit;color:inherit;cursor:pointer}
+header.bar{position:relative;z-index:60;flex:none;display:flex;align-items:center;gap:6px;height:52px;padding:0 18px 0 12px;background:rgba(255,255,255,.78);-webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);border-bottom:1px solid var(--hair)}
+.brandbtn{display:flex;align-items:center;gap:9px;height:36px;padding:0 12px 0 10px;border:0;border-radius:12px;background:transparent;font-size:14px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;transition:background .15s}
+.brandbtn:hover,.brandbtn[aria-expanded=true]{background:rgba(0,0,0,.055)}
+.brandbtn .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,#0a84ff,#5ac8fa)}
+.brandbtn .sep{color:var(--dim);font-weight:400}
+.brandbtn #modName{color:var(--cyan);letter-spacing:.02em}
+.brandbtn svg{width:12px;height:12px;stroke:var(--mut);fill:none;stroke-width:2;transition:transform .2s}
+.brandbtn[aria-expanded=true] svg{transform:rotate(180deg)}
+.vr{width:1px;height:22px;background:var(--line);margin:0 6px;flex:none}
+nav.tabs{flex:1;min-width:0;display:flex;align-items:center;gap:4px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;transition:opacity .18s}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs.swap{opacity:0}
+nav.tabs a{font-size:12.5px;font-weight:500;letter-spacing:.01em;color:rgba(29,29,31,.8);padding:6px 12px;border-radius:999px;transition:background .15s,color .15s;text-decoration:none;flex:none}
+nav.tabs a:hover{background:rgba(0,0,0,.05);color:#000}
+nav.tabs a.on{background:rgba(0,113,227,.11);color:var(--cyan);font-weight:600}
+.next{flex:none;border:0;background:var(--gray-t);border-radius:999px;padding:6px 14px;font-size:12.5px;font-weight:600;color:var(--txt);transition:background .15s;white-space:nowrap}
+.next:hover{background:#e6e6ec}
+.menu{position:absolute;left:10px;top:56px;width:380px;max-width:calc(100vw - 20px);background:rgba(255,255,255,.96);-webkit-backdrop-filter:saturate(180%) blur(24px);backdrop-filter:saturate(180%) blur(24px);border:1px solid var(--hair);border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.16),0 2px 8px rgba(0,0,0,.06);padding:8px;opacity:0;visibility:hidden;transform:translateY(-6px) scale(.985);transform-origin:top left;transition:opacity .16s,transform .16s,visibility .16s}
+.menu.open{opacity:1;visibility:visible;transform:none}
+.menu .hd{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--dim);padding:8px 12px 6px;text-transform:uppercase}
+.menu button{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:0;background:transparent;border-radius:14px;padding:10px 12px;transition:background .12s}
+.menu button:hover,.menu button:focus-visible{background:rgba(0,0,0,.05);outline:0}
+.menu button.on{background:var(--blue-t)}
+.menu .ic{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:700;font-size:15px;color:#fff;background:linear-gradient(135deg,#0a84ff,#5ac8fa)}
+.menu button:nth-of-type(2) .ic{background:linear-gradient(135deg,#ff9f0a,#ff6a3d)}
+.menu button:nth-of-type(3) .ic{background:linear-gradient(135deg,#30d158,#0fb59a)}
+.menu b{display:block;font-size:14px;letter-spacing:.02em}
+.menu small{display:block;color:var(--mut);font-size:12.5px;margin-top:1px;line-height:1.3}
+.menu .ck{margin-left:auto;color:var(--cyan);font-weight:700;opacity:0}
+.menu button.on .ck{opacity:1}
+main#stage{position:relative;flex:1;min-height:0;background:var(--bg)}
+iframe.frame{position:absolute;inset:0;width:100%;height:100%;border:0;background:var(--bg);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .28s ease,transform .28s ease,visibility .28s}
+iframe.frame.on{opacity:1;visibility:visible;transform:none}
+#veil{position:absolute;inset:0;display:grid;place-items:center;background:var(--bg);z-index:5;transition:opacity .25s,visibility .25s}
+#veil.off{opacity:0;visibility:hidden}
+#veil i{width:26px;height:26px;border-radius:50%;border:3px solid #d9d9df;border-top-color:var(--cyan);animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media(max-width:760px){.brandbtn #modName{display:none}.brandbtn .sep{display:none}.next{display:none}header.bar{padding-right:8px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <button class="brandbtn" id="modBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="modMenu">
+    <i class="dot"></i><span>FORZA IQ</span><span class="sep">/</span><span id="modName">SCOUTING</span>
+    <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg>
+  </button>
+  <div class="menu" id="modMenu" role="menu" aria-label="360-degree report modules">
+    <div class="hd">360-degree report</div>
+  </div>
+  <span class="vr"></span>
+  <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+  <button class="next" id="nextBtn"></button>
+</header>
+<main id="stage"><div id="veil"><i></i></div></main>
+
+<script>
+(function(){
+'use strict';
+var MODS=[
+ {id:'scouting',name:'SCOUTING',title:'Scouting',sub:'Recruitment recommendation: three candidates, one signing',file:'scouting.html',
+  tabs:[['top','PROFILE'],['brief','ASSIGNMENT'],['context','CONTEXT'],['s1','HEAD-TO-HEAD'],['s2','DATA & INSIGHTS'],['s3','VIDEO'],['s4','DATA & VIDEO LINKAGE'],['s5','CLUB FIT'],['s6','DECISION'],['src','SOURCES']]},
+ {id:'idp',name:'IDP',title:'IDP',sub:'Individual development plan: Ousseni Bouda, San Jose Earthquakes',file:'idp.html',
+  tabs:[['top','PROFILE'],['brief','ASSIGNMENT'],['match','MATCH'],['p1','PILLAR 1'],['p2','PILLAR 2'],['p3','PILLAR 3'],['plan','ACTION PLAN'],['src','DEFINITIONS']]},
+ {id:'opponent',name:'OPPONENT',title:'Opponent',sub:'Opponent analysis: Ajax, patterns, threats and match plan',file:'opponent.html',
+  tabs:[['top','PROFILE'],['summary','SUMMARY'],['def1','BUILD-UP'],['def2','PRESS'],['att1','FINISHING'],['att2','THROUGH PASSES'],['adapt','ADAPTATIONS'],['video','VIDEO'],['plan','MATCH PLAN'],['src','EVIDENCE']]}
+];
+var $=function(s){return document.querySelector(s)};
+var stage=$('#stage'),veil=$('#veil'),tabsEl=$('#tabs'),menu=$('#modMenu'),btn=$('#modBtn'),nextBtn=$('#nextBtn');
+var frames={},ready={},pending={},cur=null,curTab=null,quietUntil=0;
+
+/* menu */
+MODS.forEach(function(m,i){
+  var b=document.createElement('button');b.setAttribute('role','menuitem');b.dataset.mod=m.id;
+  b.innerHTML='<span class="ic">'+(i+1)+'</span><span><b>'+m.name+'</b><small>'+m.sub+'</small></span><span class="ck">&#10003;</span>';
+  b.addEventListener('click',function(){closeMenu();go(m.id)});
+  menu.appendChild(b);
+});
+function openMenu(){menu.classList.add('open');btn.setAttribute('aria-expanded','true');var o=menu.querySelector('button.on')||menu.querySelector('button');o.focus()}
+function closeMenu(){menu.classList.remove('open');btn.setAttribute('aria-expanded','false')}
+btn.addEventListener('click',function(e){e.stopPropagation();menu.classList.contains('open')?closeMenu():openMenu()});
+document.addEventListener('click',function(e){if(!menu.contains(e.target))closeMenu()});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeMenu();btn.focus()}
+  if(menu.classList.contains('open')&&(e.key==='ArrowDown'||e.key==='ArrowUp')){e.preventDefault();var bs=[].slice.call(menu.querySelectorAll('button')),i=bs.indexOf(document.activeElement);bs[(i+(e.key==='ArrowDown'?1:-1)+bs.length)%bs.length].focus()}
+});
+
+function mod(id){return MODS.filter(function(m){return m.id===id})[0]}
+function frameFor(m){
+  if(frames[m.id])return frames[m.id];
+  var f=document.createElement('iframe');f.className='frame';f.title=m.title;f.setAttribute('allow','fullscreen');f.src=m.file;
+  stage.appendChild(f);frames[m.id]=f;return f;
+}
+function drawTabs(m,instant){
+  var paint=function(){
+    tabsEl.innerHTML=m.tabs.map(function(t){return '<a href="#/'+m.id+'/'+t[0]+'" data-id="'+t[0]+'">'+t[1].replace('&','&amp;')+'</a>'}).join('');
+    tabsEl.scrollLeft=0;tabsEl.classList.remove('swap');
+  };
+  if(instant){paint();return}
+  tabsEl.classList.add('swap');setTimeout(paint,170);
+}
+function markTab(id){
+  curTab=id;
+  var tabs=tabsEl.querySelectorAll('a');
+  tabs.forEach(function(a){var on=a.dataset.id===id;a.classList.toggle('on',on);if(on){var l=a.offsetLeft,w=a.offsetWidth;if(l<tabsEl.scrollLeft+10||l+w>tabsEl.scrollLeft+tabsEl.clientWidth-10)tabsEl.scrollTo({left:l-40,behavior:'smooth'})}});
+}
+tabsEl.addEventListener('click',function(e){
+  var a=e.target.closest('a');if(!a)return;e.preventDefault();
+  var id=a.dataset.id;quietUntil=Date.now()+900;markTab(id);send(cur,{forza:1,type:'goto',id:id});setHash(cur,id);
+});
+function send(modId,msg){
+  if(ready[modId]){frames[modId].contentWindow.postMessage(msg,'*')}else pending[modId]=msg;
+}
+function setHash(modId,id){try{history.replaceState(null,'','#/'+modId+(id&&id!=='top'?'/'+id:''))}catch(e){location.hash='#/'+modId+(id&&id!=='top'?'/'+id:'')}}
+
+function go(modId,tabId,instant){
+  var m=mod(modId)||MODS[0],f=frameFor(m),switching=cur!==m.id;
+  if(switching){
+    Object.keys(frames).forEach(function(k){frames[k].classList.toggle('on',k===m.id)});
+    $('#modName').textContent=m.name;
+    menu.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.mod===m.id)});
+    drawTabs(m,cur===null);
+    var i=MODS.indexOf(m),nx=MODS[(i+1)%MODS.length];
+    nextBtn.textContent='Next: '+nx.title+' →';nextBtn.dataset.mod=nx.id;
+    cur=m.id;document.title='Forza IQ | '+m.title;
+    if(!ready[m.id]){veil.classList.remove('off')}
+  }
+  var id=tabId||'top';
+  setTimeout(function(){markTab(id)},switching?190:0);
+  quietUntil=Date.now()+(switching||instant?400:900);
+  send(m.id,{forza:1,type:'goto',id:id,instant:switching||instant});
+  setHash(m.id,id);
+}
+nextBtn.addEventListener('click',function(){go(nextBtn.dataset.mod)});
+
+window.addEventListener('message',function(e){
+  var d=e.data;if(!d||!d.forza)return;
+  if(d.type==='ready'){
+    ready[d.module]=true;
+    if(pending[d.module]){frames[d.module].contentWindow.postMessage(pending[d.module],'*');delete pending[d.module]}
+    if(d.module===cur)setTimeout(function(){veil.classList.add('off')},60);
+  }
+  if(d.type==='active'&&d.module===cur&&Date.now()>quietUntil){markTab(d.id);setHash(d.module,d.id)}
+});
+
+function route(){
+  var h=location.hash.replace(/^#\/?/,'').split('/');
+  var m=mod(h[0])||MODS[0];
+  go(m.id,h[1]&&m.tabs.some(function(t){return t[0]===h[1]})?h[1]:'top',true);
+}
+window.addEventListener('hashchange',route);
+route();
+})();
+</script>
+</body>
+</html>
